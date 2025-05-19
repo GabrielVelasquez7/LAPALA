@@ -1,0 +1,32 @@
+[
+  {
+	"pregunta": "¿Quién ganó el Mundial de 2022?",
+	"opciones": ["Francia", "Argentina", "Brasil", "Alemania"],
+	"respuesta_correcta": 1,
+	"tipo": "principal"
+  },
+  {
+	"pregunta": "¿Quién ganó la UEFA Champions League en 2005?",
+	"opciones": ["Liverpool", "Milan", "Barcelona", "Chelsea"],
+	"respuesta_correcta": 0,
+	"tipo": "principal"
+  },
+  {
+	"pregunta": "¿Quién ganó el Mundial de 1998?",
+	"opciones": ["Brasil", "Francia", "Alemania", "Argentina"],
+	"respuesta_correcta": 1,
+	"tipo": "principal"
+  },
+  {
+	"pregunta": "¿Quién ganó la Copa América 2019?",
+	"opciones": ["Brasil", "Argentina", "Chile", "Uruguay"],
+	"respuesta_correcta": 0,
+	"tipo": "principal"
+  },
+  {
+	"pregunta": "¿Quién ganó la NBA en 2016?",
+	"opciones": ["Cavaliers", "Warriors", "Heat", "Spurs"],
+	"respuesta_correcta": 0,
+	"tipo": "principal"
+  }
+]

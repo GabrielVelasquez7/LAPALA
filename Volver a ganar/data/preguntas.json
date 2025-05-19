@@ -1,0 +1,92 @@
+[
+  {
+	"pregunta": "¿Quién ganó el Mundial de 2022?",
+	"opciones": ["Francia", "Argentina", "Brasil", "Alemania"],
+	"respuesta_correcta": 1,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Hubo más de 2.5 goles en la final de 2022?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0
+	  },
+	  {
+		"pregunta": "¿Algún jugador anotó un hat-trick en la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0
+	  }
+	]
+  },
+  {
+	"pregunta": "¿Quién ganó la UEFA Champions League en 2005?",
+	"opciones": ["Liverpool", "Milan", "Barcelona", "Chelsea"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Se definió por penales?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0
+	  },
+	  {
+		"pregunta": "¿Liverpool remontó un 3-0?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0
+	  }
+	]
+  },
+  {
+	"pregunta": "¿Quién ganó el Mundial de 1998?",
+	"opciones": ["Brasil", "Francia", "Alemania", "Argentina"],
+	"respuesta_correcta": 1,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Zidane anotó más de un gol en la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0
+	  },
+	  {
+		"pregunta": "¿Hubo goles en el primer tiempo?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0
+	  }
+	]
+  },
+  {
+	"pregunta": "¿Quién ganó la Copa América 2019?",
+	"opciones": ["Brasil", "Argentina", "Chile", "Uruguay"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Brasil anotó más de 2 goles en la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0
+	  },
+	  {
+		"pregunta": "¿El partido se jugó en Maracaná?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0
+	  }
+	]
+  },
+  {
+	"pregunta": "¿Quién ganó la NBA en 2016?",
+	"opciones": ["Cavaliers", "Warriors", "Heat", "Spurs"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿LeBron James fue MVP de las Finales?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0
+	  },
+	  {
+		"pregunta": "¿La serie se definió en 7 juegos?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0
+	  }
+	]
+  }
+]

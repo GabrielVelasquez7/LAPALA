@@ -11,8 +11,15 @@ config_version=5
 [application]
 
 config/name="Volver A Ganar"
+run/main_scene="res://trivia_scene.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=720
+window/size/viewport_height=1280
+window/handheld/orientation=1
 
 [rendering]
 

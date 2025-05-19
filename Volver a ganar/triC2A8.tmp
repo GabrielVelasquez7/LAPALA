@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://btdyc8a2cmm4o"]
+
+[ext_resource type="Script" path="res://trivia_scene.gd" id="1_h4g4l"]
+
+[node name="trivia_scene" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_h4g4l")
+
+[node name="question_label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 119.0
+offset_top = 45.0
+offset_right = 610.0
+offset_bottom = 107.0
+
+[node name="options_container" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 157.0
+offset_right = 628.0
+offset_bottom = 404.0
+
+[node name="option_1" type="Button" parent="options_container"]
+layout_mode = 2
+
+[node name="option_2" type="Button" parent="options_container"]
+layout_mode = 2
+
+[node name="option_3" type="Button" parent="options_container"]
+layout_mode = 2
+
+[node name="option_4" type="Button" parent="options_container"]
+layout_mode = 2
+
+[node name="options_secondary" type="VBoxContainer" parent="options_container"]
+layout_mode = 2
+
+[node name="result_label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 423.0
+offset_right = 583.0
+offset_bottom = 472.0
+
+[connection signal="pressed" from="options_container/option_1" to="." method="_on_option_1_pressed"]
+[connection signal="pressed" from="options_container/option_2" to="." method="_on_option_2_pressed"]
+[connection signal="pressed" from="options_container/option_3" to="." method="_on_option_3_pressed"]
+[connection signal="pressed" from="options_container/option_4" to="." method="_on_option_4_pressed"]
