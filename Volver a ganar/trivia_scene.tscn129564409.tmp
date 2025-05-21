@@ -23,6 +23,18 @@ offset_top = 157.0
 offset_right = 628.0
 offset_bottom = 404.0
 
+[node name="option_1" type="Button" parent="options_container"]
+layout_mode = 2
+
+[node name="option_2" type="Button" parent="options_container"]
+layout_mode = 2
+
+[node name="option_3" type="Button" parent="options_container"]
+layout_mode = 2
+
+[node name="option_4" type="Button" parent="options_container"]
+layout_mode = 2
+
 [node name="result_label" type="Label" parent="."]
 layout_mode = 0
 offset_left = 94.0
@@ -30,8 +42,7 @@ offset_top = 423.0
 offset_right = 583.0
 offset_bottom = 472.0
 
-[node name="year_selector" type="OptionButton" parent="."]
-layout_mode = 0
-offset_left = 255.0
-offset_right = 490.0
-offset_bottom = 54.0
+[connection signal="pressed" from="options_container/option_1" to="." method="_on_option_1_pressed"]
+[connection signal="pressed" from="options_container/option_2" to="." method="_on_option_2_pressed"]
+[connection signal="pressed" from="options_container/option_3" to="." method="_on_option_3_pressed"]
+[connection signal="pressed" from="options_container/option_4" to="." method="_on_option_4_pressed"]
