@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Volver A Ganar"
-run/main_scene="res://trivia_scene.tscn"
-config/features=PackedStringArray("4.4", "Mobile")
+run/main_scene="res://SeleccionarAnoScene.tscn"
+config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://Global.gd"
 
 [display]
 
