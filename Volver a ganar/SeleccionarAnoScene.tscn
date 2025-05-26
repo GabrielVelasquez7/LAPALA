@@ -10,6 +10,7 @@ offset_bottom = 40.0
 script = ExtResource("1_t5fhb")
 
 [node name="year_selector" type="OptionButton" parent="."]
+layout_mode = 0
 offset_left = 255.0
 offset_right = 490.0
 offset_bottom = 54.0

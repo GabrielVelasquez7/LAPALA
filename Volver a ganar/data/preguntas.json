@@ -1,18 +1,217 @@
 [
-  {
+	 {
 	"año": 2022,
-	"pregunta": "¿Quién ganó el Mundial de 2022?",
+	"pregunta": "¿Quién ganará el Mundial de 2022?",
 	"opciones": ["Francia", "Argentina", "Brasil", "Alemania"],
 	"respuesta_correcta": 1,
+	"cuota": 3.0,
 	"tipo": "principal",
 	"secundarias": [
 	  {
-		"pregunta": "¿Hubo más de 2.5 goles en la final de 2022?",
+		"pregunta": "¿Habrá más de 2.5 goles en la final de 2022?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 1.9
+	  },
+	  {
+		"pregunta": "¿Algún jugador anotará un hat-trick en la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 6.5
+	  }
+	]
+  },
+  {
+	"año": 2022,
+	"pregunta": "¿Cuántos goles marcará el máximo goleador del Mundial 2022?",
+	"opciones": ["5", "6", "7", "8 o más"],
+	"respuesta_correcta": 2,
+	"cuota": 4.5,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿El máximo goleador será jugador europeo?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.2
+	  },
+	  {
+		"pregunta": "¿Su equipo llegará a semifinales?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 1.8
+	  }
+	]
+  },
+  {
+	"año": 2022,
+	"pregunta": "¿Quién será el subcampeón del Mundial 2022?",
+	"opciones": ["Francia", "Argentina", "Brasil", "Croacia"],
+	"respuesta_correcta": 0,
+	"cuota": 3.5,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿El partido por el tercer puesto terminará empatado en tiempo regular?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 4.0
+	  },
+	  {
+		"pregunta": "¿Se definirá el subcampeón en penales?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.7
+	  }
+	]
+  },
+  {
+	"año": 2022,
+	"pregunta": "¿Cuántos penales se ejecutarán en todo el Mundial 2022?",
+	"opciones": ["30 o menos", "31-40", "41-50", "Más de 50"],
+	"respuesta_correcta": 1,
+	"cuota": 2.8,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Habrá al menos una tanda de penales en semifinales?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.5
+	  },
+	  {
+		"pregunta": "¿Alguna tanda de penales tendrá más de 5 ejecuciones por equipo?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 3.1
+	  }
+	]
+  },
+  {
+	"año": 2022,
+	"pregunta": "¿Cuál será el marcador exacto de la final del Mundial 2022?",
+	"opciones": ["2-1", "3-2", "1-0", "Otro"],
+	"respuesta_correcta": 0,
+	"cuota": 6.0,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Habrá gol en los primeros 15 minutos de la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.2
+	  },
+	  {
+		"pregunta": "¿El gol ganador será anotado en tiempo extra?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 3.4
+	  }
+	]
+  },
+  {
+	"año": 2022,
+	"pregunta": "¿Cuántos partidos terminarán en empate en el Mundial 2022?",
+	"opciones": ["10 o menos", "11-15", "16-20", "Más de 20"],
+	"respuesta_correcta": 2,
+	"cuota": 3.2,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Habrá al menos un empate sin goles en fase de grupos?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 1.8
+	  },
+	  {
+		"pregunta": "¿Algún partido de eliminación directa terminará 0-0?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.3
+	  }
+	]
+  },
+  {
+	"año": 2022,
+	"pregunta": "¿Qué selección tendrá la mejor defensa (menos goles recibidos) en el Mundial 2022?",
+	"opciones": ["Francia", "Argentina", "Brasil", "Alemania"],
+	"respuesta_correcta": 3,
+	"cuota": 5.0,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Esa selección llegará a la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.0
+	  },
+	  {
+		"pregunta": "¿Su portero será considerado el mejor del torneo?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.8
+	  }
+	]
+  },
+  {
+	"año": 2022,
+	"pregunta": "¿Cuántos jugadores recibirán tarjeta roja en el Mundial 2022?",
+	"opciones": ["5 o menos", "6-10", "11-15", "Más de 15"],
+	"respuesta_correcta": 1,
+	"cuota": 2.9,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Habrá una expulsión en la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.6
+	  },
+	  {
+		"pregunta": "¿Algún equipo tendrá 2 o más jugadores expulsados durante el torneo?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 3.0
+	  }
+	]
+  },
+  {
+	"año": 2022,
+	"pregunta": "¿Cuál será el máximo goleador de la selección Argentina en el Mundial 2022?",
+	"opciones": ["Messi", "Álvarez", "Díaz", "Otro"],
+	"respuesta_correcta": 0,
+	"cuota": 2.5,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Ese jugador anotará al menos 3 goles?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 1.7
+	  },
+	  {
+		"pregunta": "¿Anotará gol en la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.1
+	  }
+	]
+  },
+  
+  {
+	"año": 2005,
+	"pregunta": "¿Quién ganará la UEFA Champions League en 2005?",
+	"opciones": ["Liverpool", "Milan", "Barcelona", "Chelsea"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Se definirá la final por penales?",
 		"opciones": ["Sí", "No"],
 		"respuesta_correcta": 0
 	  },
 	  {
-		"pregunta": "¿Algún jugador anotó un hat-trick en la final?",
+		"pregunta": "¿Habrá al menos un gol en los primeros 10 minutos de la final?",
 		"opciones": ["Sí", "No"],
 		"respuesta_correcta": 0
 	  }
@@ -20,23 +219,157 @@
   },
   {
 	"año": 2005,
-	"pregunta": "¿Quién ganó la UEFA Champions League en 2005?",
-	"opciones": ["Liverpool", "Milan", "Barcelona", "Chelsea"],
-	"respuesta_correcta": 0,
+	"pregunta": "¿Cuántos goles se marcarán en la final de la Champions 2005?",
+	"opciones": ["2 o menos", "3", "4", "5 o más"],
+	"respuesta_correcta": 3,
 	"tipo": "principal",
 	"secundarias": [
 	  {
-		"pregunta": "¿Se definió por penales?",
+		"pregunta": "¿Algún jugador anotará doblete en la final?",
 		"opciones": ["Sí", "No"],
-		"respuesta_correcta": 0
+		"respuesta_correcta": 1
 	  },
 	  {
-		"pregunta": "¿Liverpool remontó un 3-0?",
+		"pregunta": "¿El marcador final será un empate antes de penales?",
 		"opciones": ["Sí", "No"],
 		"respuesta_correcta": 0
 	  }
 	]
   },
+  {
+	"año": 2005,
+	"pregunta": "¿Cuántos goles recibirá el equipo campeón en toda la Champions 2005?",
+	"opciones": ["3 o menos", "4-6", "7-9", "10 o más"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿El equipo campeón ganará todos sus partidos en casa?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0
+	  },
+	  {
+		"pregunta": "¿Habrá al menos una remontada en fase de eliminación?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0
+	  }
+	]
+  },
+  {
+	"año": 2005,
+	"pregunta": "¿Quién será el máximo goleador de la Champions 2005?",
+	"opciones": ["Shevchenko", "Henry", "Raúl", "Otro"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Anotará al menos 8 goles?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0
+	  },
+	  {
+		"pregunta": "¿Su equipo llegará a semifinales?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0
+	  }
+	]
+  },
+  {
+	"año": 2005,
+	"pregunta": "¿Cuántas tarjetas rojas habrá en toda la Champions 2005?",
+	"opciones": ["3 o menos", "4-7", "8-10", "Más de 10"],
+	"respuesta_correcta": 1,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Habrá alguna expulsión en la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1
+	  },
+	  {
+		"pregunta": "¿Algún equipo tendrá más de una expulsión?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0
+	  }
+	]
+  },
+  {
+	"año": 2005,
+	"pregunta": "¿Habrá partido con 4 o más goles en semifinales?",
+	"opciones": ["Sí", "No"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Ese partido terminará con empate?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1
+	  },
+	  {
+		"pregunta": "¿Se definirá por penales?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1
+	  }
+	]
+  },
+  {
+	"año": 2005,
+	"pregunta": "¿Cuál será el equipo sorpresa que llegue más lejos en la Champions 2005?",
+	"opciones": ["CSKA Moscú", "Bayer Leverkusen", "Ajax", "Lyon"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Llegará a semifinales?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0
+	  },
+	  {
+		"pregunta": "¿Eliminó a algún campeón defensor?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1
+	  }
+	]
+  },
+  {
+	"año": 2005,
+	"pregunta": "¿Habrá algún jugador que anote en 5 partidos consecutivos?",
+	"opciones": ["Sí", "No"],
+	"respuesta_correcta": 1,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Será jugador del equipo campeón?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1
+	  },
+	  {
+		"pregunta": "¿Anotará en final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1
+	  }
+	]
+  },
+  {
+	"año": 2005,
+	"pregunta": "¿Cuántos goles habrá en la final de la Champions 2005 en tiempo reglamentario?",
+	"opciones": ["0-1", "2-3", "4 o más"],
+	"respuesta_correcta": 2,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Se definirá la final en tiempo extra?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1
+	  },
+	  {
+		"pregunta": "¿Habrá gol en los primeros 30 minutos?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0
+	  }
+	]
+  },
+
   {
 	"año": 1998,
 	"pregunta": "¿Quién ganó el Mundial de 1998?",
@@ -57,6 +390,79 @@
 	]
   },
   {
+	"año": 1998,
+	"pregunta": "¿Dónde se jugó la final del Mundial de 1998?",
+	"opciones": ["París", "Marsella", "Lyon", "Burdeos"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  {
+	"año": 1998,
+	"pregunta": "¿Quién fue el máximo goleador del Mundial de 1998?",
+	"opciones": ["Davor Šuker", "Ronaldo", "Thierry Henry", "Gabriel Batistuta"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  {
+	"año": 1998,
+	"pregunta": "¿Cuál fue el marcador final de la semifinal entre Brasil y Holanda en 1998?",
+	"opciones": ["1-1 (Brasil ganó en penales)", "2-1", "3-2", "1-0"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  {
+	"año": 1998,
+	"pregunta": "¿Qué país fue el anfitrión del Mundial 1998?",
+	"opciones": ["Francia", "Brasil", "Alemania", "Italia"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  {
+	"año": 1998,
+	"pregunta": "¿Quién fue el entrenador campeón del Mundial 1998?",
+	"opciones": ["Aimé Jacquet", "Carlos Alberto Parreira", "Jürgen Klinsmann", "Marcello Lippi"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  {
+	"año": 1998,
+	"pregunta": "¿Qué número de camiseta usó Ronaldo en la final de 1998?",
+	"opciones": ["9", "10", "11", "7"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  {
+	"año": 1998,
+	"pregunta": "¿Cuántos goles anotó Davor Šuker en el Mundial 1998?",
+	"opciones": ["6", "5", "4", "3"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  {
+	"año": 1998,
+	"pregunta": "¿Qué jugador francés anotó dos goles en la final de 1998?",
+	"opciones": ["Zinedine Zidane", "Thierry Henry", "David Trezeguet", "Emmanuel Petit"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  {
+	"año": 1998,
+	"pregunta": "¿Qué país perdió la final del Mundial 1998?",
+	"opciones": ["Brasil", "Francia", "Alemania", "Argentina"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  
+  {
 	"año": 2019,
 	"pregunta": "¿Quién ganó la Copa América 2019?",
 	"opciones": ["Brasil", "Argentina", "Chile", "Uruguay"],
@@ -76,6 +482,79 @@
 	]
   },
   {
+	"año": 2019,
+	"pregunta": "¿Quién fue el máximo goleador de la Copa América 2019?",
+	"opciones": ["Lionel Messi", "Gabriel Jesus", "Eduardo Vargas", "Paolo Guerrero"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  {
+	"año": 2019,
+	"pregunta": "¿Qué selección fue eliminada en semifinales por Brasil en la Copa América 2019?",
+	"opciones": ["Argentina", "Chile", "Perú", "Paraguay"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  {
+	"año": 2019,
+	"pregunta": "¿Quién fue el entrenador campeón de Brasil en la Copa América 2019?",
+	"opciones": ["Tite", "Dunga", "Felipe Scolari", "Carlos Alberto Parreira"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  {
+	"año": 2019,
+	"pregunta": "¿Cuántos goles anotó Brasil en la final de la Copa América 2019?",
+	"opciones": ["3", "2", "1", "0"],
+	"respuesta_correcta": 1,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  {
+	"año": 2019,
+	"pregunta": "¿Qué país fue sede de la Copa América 2019?",
+	"opciones": ["Brasil", "Argentina", "Chile", "Colombia"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  {
+	"año": 2019,
+	"pregunta": "¿Qué selección ganó el premio Fair Play en la Copa América 2019?",
+	"opciones": ["Chile", "Argentina", "Brasil", "Colombia"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  {
+	"año": 2019,
+	"pregunta": "¿Cuántos partidos ganó Argentina en la Copa América 2019?",
+	"opciones": ["2", "3", "4", "1"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  {
+	"año": 2019,
+	"pregunta": "¿Quién anotó el gol del empate para Argentina en semifinales 2019?",
+	"opciones": ["Lautaro Martínez", "Lionel Messi", "Paulo Dybala", "Ángel Di María"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  {
+	"año": 2019,
+	"pregunta": "¿Qué jugador fue elegido mejor jugador del torneo en la Copa América 2019?",
+	"opciones": ["Neymar", "Lionel Messi", "Philippe Coutinho", "Ederson"],
+	"respuesta_correcta": 1,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  
+  {
 	"año": 2016,
 	"pregunta": "¿Quién ganó la NBA en 2016?",
 	"opciones": ["Cavaliers", "Warriors", "Heat", "Spurs"],
@@ -93,5 +572,77 @@
 		"respuesta_correcta": 0
 	  }
 	]
+  },
+  {
+	"año": 2016,
+	"pregunta": "¿Qué equipo tuvo la mejor marca regular en la NBA 2015-2016?",
+	"opciones": ["Golden State Warriors", "Cleveland Cavaliers", "San Antonio Spurs", "Oklahoma City Thunder"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  {
+	"año": 2016,
+	"pregunta": "¿Quién fue el entrenador de los Cleveland Cavaliers en 2016?",
+	"opciones": ["Tyronn Lue", "David Blatt", "Steve Kerr", "Mike Brown"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  {
+	"año": 2016,
+	"pregunta": "¿Qué jugador anotó el tiro ganador en el juego 7 de las Finales 2016?",
+	"opciones": ["Kyrie Irving", "LeBron James", "Kevin Love", "Stephen Curry"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  {
+	"año": 2016,
+	"pregunta": "¿Cuántos puntos promedió LeBron James en las Finales 2016?",
+	"opciones": ["29.7", "27.5", "31.4", "25.3"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  {
+	"año": 2016,
+	"pregunta": "¿Qué récord histórico rompieron los Warriors en temporada regular 2015-2016?",
+	"opciones": ["73 victorias", "72 victorias", "74 victorias", "71 victorias"],
+	"respuesta_correcta": 1,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  {
+	"año": 2016,
+	"pregunta": "¿Cuál fue el resultado del Juego 7 de las Finales NBA 2016?",
+	"opciones": ["93-89", "95-90", "92-88", "96-91"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  {
+	"año": 2016,
+	"pregunta": "¿Cuántos rebotes promedió Draymond Green en las Finales 2016?",
+	"opciones": ["9.5", "8.2", "10.3", "7.7"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  {
+	"año": 2016,
+	"pregunta": "¿Quién fue el máximo anotador de los Warriors en las Finales 2016?",
+	"opciones": ["Stephen Curry", "Klay Thompson", "Andre Iguodala", "Harrison Barnes"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": []
+  },
+  {
+	"año": 2016,
+	"pregunta": "¿Cuál fue la diferencia en el marcador del Juego 7 en las Finales 2016?",
+	"opciones": ["4 puntos", "3 puntos", "5 puntos", "2 puntos"],
+	"respuesta_correcta": 0,
+	"tipo": "principal",
+	"secundarias": []
   }
 ]

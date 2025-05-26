@@ -36,3 +36,37 @@ layout_mode = 2
 
 [node name="option_4" type="Button" parent="question_container/options_container"]
 layout_mode = 2
+
+[node name="secondary_questions_container" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 91.0
+offset_top = 392.0
+offset_right = 630.0
+offset_bottom = 542.0
+
+[node name="secondary_option_1" type="Button" parent="secondary_questions_container"]
+layout_mode = 2
+
+[node name="secondary_option_2" type="Button" parent="secondary_questions_container"]
+layout_mode = 2
+
+[node name="secondary_option_3" type="Button" parent="secondary_questions_container"]
+layout_mode = 2
+
+[node name="secondary_option_4" type="Button" parent="secondary_questions_container"]
+layout_mode = 2
+
+[node name="continue" type="Button" parent="."]
+layout_mode = 0
+offset_left = 316.0
+offset_top = 647.0
+offset_right = 396.0
+offset_bottom = 678.0
+text = "APOSTAR"
+
+[node name="final_results_container" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 97.0
+offset_right = 674.0
+offset_bottom = 593.0
