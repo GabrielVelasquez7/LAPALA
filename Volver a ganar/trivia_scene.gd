@@ -1,6 +1,6 @@
 extends Control
 
-# Variables mejor organizadas y tipadas
+# --- VARIABLES PRINCIPALES ---
 var todas_las_preguntas: Array = []
 var preguntas_filtradas: Array = []
 var preguntas: Array = []
@@ -9,8 +9,13 @@ var indice_pregunta: int = 0
 var anio_seleccionado: int = -1
 var respuestas_seleccionadas: Array = []  # [{correcta: bool, cuota: float, ...}]
 var multiplicador_total: float = 1.0
+var dinero: float = 100.0  # Dinero inicial del jugador
 
-# Nodos de la UI (ahora con tipos explícitos)
+# Selecciones temporales
+var seleccion_temporal: int = -1
+var selecciones_secundarias: Dictionary = {}  # Ej: {"0": 1, "1": -1} (índice secundaria: opción)
+
+# Nodos UI
 @onready var continuar_button: Button = $continue
 @onready var question_container: VBoxContainer = $question_container
 @onready var final_results_container: VBoxContainer = $final_results_container
@@ -18,241 +23,174 @@ var multiplicador_total: float = 1.0
 @onready var options_container: VBoxContainer = $question_container/options_container
 @onready var result_label: Label = $question_container/result_label
 @onready var secondary_questions_container: VBoxContainer = $secondary_questions_container
+@onready var money_label: Label = $money_label  # Añade este nodo en tu escena
 
-func set_preguntas_data(data: Dictionary) -> void:
-	anio_seleccionado = data.get("anio", -1)
-	todas_las_preguntas = data.get("preguntas", [])
-
+# --- FUNCIONES PRINCIPALES ---
 func _ready() -> void:
-	# Configuración inicial
+	_configurar_ui_inicial()
+	_cargar_datos_iniciales()
+
+func _configurar_ui_inicial() -> void:
 	continuar_button.hide()
 	continuar_button.pressed.connect(_on_continuar_pressed)
-	
+	money_label.text = "Dinero: $%.2f" % dinero
+
+func _cargar_datos_iniciales() -> void:
 	anio_seleccionado = Global.ano_seleccionado
-	print("Año seleccionado en trivia (ready): ", anio_seleccionado)
-	
 	if not _cargar_preguntas_desde_json():
 		printerr("Error al cargar preguntas")
 		return
-	
-	if anio_seleccionado == -1:
-		printerr("Error: no se ha recibido un año válido")
-		return
-	
 	_filtrar_y_cargar_preguntas(anio_seleccionado)
 
-func _filtrar_y_cargar_preguntas(anio: int) -> void:
-	preguntas_filtradas = todas_las_preguntas.filter(func(p): return p.get("año", -1) == anio)
-	
-	if preguntas_filtradas.is_empty():
-		printerr("No hay preguntas para el año seleccionado: ", anio)
-		return
-	
-	preguntas = preguntas_filtradas
-	indice_pregunta = 0
-	_cargar_pregunta()
-
+# --- CARGAR Y FILTRAR PREGUNTAS ---
 func _cargar_preguntas_desde_json() -> bool:
 	var file = FileAccess.open("res://data/preguntas.json", FileAccess.READ)
 	if not file:
 		printerr("No se pudo abrir el archivo de preguntas")
 		return false
-	
-	var data_text = file.get_as_text()
-	var parsed = JSON.parse_string(data_text)
+	todas_las_preguntas = JSON.parse_string(file.get_as_text())
 	file.close()
-	
-	if typeof(parsed) != TYPE_ARRAY:
-		printerr("Error: JSON no es un array")
-		return false
-	
-	todas_las_preguntas = parsed
-	print("Preguntas cargadas: ", todas_las_preguntas.size())
 	return true
 
+func _filtrar_y_cargar_preguntas(anio: int) -> void:
+	preguntas_filtradas = todas_las_preguntas.filter(func(p): return p.get("año") == anio)
+	if preguntas_filtradas.is_empty():
+		printerr("No hay preguntas para el año: ", anio)
+		return
+	preguntas = preguntas_filtradas
+	indice_pregunta = 0
+	_cargar_pregunta()
+
+# --- MANEJO DE PREGUNTAS ---
 func _cargar_pregunta() -> void:
-	# Limpiar UI
 	_limpiar_contenedores()
-	
-	# Verificar fin del cuestionario
 	if indice_pregunta >= preguntas.size():
 		_mostrar_resultados_finales()
 		return
 	
-	# Configurar pregunta actual
 	pregunta_actual = preguntas[indice_pregunta]
-	
-	# Mostrar pregunta principal
 	_mostrar_pregunta_principal()
-	
-	# Mostrar preguntas secundarias si existen
-	if pregunta_actual.has("secundarias") and not pregunta_actual["secundarias"].is_empty():
+	if pregunta_actual.has("secundarias"):
 		_mostrar_preguntas_secundarias()
-	else:
-		# Si no hay secundarias, preparar para siguiente pregunta
-		continuar_button.show()
-
-func _limpiar_contenedores() -> void:
-	for child in options_container.get_children():
-		child.queue_free()
-	
-	for child in secondary_questions_container.get_children():
-		child.queue_free()
-	
-	question_container.hide()
-	secondary_questions_container.hide()
-	continuar_button.hide()
-	final_results_container.hide()
 
 func _mostrar_pregunta_principal() -> void:
 	question_container.show()
-	
-	var cuota = pregunta_actual.get("cuota", 1.0)
 	question_label.text = "{0} (Cuota: x{1})".format([
-		pregunta_actual.get("pregunta", "Sin pregunta"),
-		cuota
+		pregunta_actual["pregunta"], pregunta_actual["cuota"]
 	])
 	
-	var opciones = pregunta_actual.get("opciones", [])
-	for i in range(opciones.size()):
+	for i in pregunta_actual["opciones"].size():
 		var btn = Button.new()
-		btn.text = opciones[i]
+		btn.text = pregunta_actual["opciones"][i]
 		btn.set_meta("option_index", i)
 		btn.pressed.connect(_on_option_pressed.bind(btn))
 		options_container.add_child(btn)
 
 func _mostrar_preguntas_secundarias() -> void:
 	secondary_questions_container.show()
+	selecciones_secundarias.clear()
 	
-	for secundaria in pregunta_actual.get("secundarias", []):
+	for i in pregunta_actual["secundarias"].size():
+		var secundaria = pregunta_actual["secundarias"][i]
 		var box = VBoxContainer.new()
-		box.add_theme_constant_override("separation", 8)
+		box.set_meta("secundaria_index", i)
 		
-		var cuota_sec = secundaria.get("cuota", 1.0)
 		var label = Label.new()
-		label.text = "{0} (Cuota: x{1})".format([
-			secundaria.get("pregunta", "Sin pregunta secundaria"),
-			cuota_sec
-		])
+		label.text = "{0} (Cuota: x{1})".format([secundaria["pregunta"], secundaria["cuota"]])
 		box.add_child(label)
 		
-		var opciones_sec = secundaria.get("opciones", [])
-		for i in range(opciones_sec.size()):
+		for j in secundaria["opciones"].size():
 			var btn = Button.new()
-			btn.text = opciones_sec[i]
-			btn.set_meta("option_index", i)
-			btn.pressed.connect(_on_secundaria_option_pressed.bind(
-				btn, secundaria["respuesta_correcta"], cuota_sec
-			))
+			btn.text = secundaria["opciones"][j]
+			btn.set_meta("option_index", j)
+			btn.pressed.connect(_on_secundaria_option_pressed.bind(btn, i))
 			box.add_child(btn)
 		
 		secondary_questions_container.add_child(box)
 
-func _mostrar_resultados_finales() -> void:
-	final_results_container.show()
-	
-	# Limpiar resultados anteriores
-	for child in final_results_container.get_children():
-		child.queue_free()
-	
-	var todas_correctas = true
-	var multiplicador = 1.0
-	
-	# Mostrar cada resultado
-	for resultado in respuestas_seleccionadas:
-		var item = Label.new()
-		var estado = "✔ Correcta" if resultado["correcta"] else "✘ Incorrecta"
-		
-		if not resultado["correcta"]:
-			todas_correctas = false
-		multiplicador *= resultado["cuota"]
-		
-		item.text = "{0}\n{1} | Cuota: x{2}\n".format([
-			resultado["pregunta"],
-			estado,
-			resultado["cuota"]
-		])
-		final_results_container.add_child(item)
-	
-	# Mostrar resumen final
-	var resumen = Label.new()
-	if respuestas_seleccionadas.size() == 3:
-		resumen.text = "🎉 ¡Ganaste la apuesta combinada!\nMultiplicador final: x{0}".format(
-			[snapped(multiplicador, 0.01)]
-		) if todas_correctas else "❌ Perdiste la apuesta combinada.\nMultiplicador anulado."
-	else:
-		resumen.text = "Preguntas respondidas: {0}".format([respuestas_seleccionadas.size()])
-	
-	final_results_container.add_child(resumen)
-
+# --- MANEJO DE SELECCIONES ---
 func _on_option_pressed(button: Button) -> void:
-	var index = button.get_meta("option_index")
-	var es_correcta = index == pregunta_actual["respuesta_correcta"]
-	var cuota = pregunta_actual.get("cuota", 1.0)
-	
-	# Registrar respuesta
-	respuestas_seleccionadas.append({
-		"correcta": es_correcta,
-		"cuota": cuota,
-		"anio": anio_seleccionado,
-		"pregunta": pregunta_actual.get("pregunta", ""),
-		"seleccion": index
-	})
-	
-	if es_correcta:
-		multiplicador_total *= cuota
-	
-	# Desactivar botones
+	seleccion_temporal = button.get_meta("option_index")
+	# Resaltar selección
 	for btn in options_container.get_children():
-		if btn is Button:
-			btn.disabled = true
-	
-	# Si no hay secundarias, pasar a siguiente pregunta después de un delay
-	if not pregunta_actual.has("secundarias") or pregunta_actual["secundarias"].is_empty():
-		await get_tree().create_timer(1.5).timeout
-		indice_pregunta += 1
-		_cargar_pregunta()
+		btn.modulate = Color.WHITE if btn != button else Color.GREEN
 
-func _on_secundaria_option_pressed(button: Button, respuesta_correcta: int, cuota_sec: float) -> void:
-	var index = button.get_meta("option_index")
-	var resultado = index == respuesta_correcta
-	
-	# Desactivar botones en este grupo
+func _on_secundaria_option_pressed(button: Button, secundaria_index: int) -> void:
+	selecciones_secundarias[str(secundaria_index)] = button.get_meta("option_index")
+	# Resaltar selección
 	for sibling in button.get_parent().get_children():
 		if sibling is Button:
-			sibling.disabled = true
+			sibling.modulate = Color.WHITE if sibling != button else Color.GREEN
+			_verificar_selecciones()
+
+
+func _limpiar_contenedores() -> void:
+	# Limpia las opciones principales
+	for child in options_container.get_children():
+		child.queue_free()
 	
-	button.get_parent().set_meta("respondida", true)
-	button.get_parent().set_meta("es_correcta", resultado)
+	# Limpia las preguntas secundarias
+	for child in secondary_questions_container.get_children():
+		child.queue_free()
 	
-	# Registrar respuesta
+	# Reinicia selecciones temporales
+	seleccion_temporal = -1
+	selecciones_secundarias.clear()
+	
+	# Oculta contenedores no necesarios
+	question_container.hide()
+	secondary_questions_container.hide()
+	continuar_button.hide()
+	final_results_container.hide()
+
+
+func _verificar_selecciones() -> void:
+	var secundarias_completas = true
+	if pregunta_actual.has("secundarias"):
+		for i in pregunta_actual["secundarias"].size():
+			if not selecciones_secundarias.has(str(i)):
+				secundarias_completas = false
+				break
+	if seleccion_temporal != -1 and secundarias_completas:
+		continuar_button.show()
+	else:
+		continuar_button.hide()
+
+# --- CONFIRMAR APUESTA ---
+func _on_continuar_pressed() -> void:
+	if seleccion_temporal == -1:
+		print("¡Selecciona una opción primero!")
+		return
+	
+	# Procesar pregunta principal
+	var acierto_principal = (seleccion_temporal == pregunta_actual["respuesta_correcta"])
+	dinero *= pregunta_actual["cuota"] if acierto_principal else 0.0
 	respuestas_seleccionadas.append({
-		"pregunta": button.get_parent().get_child(0).text,
-		"correcta": resultado,
-		"cuota": cuota_sec
+		"pregunta": pregunta_actual["pregunta"],
+		"correcta": acierto_principal,
+		"cuota": pregunta_actual["cuota"]
 	})
 	
-	# Verificar si todas las secundarias están respondidas
-	var todas_respondidas = true
-	for child in secondary_questions_container.get_children():
-		if not child.has_meta("respondida") or not child.get_meta("respondida"):
-			todas_respondidas = false
-			break
+	# Procesar preguntas secundarias (si existen)
+	if pregunta_actual.has("secundarias"):
+		for i in pregunta_actual["secundarias"].size():
+			var idx_str = str(i)
+			if selecciones_secundarias.has(idx_str):
+				var secundaria = pregunta_actual["secundarias"][i]
+				var acierto_sec = (selecciones_secundarias[idx_str] == secundaria["respuesta_correcta"])
+				dinero *= secundaria["cuota"] if acierto_sec else 0.0
+				respuestas_seleccionadas.append({
+					"pregunta": secundaria["pregunta"],
+					"correcta": acierto_sec,
+					"cuota": secundaria["cuota"]
+				})
 	
-	if todas_respondidas:
-		continuar_button.show()
-
-func _on_continuar_pressed() -> void:
-	# Opcional: contar respuestas secundarias
-	var stats = {"correctas": 0, "incorrectas": 0}
-	for child in secondary_questions_container.get_children():
-		if child.has_meta("es_correcta"):
-			if child.get_meta("es_correcta"):
-				stats.correctas += 1
-			else:
-				stats.incorrectas += 1
-	print("Secundarias - Correctas: %s, Incorrectas: %s" % [stats.correctas, stats.incorrectas])
-	
-	# Pasar a siguiente pregunta
+	# Actualizar UI y pasar a siguiente pregunta
+	money_label.text = "Dinero: $%.2f" % dinero
 	indice_pregunta += 1
 	_cargar_pregunta()
+
+# --- RESULTADOS FINALES ---
+func _mostrar_resultados_finales() -> void:
+	final_results_container.show()
+	# (Implementa aquí tu lógica para mostrar ganancias/perdidas totales)

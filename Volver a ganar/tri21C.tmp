@@ -70,11 +70,3 @@ offset_left = 51.0
 offset_top = 97.0
 offset_right = 674.0
 offset_bottom = 593.0
-
-[node name="money_label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 428.0
-offset_top = 35.0
-offset_right = 687.0
-offset_bottom = 70.0
-text = "DINERO :"
