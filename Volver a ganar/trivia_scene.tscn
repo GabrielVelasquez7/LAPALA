@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://chfj5d4pngjq4"]
+[gd_scene load_steps=3 format=3 uid="uid://chfj5d4pngjq4"]
 
 [ext_resource type="Script" path="res://trivia_scene.gd" id="1_h4g4l"]
+[ext_resource type="Script" path="res://admob-lib/admob.gd" id="2_y4p03"]
 
 [node name="trivia_scene" type="Control"]
 layout_mode = 3
@@ -78,3 +79,17 @@ offset_top = 35.0
 offset_right = 687.0
 offset_bottom = 70.0
 text = "DINERO :"
+
+[node name="AdMob" type="Node" parent="."]
+script = ExtResource("2_y4p03")
+rewarded_id = "ca-app-pub-3940256099942544/5224354917"
+
+[node name="rewarded" type="Button" parent="."]
+layout_mode = 0
+offset_left = 534.0
+offset_top = 584.0
+offset_right = 658.0
+offset_bottom = 612.0
+text = "Anuncio"
+
+[connection signal="pressed" from="rewarded" to="." method="_on_rewarded_pressed"]

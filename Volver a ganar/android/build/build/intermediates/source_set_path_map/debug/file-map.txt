@@ -1,0 +1,31 @@
+com.godot.game-jetified-lifecycle-viewmodel-savedstate-2.5.1-0 C:\Users\nelso\.gradle\caches\transforms-3\0d31e0c55bb6b6571f63b02461d10693\transformed\jetified-lifecycle-viewmodel-savedstate-2.5.1\res
+com.godot.game-jetified-play-services-base-18.0.0-1 C:\Users\nelso\.gradle\caches\transforms-3\0e628cf47af6527003ab8a0aef8cdcd5\transformed\jetified-play-services-base-18.0.0\res
+com.godot.game-jetified-emoji2-views-helper-1.2.0-2 C:\Users\nelso\.gradle\caches\transforms-3\0f656dd8e5152233a1c28cc8a0970f3e\transformed\jetified-emoji2-views-helper-1.2.0\res
+com.godot.game-jetified-emoji2-1.2.0-3 C:\Users\nelso\.gradle\caches\transforms-3\123aba15151d339e0c4dcce42b14043b\transformed\jetified-emoji2-1.2.0\res
+com.godot.game-jetified-play-services-ads-22.2.0-4 C:\Users\nelso\.gradle\caches\transforms-3\130f811dcb6c4c628d8d471e056ead88\transformed\jetified-play-services-ads-22.2.0\res
+com.godot.game-browser-1.4.0-5 C:\Users\nelso\.gradle\caches\transforms-3\164e1ff50f0a8aa760aa5dde073f2f68\transformed\browser-1.4.0\res
+com.godot.game-fragment-1.3.6-6 C:\Users\nelso\.gradle\caches\transforms-3\189e80978ed2f28e12fcb892018fb934\transformed\fragment-1.3.6\res
+com.godot.game-jetified-startup-runtime-1.1.1-7 C:\Users\nelso\.gradle\caches\transforms-3\29c2f84df434c9adba4073a373a15189\transformed\jetified-startup-runtime-1.1.1\res
+com.godot.game-core-1.8.0-8 C:\Users\nelso\.gradle\caches\transforms-3\35f4a948deebfe6e56a5492680c1f66f\transformed\core-1.8.0\res
+com.godot.game-appcompat-1.5.1-9 C:\Users\nelso\.gradle\caches\transforms-3\38826d29dd2dcdda546a662638c2bdd9\transformed\appcompat-1.5.1\res
+com.godot.game-lifecycle-viewmodel-2.5.1-10 C:\Users\nelso\.gradle\caches\transforms-3\3bc8ad8fa3aa99456b67aac403e8cb92\transformed\lifecycle-viewmodel-2.5.1\res
+com.godot.game-jetified-play-services-basement-18.0.0-11 C:\Users\nelso\.gradle\caches\transforms-3\4b1271ea82deb3a856a6d71030563e6d\transformed\jetified-play-services-basement-18.0.0\res
+com.godot.game-jetified-play-services-ads-lite-22.2.0-12 C:\Users\nelso\.gradle\caches\transforms-3\51821c8f0367571e25498d105c19d1f4\transformed\jetified-play-services-ads-lite-22.2.0\res
+com.godot.game-jetified-lifecycle-process-2.4.1-13 C:\Users\nelso\.gradle\caches\transforms-3\5d5a7b8d0b0f253384065e50722faa6a\transformed\jetified-lifecycle-process-2.4.1\res
+com.godot.game-jetified-appcompat-resources-1.5.1-14 C:\Users\nelso\.gradle\caches\transforms-3\67f7854b8d0eb7133f7e66b44603a1da\transformed\jetified-appcompat-resources-1.5.1\res
+com.godot.game-jetified-savedstate-1.2.0-15 C:\Users\nelso\.gradle\caches\transforms-3\8ff7b8f91aafa36a51082344806a8bc3\transformed\jetified-savedstate-1.2.0\res
+com.godot.game-jetified-godot-lib.template_debug-16 C:\Users\nelso\.gradle\caches\transforms-3\9c5a10b9f0de0fbc7e522ed48f82044b\transformed\jetified-godot-lib.template_debug\res
+com.godot.game-work-runtime-2.7.0-17 C:\Users\nelso\.gradle\caches\transforms-3\9d61bbcf0d0d6a6d30d2f81da24cf2d3\transformed\work-runtime-2.7.0\res
+com.godot.game-jetified-core-ktx-1.8.0-18 C:\Users\nelso\.gradle\caches\transforms-3\a2c43ce21a0f649582345633442ce56d\transformed\jetified-core-ktx-1.8.0\res
+com.godot.game-lifecycle-runtime-2.5.1-19 C:\Users\nelso\.gradle\caches\transforms-3\a461e5a0229e07ae7f783a368c46a2ba\transformed\lifecycle-runtime-2.5.1\res
+com.godot.game-jetified-annotation-experimental-1.1.0-20 C:\Users\nelso\.gradle\caches\transforms-3\c2e7a6f7c18e58aee699d724727cbaf5\transformed\jetified-annotation-experimental-1.1.0\res
+com.godot.game-lifecycle-livedata-core-2.5.1-21 C:\Users\nelso\.gradle\caches\transforms-3\ca854c17ab402502877625bb5dbda12a\transformed\lifecycle-livedata-core-2.5.1\res
+com.godot.game-jetified-activity-1.5.1-22 C:\Users\nelso\.gradle\caches\transforms-3\e2116867b3082d312c31bcf6bd999b4e\transformed\jetified-activity-1.5.1\res
+com.godot.game-pngs-23 C:\Users\nelso\Documents\GitHub\LAPALA\Volver a ganar\android\build\build\generated\res\pngs\debug
+com.godot.game-resValues-24 C:\Users\nelso\Documents\GitHub\LAPALA\Volver a ganar\android\build\build\generated\res\resValues\debug
+com.godot.game-rs-25 C:\Users\nelso\Documents\GitHub\LAPALA\Volver a ganar\android\build\build\generated\res\rs\debug
+com.godot.game-mergeDebugResources-26 C:\Users\nelso\Documents\GitHub\LAPALA\Volver a ganar\android\build\build\intermediates\incremental\debug\mergeDebugResources\merged.dir
+com.godot.game-mergeDebugResources-27 C:\Users\nelso\Documents\GitHub\LAPALA\Volver a ganar\android\build\build\intermediates\incremental\debug\mergeDebugResources\stripped.dir
+com.godot.game-merged_res-28 C:\Users\nelso\Documents\GitHub\LAPALA\Volver a ganar\android\build\build\intermediates\merged_res\debug
+com.godot.game-build-29 C:\Users\nelso\Documents\GitHub\LAPALA\Volver a ganar\android\build\res
+com.godot.game-debug-30 C:\Users\nelso\Documents\GitHub\LAPALA\Volver a ganar\android\build\src\debug\res

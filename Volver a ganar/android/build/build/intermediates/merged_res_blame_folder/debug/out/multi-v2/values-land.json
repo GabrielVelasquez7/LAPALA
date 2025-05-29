@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.godot.game-mergeDebugResources-26:/values-land/values-land.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\nelso\\.gradle\\caches\\transforms-3\\38826d29dd2dcdda546a662638c2bdd9\\transformed\\appcompat-1.5.1\\res\\values-land\\values-land.xml",
+                    "from": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,125,196",
+                        "endColumns": "69,70,67",
+                        "endOffsets": "120,191,259"
+                    }
+                }
+            ]
+        }
+    ]
+}

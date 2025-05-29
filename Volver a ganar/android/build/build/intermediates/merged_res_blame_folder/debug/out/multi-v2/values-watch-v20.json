@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.godot.game-mergeDebugResources-26:/values-watch-v20/values-watch-v20.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\nelso\\.gradle\\caches\\transforms-3\\38826d29dd2dcdda546a662638c2bdd9\\transformed\\appcompat-1.5.1\\res\\values-watch-v20\\values-watch-v20.xml",
+                    "from": {
+                        "startLines": "2,5,8",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,214,385",
+                        "endLines": "4,7,10",
+                        "endColumns": "12,12,12",
+                        "endOffsets": "209,380,553"
+                    }
+                }
+            ]
+        }
+    ]
+}
