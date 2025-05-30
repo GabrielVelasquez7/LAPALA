@@ -33,6 +33,7 @@ func _ready() -> void:
 	print("🔍 Iniciando verificación de plugin...")
 	if Engine.has_singleton("AdMob"):
 		var admob = Engine.get_singleton("AdMob")
+		
 		print("✅ Plugin detectado: ", admob)
 	else:
 		printerr("❌ Error: Plugin no encontrado")
@@ -209,6 +210,13 @@ func _mostrar_resultados_finales() -> void:
 
 func _on_rewarded_pressed():
 	admob.load_rewarded_video()
-	await admob.load_rewarded_video_loaded
+	await admob.rewarded_video_loaded
 	admob.show_rewarded_video()
-	pass # Replace with function body.
+
+
+
+func _on_banner_pressed():
+	admob.load_banner()
+	await admob.banner_loaded
+	admob.show_banner()
+
