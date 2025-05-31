@@ -216,4 +216,26 @@ func _on_option_pressed(button):
 	# Esperar y pasar a siguiente pregunta
 	await get_tree().create_timer(1.5).timeout
 	indice_pregunta += 1
+<<<<<<< Updated upstream
 	cargar_pregunta()
+=======
+	_cargar_pregunta()
+
+# --- RESULTADOS FINALES ---
+func _mostrar_resultados_finales() -> void:
+	final_results_container.show()
+	# (Implementa aquí tu lógica para mostrar ganancias/perdidas totales)
+
+
+func _on_rewarded_pressed():
+	admob.load_rewarded_video()
+	await admob.rewarded_video_loaded
+	admob.show_rewarded_video()
+
+
+
+func _on_banner_pressed():
+	admob.load_banner()
+	await admob.banner_loaded
+	admob.show_banner()
+>>>>>>> Stashed changes

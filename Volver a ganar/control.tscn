@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwft05c7x7ewj"]
+
+[sub_resource type="Resource" id="Resource_uchyk"]
+metadata/__load_path__ = "res://SelectorDeAnio.gd"
+
+[node name="SelectorDeAnio" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = SubResource("Resource_uchyk")

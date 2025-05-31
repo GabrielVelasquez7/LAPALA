@@ -1,6 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://chfj5d4pngjq4"]
 
 [ext_resource type="Script" uid="uid://cied6yh5xc65c" path="res://trivia_scene.gd" id="1_h4g4l"]
+<<<<<<< Updated upstream
+=======
+[ext_resource type="Script" uid="uid://dqd0rop3utend" path="res://admob-lib/admob.gd" id="2_y4p03"]
+>>>>>>> Stashed changes
 
 [node name="trivia_scene" type="Control"]
 layout_mode = 3
