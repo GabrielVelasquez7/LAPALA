@@ -12,10 +12,11 @@ script = ExtResource("1_h4g4l")
 
 [node name="question_container" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 89.0
-offset_top = 157.0
-offset_right = 628.0
-offset_bottom = 404.0
+offset_left = 178.0
+offset_top = 174.0
+offset_right = 717.0
+offset_bottom = 421.0
+scale = Vector2(0.694978, 1.10167)
 
 [node name="question_label" type="Label" parent="question_container"]
 layout_mode = 2
@@ -40,10 +41,10 @@ layout_mode = 2
 
 [node name="secondary_questions_container" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 91.0
-offset_top = 392.0
-offset_right = 630.0
-offset_bottom = 542.0
+offset_left = 179.0
+offset_top = 398.0
+offset_right = 549.0
+offset_bottom = 460.0
 
 [node name="secondary_option_1" type="Button" parent="secondary_questions_container"]
 layout_mode = 2

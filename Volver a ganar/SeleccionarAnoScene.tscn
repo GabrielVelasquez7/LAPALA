@@ -11,9 +11,10 @@ script = ExtResource("1_t5fhb")
 
 [node name="year_selector" type="OptionButton" parent="."]
 layout_mode = 0
-offset_left = 255.0
-offset_right = 490.0
-offset_bottom = 54.0
+offset_left = 248.0
+offset_top = 86.0
+offset_right = 483.0
+offset_bottom = 140.0
 
 [node name="boton_continuar" type="Button" parent="."]
 layout_direction = 3
@@ -23,4 +24,8 @@ anchor_left = -10.05
 anchor_top = 7.025
 anchor_right = -6.25
 anchor_bottom = 7.825
-offset_right = 1.52588e-05
+offset_left = 11.0
+offset_top = 81.0
+offset_right = 11.0
+offset_bottom = 81.0
+text = "Continuar"
