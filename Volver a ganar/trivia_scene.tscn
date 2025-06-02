@@ -12,11 +12,11 @@ script = ExtResource("1_h4g4l")
 
 [node name="question_container" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 178.0
-offset_top = 174.0
-offset_right = 717.0
-offset_bottom = 421.0
-scale = Vector2(0.694978, 1.10167)
+offset_left = 156.0
+offset_top = 176.0
+offset_right = 795.0
+offset_bottom = 423.0
+scale = Vector2(0.881224, 1.22228)
 
 [node name="question_label" type="Label" parent="question_container"]
 layout_mode = 2
@@ -24,53 +24,44 @@ layout_mode = 2
 [node name="result_label" type="Label" parent="question_container"]
 layout_mode = 2
 
-[node name="options_container" type="VBoxContainer" parent="question_container"]
-layout_mode = 2
-
-[node name="option_1" type="Button" parent="question_container/options_container"]
-layout_mode = 2
-
-[node name="option_2" type="Button" parent="question_container/options_container"]
-layout_mode = 2
-
-[node name="option_3" type="Button" parent="question_container/options_container"]
-layout_mode = 2
-
-[node name="option_4" type="Button" parent="question_container/options_container"]
-layout_mode = 2
-
 [node name="secondary_questions_container" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 179.0
-offset_top = 398.0
-offset_right = 549.0
-offset_bottom = 460.0
+offset_left = 136.0
+offset_top = 516.0
+offset_right = 506.0
+offset_bottom = 768.0
 
 [node name="secondary_option_1" type="Button" parent="secondary_questions_container"]
+custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 
 [node name="secondary_option_2" type="Button" parent="secondary_questions_container"]
+custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 
 [node name="secondary_option_3" type="Button" parent="secondary_questions_container"]
+custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 
 [node name="secondary_option_4" type="Button" parent="secondary_questions_container"]
+custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 
 [node name="continue" type="Button" parent="."]
+custom_minimum_size = Vector2(300, 60)
 layout_mode = 0
-offset_left = 316.0
-offset_top = 647.0
-offset_right = 396.0
-offset_bottom = 678.0
+offset_left = 175.0
+offset_top = 1025.0
+offset_right = 475.0
+offset_bottom = 1085.0
 text = "APOSTAR"
 
 [node name="final_results_container" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 51.0
 offset_top = 97.0
-offset_right = 674.0
+offset_right = 667.0
 offset_bottom = 593.0
 
 [node name="money_label" type="Label" parent="."]
@@ -86,11 +77,45 @@ script = ExtResource("2_y4p03")
 rewarded_id = "ca-app-pub-3940256099942544/5224354917"
 
 [node name="rewarded" type="Button" parent="."]
+custom_minimum_size = Vector2(300, 60)
 layout_mode = 0
-offset_left = 534.0
-offset_top = 584.0
-offset_right = 658.0
-offset_bottom = 612.0
+offset_left = 388.0
+offset_top = 1194.0
+offset_right = 688.0
+offset_bottom = 1254.0
 text = "Anuncio"
+
+[node name="options_container" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 129.0
+offset_top = 215.0
+offset_right = 595.0
+offset_bottom = 467.0
+
+[node name="option_1" type="Button" parent="options_container"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+
+[node name="option_2" type="Button" parent="options_container"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+
+[node name="option_3" type="Button" parent="options_container"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+
+[node name="option_4" type="Button" parent="options_container"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -2
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_left = -6.0
+offset_right = 1074.0
+offset_bottom = 1920.0
+scale = Vector2(0.674281, 0.668844)
 
 [connection signal="pressed" from="rewarded" to="." method="_on_rewarded_pressed"]
