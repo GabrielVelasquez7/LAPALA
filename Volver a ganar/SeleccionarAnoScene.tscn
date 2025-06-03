@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://blt3w06wpnk2"]
 
-[ext_resource type="Script" path="res://SeleccionarAnoScene.gd" id="1_t5fhb"]
+[ext_resource type="Script" uid="uid://b3nqojifkeux6" path="res://SeleccionarAnoScene.gd" id="1_t5fhb"]
 
 [node name="SeleccionarAnoScene" type="Control"]
 layout_mode = 3

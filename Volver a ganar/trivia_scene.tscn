@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://chfj5d4pngjq4"]
 
-[ext_resource type="Script" path="res://trivia_scene.gd" id="1_h4g4l"]
-[ext_resource type="Script" path="res://admob-lib/admob.gd" id="2_y4p03"]
+[ext_resource type="Script" uid="uid://cied6yh5xc65c" path="res://trivia_scene.gd" id="1_h4g4l"]
+[ext_resource type="Script" uid="uid://cca2jpbn26c2m" path="res://admob-lib/admob.gd" id="2_y4p03"]
 
 [node name="trivia_scene" type="Control"]
 layout_mode = 3
@@ -64,6 +64,13 @@ offset_top = 97.0
 offset_right = 667.0
 offset_bottom = 593.0
 
+[node name="ruleta_menu" type="Button" parent="."]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 7.0
+offset_right = 64.0
+offset_bottom = 39.0
+
 [node name="money_label" type="Label" parent="."]
 layout_mode = 0
 offset_left = 428.0
@@ -118,4 +125,5 @@ offset_right = 1074.0
 offset_bottom = 1920.0
 scale = Vector2(0.674281, 0.668844)
 
+[connection signal="pressed" from="ruleta_menu" to="." method="_on_ruleta_menu_pressed"]
 [connection signal="pressed" from="rewarded" to="." method="_on_rewarded_pressed"]

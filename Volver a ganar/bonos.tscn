@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3 uid="uid://cspe7gibkdb5p"]
+
+[ext_resource type="Script" uid="uid://b3upmvwgfykir" path="res://bonos.gd" id="1_tij81"]
+
+[node name="Bonos" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tij81")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 421.0
+offset_bottom = 490.0
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Label"]
+layout_mode = 0
+offset_right = 421.0
+offset_bottom = 442.0
+
+[node name="boton_publico" type="Button" parent="Panel/Label/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+text = "PUBLICO"
+
+[node name="boton_pista" type="Button" parent="Panel/Label/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+text = "PISTA"
+
+[node name="button_50" type="Button" parent="Panel/Label/VBoxContainer"]
+layout_mode = 2
+text = "50/50"
+
+[connection signal="pressed" from="Panel/Label/VBoxContainer/boton_publico" to="." method="_on_boton_publico_pressed"]
+[connection signal="pressed" from="Panel/Label/VBoxContainer/boton_pista" to="." method="_on_boton_pista_pressed"]
+[connection signal="pressed" from="Panel/Label/VBoxContainer/button_50" to="." method="_on_button_50_pressed"]

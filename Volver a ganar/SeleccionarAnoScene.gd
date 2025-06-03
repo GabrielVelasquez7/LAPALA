@@ -49,6 +49,3 @@ func _cargar_trivia():
 	var trivia_scene = preload("res://trivia_scene.tscn").instantiate()
 	get_tree().root.add_child(trivia_scene)
 	queue_free()
-
-
-
