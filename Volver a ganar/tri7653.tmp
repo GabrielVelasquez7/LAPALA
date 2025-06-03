@@ -1,0 +1,145 @@
+[gd_scene load_steps=5 format=3 uid="uid://chfj5d4pngjq4"]
+
+[ext_resource type="Script" path="res://trivia_scene.gd" id="1_h4g4l"]
+[ext_resource type="Script" path="res://admob-lib/admob.gd" id="2_y4p03"]
+[ext_resource type="Texture2D" uid="uid://d00s5xx4crkwy" path="res://assets/background/01_1994.PNG" id="3_whao5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slxc2"]
+bg_color = Color(0.984314, 1, 0.94902, 0.898039)
+
+[node name="trivia_scene" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_h4g4l")
+
+[node name="question_container" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 230.0
+offset_right = 739.0
+offset_bottom = 522.0
+scale = Vector2(0.904076, 1.26166)
+
+[node name="question_label" type="Label" parent="question_container"]
+z_index = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="result_label" type="Label" parent="question_container"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="secondary_questions_container" type="VBoxContainer" parent="."]
+z_index = 1
+layout_mode = 0
+offset_left = 62.0
+offset_top = 480.0
+offset_right = 462.0
+offset_bottom = 732.0
+scale = Vector2(1.48513, 0.997834)
+auto_translate = false
+
+[node name="secondary_option_1" type="Button" parent="secondary_questions_container"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+
+[node name="secondary_option_2" type="Button" parent="secondary_questions_container"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+
+[node name="secondary_option_3" type="Button" parent="secondary_questions_container"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+
+[node name="secondary_option_4" type="Button" parent="secondary_questions_container"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+
+[node name="continue" type="Button" parent="."]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 0
+offset_left = 215.0
+offset_top = 971.0
+offset_right = 515.0
+offset_bottom = 1031.0
+text = "APOSTAR"
+
+[node name="final_results_container" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 51.0
+offset_top = 97.0
+offset_right = 667.0
+offset_bottom = 593.0
+
+[node name="money_label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 428.0
+offset_top = 35.0
+offset_right = 687.0
+offset_bottom = 70.0
+text = "DINERO :"
+
+[node name="AdMob" type="Node" parent="."]
+script = ExtResource("2_y4p03")
+banner_id = "ca-app-pub-3940256099942544/9214589741"
+rewarded_id = "ca-app-pub-3940256099942544/5224354917"
+
+[node name="rewarded" type="Button" parent="."]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 0
+offset_left = 388.0
+offset_top = 1194.0
+offset_right = 688.0
+offset_bottom = 1254.0
+text = "Anuncio"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_left = -6.0
+offset_right = 1074.0
+offset_bottom = 1920.0
+scale = Vector2(0.674281, 0.668844)
+texture = ExtResource("3_whao5")
+
+[node name="options_container" type="GridContainer" parent="."]
+z_index = 1
+layout_mode = 2
+offset_left = 55.0
+offset_top = 280.0
+offset_right = 659.0
+offset_bottom = 404.0
+columns = 2
+
+[node name="option_1" type="Button" parent="options_container"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+
+[node name="option_2" type="Button" parent="options_container"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+
+[node name="option_3" type="Button" parent="options_container"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+
+[node name="option_4" type="Button" parent="options_container"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+
+[node name="trivia_panel" type="Panel" parent="."]
+visibility_layer = 8
+layout_mode = 0
+offset_left = 27.0
+offset_top = 222.0
+offset_right = 71.0
+offset_bottom = 264.0
+scale = Vector2(15.1075, 15.7598)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slxc2")
+
+[connection signal="pressed" from="rewarded" to="." method="_on_rewarded_pressed"]

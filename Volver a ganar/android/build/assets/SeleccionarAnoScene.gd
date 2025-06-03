@@ -1,15 +1,36 @@
 extends Control
 
 var todas_las_preguntas = []
-var year_selector: OptionButton
+var botones_anios: Array
 
 func _ready():
-	year_selector = $year_selector
+	botones_anios = [
+		$year_container/year_1,
+		$year_container/year_2,
+		$year_container/year_3,
+		$year_container/year_4
+	]
+	
+	# Verificación de años ganados y dinero
+	print("Años ganados (al cargar Selección): ", Global.anios_ganados)
+	print("Dinero actual: $", Global.dinero)
+	
+	# Aplicar condición de reset si dinero es 0
+	if Global.dinero <= 0:
+		Global.dinero = 100
+		print("¡Dinero reseteado a $100!")
+	
+	# Actualizar el label de dinero (asegúrate de tener un Label llamado LabelDinero en tu escena)
+	$money_label.text = "Dinero: $%.2f" % Global.dinero
+	
 	cargar_preguntas()
-	llenar_selector_anios()
+	seleccionar_anios_aleatorios()
+
 	$boton_continuar.disabled = true
-	year_selector.item_selected.connect(_on_year_selected)
 	$boton_continuar.pressed.connect(_on_boton_continuar_pressed)
+
+	for boton in botones_anios:
+		boton.pressed.connect(_on_boton_anio_pressed.bind(boton))
 
 func cargar_preguntas():
 	var file = FileAccess.open("res://data/preguntas.json", FileAccess.READ)
@@ -19,36 +40,39 @@ func cargar_preguntas():
 		todas_las_preguntas = parsed if typeof(parsed) == TYPE_ARRAY else []
 		file.close()
 
-func llenar_selector_anios():
-	var anios = {}
+func seleccionar_anios_aleatorios():
+	var anios_disponibles = []
 	for pregunta in todas_las_preguntas:
-		anios[pregunta["año"]] = true
-	var ordenados = anios.keys()
-	ordenados.sort()
-	ordenados.reverse()
-	year_selector.clear()
-	year_selector.add_item("Selecciona un año", -1)
-	year_selector.set_item_disabled(0, true)
-	for anio in ordenados:
-		year_selector.add_item(str(anio), anio)
+		var anio = pregunta["año"]
+		if anio not in Global.anios_ganados and anio not in anios_disponibles:
+			anios_disponibles.append(anio)
 
-func _on_year_selected(index):
-	if year_selector.get_item_id(index) != -1:
-		$boton_continuar.disabled = false
+	anios_disponibles.shuffle()
+
+	var seleccionados = anios_disponibles.slice(0, 4)
+	for i in range(4):
+		if i < seleccionados.size():
+			botones_anios[i].text = str(seleccionados[i])
+			botones_anios[i].visible = true
+			botones_anios[i].disabled = false
+			botones_anios[i].set_meta("anio", seleccionados[i])
+		else:
+			botones_anios[i].visible = false
+
+func _on_boton_anio_pressed(boton):
+	var anio = boton.get_meta("anio")
+	Global.ano_seleccionado = anio
+	print("Año seleccionado:", anio)
+	$boton_continuar.disabled = false
+
+	# Feedback visual
+	for b in botones_anios:
+		b.modulate = Color(1, 1, 1, 0.5)
+	boton.modulate = Color(1, 1, 1, 1)
 
 func _on_boton_continuar_pressed():
-	var anio = year_selector.get_selected_id()
+	var anio = Global.ano_seleccionado
 	if anio == -1:
 		printerr("No se ha seleccionado un año válido")
 		return
-	Global.ano_seleccionado = anio
-	print("Asignando año:", anio)
-	call_deferred("_cargar_trivia")
-
-func _cargar_trivia():
-	var trivia_scene = preload("res://trivia_scene.tscn").instantiate()
-	get_tree().root.add_child(trivia_scene)
-	queue_free()
-
-
-
+	get_tree().change_scene_to_file("res://trivia_scene.tscn")

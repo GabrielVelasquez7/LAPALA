@@ -9,13 +9,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_t5fhb")
 
-[node name="year_selector" type="OptionButton" parent="."]
-layout_mode = 0
-offset_left = 248.0
-offset_top = 86.0
-offset_right = 483.0
-offset_bottom = 140.0
-
 [node name="boton_continuar" type="Button" parent="."]
 layout_direction = 3
 layout_mode = 1
@@ -24,8 +17,40 @@ anchor_left = -10.05
 anchor_top = 7.025
 anchor_right = -6.25
 anchor_bottom = 7.825
-offset_left = 11.0
-offset_top = 81.0
-offset_right = 11.0
-offset_bottom = 81.0
+offset_left = -67.0
+offset_top = 289.0
+offset_right = 70.0
+offset_bottom = 315.0
 text = "Continuar"
+
+[node name="year_container" type="GridContainer" parent="."]
+z_index = 1
+offset_left = 59.0
+offset_top = 315.0
+offset_right = 663.0
+offset_bottom = 439.0
+scale = Vector2(1.00307, 1)
+columns = 2
+
+[node name="year_1" type="Button" parent="year_container"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+
+[node name="year_2" type="Button" parent="year_container"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+
+[node name="year_3" type="Button" parent="year_container"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+
+[node name="year_4" type="Button" parent="year_container"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+
+[node name="money_label" type="Label" parent="."]
+offset_left = 428.0
+offset_top = 35.0
+offset_right = 687.0
+offset_bottom = 70.0
+text = "DINERO :"
