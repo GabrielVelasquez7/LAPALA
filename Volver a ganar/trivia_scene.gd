@@ -11,15 +11,16 @@ var respuestas_seleccionadas: Array = []  # [{correcta: bool, cuota: float, ...}
 var multiplicador_total: float = 1.0
 var dinero: float = 100.0  # Dinero inicial del jugador
 var opciones = ["A", "B", "C", "D"]
-var opcion_correcta = "A" # Ejemplo, esta debe definirse dinámicamente por pregunta
+var opcion_correcta = "A"
 var bonos_usados = {
 	"50_50": false,
 	"pista": false,
 	"publico": false
 }
+
 # --- SELECCIONES TEMPORALES ---
 var seleccion_temporal: int = -1
-var selecciones_secundarias: Dictionary = {}  # Ej: {"0": 1, "1": -1}
+var selecciones_secundarias: Dictionary = {}
 
 # --- NODOS UI ---
 @onready var continuar_button: Button = $continue
@@ -31,20 +32,18 @@ var selecciones_secundarias: Dictionary = {}  # Ej: {"0": 1, "1": -1}
 @onready var secondary_questions_container: VBoxContainer = $secondary_questions_container
 @onready var money_label: Label = $money_label
 @onready var admob = $AdMob
-@onready var ruleta_menu_container = $ruleta_menu  # Este es un contenedor donde irá el menú instanciado
-var ruleta_menu_instance  # Referencia al nodo instanciado
+@onready var ruleta_menu_container = $ruleta_menu
+var ruleta_menu_instance
 
 # --- FUNCIÓN PRINCIPAL ---
 func _ready() -> void:
 	_configurar_ui_inicial()
 	_cargar_datos_iniciales()
 
-	# Instanciar menú de potenciadores
 	var menu_scene = load("res://bonos.tscn")
 	if menu_scene:
 		ruleta_menu_instance = menu_scene.instantiate()
 		ruleta_menu_container.add_child(ruleta_menu_instance)
-		# Conectar señales de potenciadores
 		ruleta_menu_instance.connect("potenciar_50_50", Callable(self, "_usar_50_50"))
 		ruleta_menu_instance.connect("potenciar_pista", Callable(self, "_usar_pista"))
 		ruleta_menu_instance.connect("potenciar_publico", Callable(self, "_usar_publico"))
@@ -52,21 +51,18 @@ func _ready() -> void:
 	else:
 		printerr("❌ No se pudo cargar el menú de potenciadores")
 
-	# Verificación del plugin AdMob
-	print("🔍 Iniciando verificación de plugin...")
 	if Engine.has_singleton("AdMob"):
 		admob = Engine.get_singleton("AdMob")
 		print("✅ Plugin detectado: ", admob)
 	else:
 		printerr("❌ Error: Plugin no encontrado")
-	print("Lista de singletons disponibles: ", Engine.get_singleton_list())
-
 
 # --- CONFIGURACIÓN INICIAL ---
 func _configurar_ui_inicial() -> void:
 	continuar_button.hide()
 	continuar_button.pressed.connect(_on_continuar_pressed)
 	money_label.text = "Dinero: $%.2f" % dinero
+	result_label.hide()
 
 func _cargar_datos_iniciales() -> void:
 	anio_seleccionado = Global.ano_seleccionado
@@ -74,7 +70,6 @@ func _cargar_datos_iniciales() -> void:
 		printerr("Error al cargar preguntas")
 		return
 	_filtrar_y_cargar_preguntas(anio_seleccionado)
-
 
 # --- CARGA Y FILTRADO DE PREGUNTAS ---
 func _cargar_preguntas_desde_json() -> bool:
@@ -95,14 +90,12 @@ func _filtrar_y_cargar_preguntas(anio: int) -> void:
 	indice_pregunta = 0
 	_cargar_pregunta()
 
-
 # --- MANEJO DE PREGUNTAS ---
 func _cargar_pregunta() -> void:
 	_limpiar_contenedores()
 	if indice_pregunta >= preguntas.size():
 		_mostrar_resultados_finales()
 		return
-	
 	pregunta_actual = preguntas[indice_pregunta]
 	_mostrar_pregunta_principal()
 	if pregunta_actual.has("secundarias"):
@@ -113,7 +106,6 @@ func _mostrar_pregunta_principal() -> void:
 	question_label.text = "{0} (Cuota: x{1})".format([
 		pregunta_actual["pregunta"], pregunta_actual["cuota"]
 	])
-	
 	for i in pregunta_actual["opciones"].size():
 		var btn = Button.new()
 		btn.text = pregunta_actual["opciones"][i]
@@ -124,25 +116,20 @@ func _mostrar_pregunta_principal() -> void:
 func _mostrar_preguntas_secundarias() -> void:
 	secondary_questions_container.show()
 	selecciones_secundarias.clear()
-	
 	for i in pregunta_actual["secundarias"].size():
 		var secundaria = pregunta_actual["secundarias"][i]
 		var box = VBoxContainer.new()
 		box.set_meta("secundaria_index", i)
-		
 		var label = Label.new()
 		label.text = "{0} (Cuota: x{1})".format([secundaria["pregunta"], secundaria["cuota"]])
 		box.add_child(label)
-		
 		for j in secundaria["opciones"].size():
 			var btn = Button.new()
 			btn.text = secundaria["opciones"][j]
 			btn.set_meta("option_index", j)
 			btn.pressed.connect(_on_secundaria_option_pressed.bind(btn, i))
 			box.add_child(btn)
-		
 		secondary_questions_container.add_child(box)
-
 
 # --- MANEJO DE SELECCIONES ---
 func _on_option_pressed(button: Button) -> void:
@@ -158,7 +145,6 @@ func _on_secundaria_option_pressed(button: Button, secundaria_index: int) -> voi
 			sibling.modulate = Color.WHITE if sibling != button else Color.GREEN
 	_verificar_selecciones()
 
-
 # --- VERIFICACIÓN DE COMPLECIÓN ---
 func _verificar_selecciones() -> void:
 	var secundarias_completas = true
@@ -172,14 +158,11 @@ func _verificar_selecciones() -> void:
 	else:
 		continuar_button.hide()
 
-
 # --- CONFIRMACIÓN DE RESPUESTA ---
 func _on_continuar_pressed() -> void:
 	if seleccion_temporal == -1:
 		print("¡Selecciona una opción primero!")
 		return
-
-	# Pregunta principal
 	var acierto_principal = (seleccion_temporal == pregunta_actual["respuesta_correcta"])
 	dinero *= pregunta_actual["cuota"] if acierto_principal else 0.0
 	respuestas_seleccionadas.append({
@@ -187,8 +170,6 @@ func _on_continuar_pressed() -> void:
 		"correcta": acierto_principal,
 		"cuota": pregunta_actual["cuota"]
 	})
-
-	# Preguntas secundarias
 	if pregunta_actual.has("secundarias"):
 		for i in pregunta_actual["secundarias"].size():
 			var idx_str = str(i)
@@ -201,17 +182,13 @@ func _on_continuar_pressed() -> void:
 					"correcta": acierto_sec,
 					"cuota": secundaria["cuota"]
 				})
-
 	money_label.text = "Dinero: $%.2f" % dinero
 	indice_pregunta += 1
 	_cargar_pregunta()
 
-
 # --- RESULTADOS FINALES ---
 func _mostrar_resultados_finales() -> void:
 	final_results_container.show()
-	# Aquí puedes agregar un resumen de respuestas correctas e incorrectas
-
 
 # --- LIMPIAR PREGUNTA ANTERIOR ---
 func _limpiar_contenedores() -> void:
@@ -225,7 +202,58 @@ func _limpiar_contenedores() -> void:
 	secondary_questions_container.hide()
 	continuar_button.hide()
 	final_results_container.hide()
+	result_label.hide()
 
+# --- FUNCIONES DE POTENCIADORES ---
+func _usar_50_50() -> void:
+	if bonos_usados["50_50"]:
+		return
+	bonos_usados["50_50"] = true
+	var correct_index = pregunta_actual["respuesta_correcta"]
+	var indices_incorrectos = []
+	for i in range(pregunta_actual["opciones"].size()):
+		if i != correct_index:
+			indices_incorrectos.append(i)
+	indices_incorrectos.shuffle()
+	var eliminados = indices_incorrectos.slice(0, 2)
+	for btn in options_container.get_children():
+		var index = btn.get_meta("option_index")
+		if eliminados.has(index):
+			btn.hide()
+	print("✅ Bono 50/50 activado")
+
+func _usar_pista() -> void:
+	if bonos_usados["pista"]:
+		return
+	bonos_usados["pista"] = true
+	var correcta = pregunta_actual["opciones"][pregunta_actual["respuesta_correcta"]]
+	var pista = "💡 Pista: la respuesta está relacionada con: %s" % correcta
+	result_label.text = pista
+	result_label.show()
+	print("✅ Bono pista activado")
+
+func _usar_publico() -> void:
+	if bonos_usados["publico"]:
+		return
+	bonos_usados["publico"] = true
+	var cantidad_opciones = pregunta_actual["opciones"].size()
+	var correct_index = pregunta_actual["respuesta_correcta"]
+	var porcentaje_correcta = randi_range(50, 70)
+	var restante = 100 - porcentaje_correcta
+	var incorrectos = []
+	var porcentajes = []
+	for i in range(cantidad_opciones):
+		if i != correct_index:
+			incorrectos.append(i)
+	var suma = 0
+	for i in range(incorrectos.size()):
+		var valor = (restante - suma) if i == incorrectos.size() - 1 else randi_range(0, restante - suma)
+		suma += valor
+		porcentajes.append("Opción %s: %d%%" % [opciones[incorrectos[i]], valor])
+	porcentajes.append("Opción %s: %d%% ✅" % [opciones[correct_index], porcentaje_correcta])
+	result_label.text = "📊 Resultado del público:\n" + "\n".join(porcentajes)
+	result_label.show()
+	print("✅ Bono público activado")
 
 # --- FUNCIONES DE ANUNCIOS ---
 func _on_rewarded_pressed():
@@ -238,83 +266,6 @@ func _on_banner_pressed():
 	await admob.banner_loaded
 	admob.show_banner()
 
-
-# --- FUNCIONES DE POTENCIADORES ---
-# Debes tener acceso a la pregunta actual. Vamos a asumir que está en una variable llamada pregunta_actual.
-
-# --- FUNCIONES DE POTENCIADORES ---
-func _usar_50_50(pregunta_actual):
-	var correct_index = pregunta_actual["respuesta_correcta"]
-	var opciones = pregunta_actual["opciones"]
-	var indices_incorrectos = []
-
-	for i in range(opciones.size()):
-		if i != correct_index:
-			indices_incorrectos.append(i)
-
-	# Elegimos dos índices incorrectos al azar
-	indices_incorrectos.shuffle()
-	var eliminados = indices_incorrectos.slice(0, 2)
-
-	# Creamos una nueva lista de opciones mostrando solo la correcta y una incorrecta
-	var opciones_mostradas = []
-	for i in range(opciones.size()):
-		if i == correct_index or not eliminados.has(i):
-			opciones_mostradas.append({
-				"texto": opciones[i],
-				"index": i
-			})
-
-	print("Usando 50/50: mostrando opciones", opciones_mostradas)
-	return opciones_mostradas
-
-
-func _usar_pista(pregunta_actual):
-	var correcta = pregunta_actual["opciones"][pregunta_actual["respuesta_correcta"]]
-	var pista = "La respuesta está relacionada con: %s" % correcta
-	print("Usando pista:", pista)
-	return pista
-
-
-func _usar_publico(pregunta_actual):
-	var opciones = pregunta_actual["opciones"]
-	var cantidad_opciones = opciones.size()
-	var correct_index = pregunta_actual["respuesta_correcta"]
-
-	# Asignar una cantidad mayor al correcto (entre 50% y 70%)
-	var porcentaje_correcta = randi_range(50, 70)
-	var porcentajes = []
-
-	var restante = 100 - porcentaje_correcta
-	var incorrectos = []
-
-	for i in range(cantidad_opciones):
-		if i != correct_index:
-			incorrectos.append(i)
-
-	# Repartir el porcentaje restante aleatoriamente entre las otras opciones
-	var suma = 0
-	for i in range(incorrectos.size()):
-		var valor = (restante - suma) if i == incorrectos.size() - 1 else randi_range(0, restante - suma)
-
-		suma += valor
-		porcentajes.append({
-			"index": incorrectos[i],
-			"porcentaje": valor
-		})
-
-	# Agregar la opción correcta
-	porcentajes.append({
-		"index": correct_index,
-		"porcentaje": porcentaje_correcta
-	})
-
-	# Ordenar por índice para que coincida con el orden original
-	porcentajes.sort_custom(func(a, b): return a["index"] < b["index"])
-
-	print("Usando público:", porcentajes)
-	return porcentajes
-
-
+# --- ABRIR MENÚ DE BONOS ---
 func _on_ruleta_menu_pressed() -> void:
 	ruleta_menu_instance.visible = not ruleta_menu_instance.visible
