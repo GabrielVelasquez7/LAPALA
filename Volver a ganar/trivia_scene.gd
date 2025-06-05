@@ -28,10 +28,6 @@ var bonos_usados = {
 	"publico": false
 }
 
-# --- SELECCIONES TEMPORALES ---
-var seleccion_temporal: int = -1
-var selecciones_secundarias: Dictionary = {}
-
 # --- NODOS UI ---
 @onready var continuar_button: Button = $continue
 @onready var question_container: VBoxContainer = $question_container
@@ -299,21 +295,6 @@ func _on_anuncio_cerrado() -> void:
 func _on_rewarded_video_loaded() -> void:
 	print("📦 Anuncio rewarded cargado y listo")
 
-# --- FLUJO DE REINTENTO MEJORADO ---
-
-# --- LIMPIAR PREGUNTA ANTERIOR ---
-func _limpiar_contenedores() -> void:
-	for child in options_container.get_children():
-		child.queue_free()
-	for child in secondary_questions_container.get_children():
-		child.queue_free()
-	seleccion_temporal = -1
-	selecciones_secundarias.clear()
-	question_container.hide()
-	secondary_questions_container.hide()
-	continuar_button.hide()
-	final_results_container.hide()
-	result_label.hide()
 
 # --- FUNCIONES DE POTENCIADORES ---
 func _usar_50_50() -> void:
