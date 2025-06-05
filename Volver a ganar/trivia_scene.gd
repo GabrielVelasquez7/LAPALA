@@ -19,6 +19,20 @@ var recompensa_otorgada: bool = false
 # --- NODOS UI ---
 @onready var retry_label: Label = $retry_label
 @onready var rewarded: Button = $rewarded
+var dinero: float = 100.0  # Dinero inicial del jugador
+var opciones = ["A", "B", "C", "D"]
+var opcion_correcta = "A"
+var bonos_usados = {
+	"50_50": false,
+	"pista": false,
+	"publico": false
+}
+
+# --- SELECCIONES TEMPORALES ---
+var seleccion_temporal: int = -1
+var selecciones_secundarias: Dictionary = {}
+
+# --- NODOS UI ---
 @onready var continuar_button: Button = $continue
 @onready var question_container: VBoxContainer = $question_container
 @onready var final_results_container: VBoxContainer = $final_results_container
@@ -28,8 +42,10 @@ var recompensa_otorgada: bool = false
 @onready var secondary_questions_container: VBoxContainer = $secondary_questions_container
 @onready var money_label: Label = $money_label
 @onready var admob = $AdMob
+@onready var ruleta_menu_container = $ruleta_menu
+var ruleta_menu_instance
 
-# --- FUNCIONES PRINCIPALES ---
+# --- FUNCIÓN PRINCIPAL ---
 func _ready() -> void:
 	_configurar_ui_inicial()
 	_cargar_datos_iniciales()
@@ -56,8 +72,19 @@ func _ready() -> void:
 	else:
 		printerr("❌ Error: Nodo AdMob no encontrado en escena")
 
+	var menu_scene = load("res://bonos.tscn")
+	if menu_scene:
+		ruleta_menu_instance = menu_scene.instantiate()
+		ruleta_menu_container.add_child(ruleta_menu_instance)
+		ruleta_menu_instance.connect("potenciar_50_50", Callable(self, "_usar_50_50"))
+		ruleta_menu_instance.connect("potenciar_pista", Callable(self, "_usar_pista"))
+		ruleta_menu_instance.connect("potenciar_publico", Callable(self, "_usar_publico"))
+		ruleta_menu_instance.hide()
+	else:
+		printerr("❌ No se pudo cargar el menú de potenciadores")
 
 
+# --- CONFIGURACIÓN INICIAL ---
 func _configurar_ui_inicial() -> void:
 	continuar_button.hide()
 	continuar_button.pressed.connect(_on_continuar_pressed)
@@ -70,7 +97,7 @@ func _cargar_datos_iniciales() -> void:
 		return
 	_filtrar_y_cargar_preguntas(anio_seleccionado)
 
-# --- CARGAR Y FILTRAR PREGUNTAS ---
+# --- CARGA Y FILTRADO DE PREGUNTAS ---
 func _cargar_preguntas_desde_json() -> bool:
 	var file = FileAccess.open("res://data/preguntas.json", FileAccess.READ)
 	if not file:
@@ -105,7 +132,6 @@ func _mostrar_pregunta_principal() -> void:
 	question_label.text = "{0} (Cuota: x{1})".format([
 		pregunta_actual["pregunta"], pregunta_actual["cuota"]
 	])
-
 	for i in pregunta_actual["opciones"].size():
 		var btn = Button.new()
 		btn.text = pregunta_actual["opciones"][i]
@@ -119,7 +145,6 @@ func _mostrar_pregunta_principal() -> void:
 func _mostrar_preguntas_secundarias() -> void:
 	secondary_questions_container.show()
 	selecciones_secundarias.clear()
-
 	for i in pregunta_actual["secundarias"].size():
 		var secundaria = pregunta_actual["secundarias"][i]
 		var box = VBoxContainer.new()
@@ -136,7 +161,6 @@ func _mostrar_preguntas_secundarias() -> void:
 
 
 		box.add_child(label)
-
 		for j in secundaria["opciones"].size():
 			var btn = Button.new()
 			btn.text = secundaria["opciones"][j]
@@ -146,7 +170,6 @@ func _mostrar_preguntas_secundarias() -> void:
 			btn.size_flags_vertical = Control.SIZE_FILL
 			btn.pressed.connect(_on_secundaria_option_pressed.bind(btn, i))
 			box.add_child(btn)
-
 		secondary_questions_container.add_child(box)
 
 
@@ -164,6 +187,7 @@ func _on_secundaria_option_pressed(button: Button, secundaria_index: int) -> voi
 			sibling.modulate = Color.WHITE if sibling != button else Color.GREEN
 	_verificar_selecciones()
 
+# --- VERIFICACIÓN DE COMPLECIÓN ---
 func _verificar_selecciones() -> void:
 	var secundarias_completas = true
 	if pregunta_actual.has("secundarias"):
@@ -194,7 +218,6 @@ func _on_continuar_pressed() -> void:
 	if seleccion_temporal == -1:
 		print("¡Selecciona una opción primero!")
 		return
-
 	var acierto_principal = (seleccion_temporal == pregunta_actual["respuesta_correcta"])
 	Global.dinero *= pregunta_actual["cuota"] if acierto_principal else 0.0
 	respuestas_seleccionadas.append({
@@ -202,7 +225,6 @@ func _on_continuar_pressed() -> void:
 		"correcta": acierto_principal,
 		"cuota": pregunta_actual["cuota"]
 	})
-
 	if pregunta_actual.has("secundarias"):
 		for i in pregunta_actual["secundarias"].size():
 			var idx_str = str(i)
@@ -278,6 +300,73 @@ func _on_rewarded_video_loaded() -> void:
 	print("📦 Anuncio rewarded cargado y listo")
 
 # --- FLUJO DE REINTENTO MEJORADO ---
+
+# --- LIMPIAR PREGUNTA ANTERIOR ---
+func _limpiar_contenedores() -> void:
+	for child in options_container.get_children():
+		child.queue_free()
+	for child in secondary_questions_container.get_children():
+		child.queue_free()
+	seleccion_temporal = -1
+	selecciones_secundarias.clear()
+	question_container.hide()
+	secondary_questions_container.hide()
+	continuar_button.hide()
+	final_results_container.hide()
+	result_label.hide()
+
+# --- FUNCIONES DE POTENCIADORES ---
+func _usar_50_50() -> void:
+	if bonos_usados["50_50"]:
+		return
+	bonos_usados["50_50"] = true
+	var correct_index = pregunta_actual["respuesta_correcta"]
+	var indices_incorrectos = []
+	for i in range(pregunta_actual["opciones"].size()):
+		if i != correct_index:
+			indices_incorrectos.append(i)
+	indices_incorrectos.shuffle()
+	var eliminados = indices_incorrectos.slice(0, 2)
+	for btn in options_container.get_children():
+		var index = btn.get_meta("option_index")
+		if eliminados.has(index):
+			btn.hide()
+	print("✅ Bono 50/50 activado")
+
+func _usar_pista() -> void:
+	if bonos_usados["pista"]:
+		return
+	bonos_usados["pista"] = true
+	var correcta = pregunta_actual["opciones"][pregunta_actual["respuesta_correcta"]]
+	var pista = "💡 Pista: la respuesta está relacionada con: %s" % correcta
+	result_label.text = pista
+	result_label.show()
+	print("✅ Bono pista activado")
+
+func _usar_publico() -> void:
+	if bonos_usados["publico"]:
+		return
+	bonos_usados["publico"] = true
+	var cantidad_opciones = pregunta_actual["opciones"].size()
+	var correct_index = pregunta_actual["respuesta_correcta"]
+	var porcentaje_correcta = randi_range(50, 70)
+	var restante = 100 - porcentaje_correcta
+	var incorrectos = []
+	var porcentajes = []
+	for i in range(cantidad_opciones):
+		if i != correct_index:
+			incorrectos.append(i)
+	var suma = 0
+	for i in range(incorrectos.size()):
+		var valor = (restante - suma) if i == incorrectos.size() - 1 else randi_range(0, restante - suma)
+		suma += valor
+		porcentajes.append("Opción %s: %d%%" % [opciones[incorrectos[i]], valor])
+	porcentajes.append("Opción %s: %d%% ✅" % [opciones[correct_index], porcentaje_correcta])
+	result_label.text = "📊 Resultado del público:\n" + "\n".join(porcentajes)
+	result_label.show()
+	print("✅ Bono público activado")
+
+# --- FUNCIONES DE ANUNCIOS ---
 func _on_rewarded_pressed():
 	if esperando_recompensa:
 		print("⏳ Ya se está esperando una recompensa...")
@@ -311,3 +400,7 @@ func _on_banner_pressed():
 	admob.load_banner()
 	await admob.banner_loaded
 	admob.show_banner()
+
+# --- ABRIR MENÚ DE BONOS ---
+func _on_ruleta_menu_pressed() -> void:
+	ruleta_menu_instance.visible = not ruleta_menu_instance.visible

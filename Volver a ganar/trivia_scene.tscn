@@ -74,6 +74,13 @@ offset_top = 97.0
 offset_right = 667.0
 offset_bottom = 593.0
 
+[node name="ruleta_menu" type="Button" parent="."]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 7.0
+offset_right = 64.0
+offset_bottom = 39.0
+
 [node name="money_label" type="Label" parent="."]
 layout_mode = 0
 offset_left = 428.0
@@ -148,4 +155,5 @@ offset_right = 403.0
 offset_bottom = 844.0
 text = "Anuncio"
 
+[connection signal="pressed" from="ruleta_menu" to="." method="_on_ruleta_menu_pressed"]
 [connection signal="pressed" from="rewarded" to="." method="_on_rewarded_pressed"]
