@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://de7f3bp2dxiuu"]
+
+[ext_resource type="Script" path="res://money_hud.gd" id="1_tcu8x"]
+[ext_resource type="Texture2D" uid="uid://bm5mycs4bdubw" path="res://assets/MobileGameUI/Silver-Gold_Pack/LongButtons/LongButton_Orange.png" id="2_fu7y5"]
+[ext_resource type="Texture2D" uid="uid://cms01qcbxxq1l" path="res://assets/MobileGameUI/Silver-Gold_Pack/SquareButtons/SquareButton_White.png" id="3_k5gid"]
+[ext_resource type="Texture2D" uid="uid://pxw4fa68yvrw" path="res://assets/MobileGameUI/Silver-Gold_Pack/Others/Coin.png" id="4_kqr2l"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_tcu8x")
+
+[node name="Background" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(3.08, 1)
+texture = ExtResource("2_fu7y5")
+
+[node name="btn_background" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = -1.0
+offset_top = -5.0
+offset_right = 52.0
+offset_bottom = 52.0
+scale = Vector2(0.870968, 0.818182)
+texture = ExtResource("3_k5gid")
+
+[node name="Icon2" type="TextureRect" parent="."]
+texture_filter = 1
+offset_left = 5.0
+offset_top = 1.0
+offset_right = 42.0
+offset_bottom = 39.0
+scale = Vector2(0.870968, 0.818182)
+texture = ExtResource("4_kqr2l")
+
+[node name="CantidadLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 4.0
+offset_right = 154.0
+offset_bottom = 27.0

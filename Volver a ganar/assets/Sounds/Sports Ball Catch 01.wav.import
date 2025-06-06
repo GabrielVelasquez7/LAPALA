@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cvg43siukxjk8"
+path="res://.godot/imported/Sports Ball Catch 01.wav-0543ab9cbcaed7641b2866e1400b42c1.sample"
+
+[deps]
+
+source_file="res://assets/Sounds/Sports Ball Catch 01.wav"
+dest_files=["res://.godot/imported/Sports Ball Catch 01.wav-0543ab9cbcaed7641b2866e1400b42c1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -14,11 +14,13 @@ var selecciones_secundarias: Dictionary = {}
 var dinero_guardado: float = 0.0
 var esperando_recompensa: bool = false
 var recompensa_otorgada: bool = false
+var money_display_scene = preload("res://money_display.tscn")
+var money_display: Control
 
 
 # --- NODOS UI ---
 @onready var retry_label: Label = $retry_label
-@onready var rewarded: Button = $rewarded
+@onready var rewarded: TextureButton = $rewarded
 var dinero: float = 100.0  # Dinero inicial del jugador
 var opciones = ["A", "B", "C", "D"]
 var opcion_correcta = "A"
@@ -29,44 +31,60 @@ var bonos_usados = {
 }
 
 # --- NODOS UI ---
-@onready var continuar_button: Button = $continue
+@onready var label_style: Label = $LabelStyleTemplate
+@onready var continuar_button: TextureButton = $continue
 @onready var question_container: VBoxContainer = $question_container
 @onready var final_results_container: VBoxContainer = $final_results_container
 @onready var question_label: Label = $question_container/question_label
 @onready var options_container: GridContainer = $options_container  # GridContainer con columns = 2
 @onready var result_label: Label = $question_container/result_label
 @onready var secondary_questions_container: VBoxContainer = $secondary_questions_container
-@onready var money_label: Label = $money_label
+@onready var money_display_container: Control = $money_display_container
 @onready var admob = $AdMob
 @onready var ruleta_menu_container = $ruleta_menu
+@onready var opcion_label_1: Label = $options_container/option_1/optionlabel1
+@onready var opcion_label_2: Label = $options_container/option_2/optionlabel2
+@onready var opcion_label_3: Label = $options_container/option_3/optionlabel3
+@onready var opcion_label_4: Label = $options_container/option_4/optionlabel4
 var ruleta_menu_instance
+var money_display_instance: Control
+
 
 # --- FUNCIÓN PRINCIPAL ---
 func _ready() -> void:
 	_configurar_ui_inicial()
 	_cargar_datos_iniciales()
 	rewarded.hide()
+	
 	print("🔍 Iniciando verificación de plugin...")
+
 	if admob:
 		print("✅ Nodo AdMob encontrado")
-		
-		# Conectar señales directamente al nodo
 		if admob.has_signal("rewarded"):
 			admob.rewarded.connect(_on_recompensa_recibida)
 		else:
 			printerr("❌ Señal 'rewarded' no encontrada en nodo AdMob")
-			
 		if admob.has_signal("rewarded_video_closed"):
 			admob.rewarded_video_closed.connect(_on_anuncio_cerrado)
 		else:
 			printerr("❌ Señal 'rewarded_video_closed' no encontrada en nodo AdMob")
-			
 		if admob.has_signal("rewarded_video_loaded"):
 			admob.rewarded_video_loaded.connect(_on_rewarded_video_loaded)
 		else:
 			printerr("❌ Señal 'rewarded_video_loaded' no encontrada en nodo AdMob")
 	else:
 		printerr("❌ Error: Nodo AdMob no encontrado en escena")
+		
+
+	var money_scene = load("res://money_display.tscn")
+	if money_scene:
+		money_display_instance = money_scene.instantiate()
+		money_display_container.add_child(money_display_instance)
+		money_display_instance.set_money(Global.dinero)
+
+	else:
+		printerr("❌ No se pudo cargar la escena del display de dinero")
+
 
 	var menu_scene = load("res://bonos.tscn")
 	if menu_scene:
@@ -84,7 +102,8 @@ func _ready() -> void:
 func _configurar_ui_inicial() -> void:
 	continuar_button.hide()
 	continuar_button.pressed.connect(_on_continuar_pressed)
-	money_label.text = "Dinero: $%.2f" % Global.dinero
+
+
 
 func _cargar_datos_iniciales() -> void:
 	anio_seleccionado = Global.ano_seleccionado
@@ -128,58 +147,159 @@ func _mostrar_pregunta_principal() -> void:
 	question_label.text = "{0} (Cuota: x{1})".format([
 		pregunta_actual["pregunta"], pregunta_actual["cuota"]
 	])
+	
+	# Limpiar solo los botones anteriores
+	for child in options_container.get_children():
+		if child is TextureButton:
+			child.queue_free()
+	
 	for i in pregunta_actual["opciones"].size():
-		var btn = Button.new()
-		btn.text = pregunta_actual["opciones"][i]
+		var btn = TextureButton.new()
+		
+		# Configuración del botón (igual que antes)
+		btn.name = "Opcion_%d" % i
 		btn.set_meta("option_index", i)
 		btn.pressed.connect(_on_option_pressed.bind(btn))
+		btn.custom_minimum_size = Vector2(150, 80)
+		btn.texture_normal = load("res://assets/MobileGameUI/Silver-Gold_Pack/LongButtons/LongButton_White.png")
+		btn.texture_pressed = load("res://assets/MobileGameUI/Silver-Gold_Pack/LongButtons/LongButton_White_Pressed.png")
+		btn.stretch_mode = TextureButton.STRETCH_SCALE
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		btn.size_flags_vertical = Control.SIZE_EXPAND_FILL
-		btn.custom_minimum_size = Vector2(150, 80)
+		
+		# Crear NUEVO Label pero copiando el estilo de la plantilla
+		var new_label = Label.new()
+		
+		# 1. CONFIGURACIÓN MANUAL OBLIGATORIA
+		new_label.position.y += 25
+		new_label.name = "OptionLabel_%d" % i
+		new_label.text = pregunta_actual["opciones"][i]
+		new_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER  # Valor 1 para centro
+		new_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER      # Valor 1 para centro
+		
+		# 2. PROPIEDADES DE TAMAÑO (CRÍTICAS)
+		new_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		new_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		new_label.anchor_right = 2.0
+		new_label.anchor_bottom = 1.0
+
+		new_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		
+		# 3. ESTILO VISUAL FORZADO (eliminar después de debug)
+		var debug_style = StyleBoxFlat.new()
+		debug_style.bg_color = Color(0.8, 0.8, 0.8, 0.5)  # Fondo gris semitransparente
+		new_label.add_theme_stylebox_override("normal", debug_style)
+		
+		# 4. FUENTE Y TEXTO (configuración manual)
+		var font = FontFile.new()
+		font.font_data = load("res://Fonts/Pixellari.ttf")  # Cambia por tu fuente
+
+		
+		new_label.add_theme_font_override("font", font)
+		new_label.add_theme_font_size_override("font_size", 24)
+		new_label.add_theme_color_override("font_color", Color.BLACK)
+		
+		# 5. AÑADIR AL BOTÓN
+		btn.add_child(new_label)
+		
+		# Debug adicional
+		print("✅ Label creado - Texto: ", new_label.text)
+		print("   - Tamaño: ", new_label.size)
+		print("   - Posición: ", new_label.position)
+		print("   - Alineación: ", new_label.horizontal_alignment, ", ", new_label.vertical_alignment)
+		
 		options_container.add_child(btn)
+		
+		# Forzar actualización
+		new_label.reset_size()
 
 func _mostrar_preguntas_secundarias() -> void:
 	secondary_questions_container.show()
 	selecciones_secundarias.clear()
+	
+	# Cargar estilos base (asegúrate de tener estas variables @onready)
+	var button_style = preload("res://assets/MobileGameUI/Silver-Gold_Pack/LongButtons/LongButton_White.png")
+	var button_pressed_style = preload("res://assets/MobileGameUI/Silver-Gold_Pack/LongButtons/LongButton_White_Pressed.png")
+	var label_font = load("res://Fonts/Pixellari.ttf")  # Cambia por tu fuente
+
+
 	for i in pregunta_actual["secundarias"].size():
 		var secundaria = pregunta_actual["secundarias"][i]
 		var box = VBoxContainer.new()
 		box.set_meta("secundaria_index", i)
 		box.size_flags_horizontal = Control.SIZE_FILL
 		box.custom_minimum_size = Vector2(320, 0)
+		box.add_theme_constant_override("separation", 10)  # Espacio entre elementos
 
+		# Label de la pregunta
 		var label = Label.new()
 		label.text = "{0} (Cuota: x{1})".format([secundaria["pregunta"], secundaria["cuota"]])
 		label.custom_minimum_size = Vector2(300, 40)
 		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		label.modulate = Color(0, 0, 0)
 		label.z_index = 1
-
-
+		
+		# Configuración de fuente para el Label
+		label.add_theme_font_override("font", label_font)
+		label.add_theme_font_size_override("font_size", 18)
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			
 		box.add_child(label)
+
 		for j in secundaria["opciones"].size():
-			var btn = Button.new()
-			btn.text = secundaria["opciones"][j]
+			var btn = TextureButton.new()  # Cambiamos Button por TextureButton
+			
+			# Configuración del botón
+			btn.name = "Secundaria_%d_Opcion_%d" % [i, j]
 			btn.set_meta("option_index", j)
 			btn.custom_minimum_size = Vector2(200, 60)
 			btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			btn.size_flags_vertical = Control.SIZE_FILL
+			
+					
+					# Texturas y estilo
+			btn.texture_normal = button_style
+			btn.texture_pressed = button_pressed_style
+			btn.stretch_mode = TextureButton.STRETCH_SCALE
+		
+			
+			# Label interno para el texto
+			var btn_label = Label.new()
+			btn_label.text = secundaria["opciones"][j]
+			btn_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			btn_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+			btn_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL          
+			btn_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
+			btn_label.anchor_right = 1.0
+			btn_label.anchor_bottom = 1.0
+			
+			# Ajuste de posición vertical (bajar un poco el texto)
+			btn_label.position.y += 1  # Ajusta este valor según necesites
+					
+					# Configuración de fuente
+			btn_label.add_theme_font_override("font", label_font)
+			btn_label.add_theme_font_size_override("font_size", 24)
+			btn_label.add_theme_color_override("font_color", Color(0, 0, 0))
+					
+			btn.add_child(btn_label)
 			btn.pressed.connect(_on_secundaria_option_pressed.bind(btn, i))
 			box.add_child(btn)
-		secondary_questions_container.add_child(box)
+				
+			secondary_questions_container.add_child(box)
 
 
 # --- MANEJO DE SELECCIONES ---
-func _on_option_pressed(button: Button) -> void:
+func _on_option_pressed(button: TextureButton) -> void:  # ¡Cambiado a TextureButton!
 	seleccion_temporal = button.get_meta("option_index")
 	for btn in options_container.get_children():
-		btn.modulate = Color.WHITE if btn != button else Color.GREEN
-	_verificar_selecciones()
+		if btn is TextureButton:
+			btn.modulate = Color.WHITE if btn != button else Color.GREEN
+			_verificar_selecciones()
 
-func _on_secundaria_option_pressed(button: Button, secundaria_index: int) -> void:
+func _on_secundaria_option_pressed(button: TextureButton, secundaria_index: int) -> void:
 	selecciones_secundarias[str(secundaria_index)] = button.get_meta("option_index")
 	for sibling in button.get_parent().get_children():
-		if sibling is Button:
+		if sibling is TextureButton:
 			sibling.modulate = Color.WHITE if sibling != button else Color.GREEN
 	_verificar_selecciones()
 
@@ -234,7 +354,11 @@ func _on_continuar_pressed() -> void:
 					"cuota": secundaria["cuota"]
 				})
 
-	money_label.text = "Dinero: $%.2f" % Global.dinero
+	if money_display_instance:
+		money_display_instance.set_money(Global.dinero)
+	else:
+		printerr("⚠️ No se ha cargado money_display_instance")
+
 
 	if Global.dinero <= 0.0:
 		dinero_guardado = 500.0  # Puedes ajustar el valor que se recupera
@@ -273,7 +397,11 @@ func _on_recompensa_recibida(currency: String, amount: int) -> void:
 	print("💰 Recompensa recibida: ", currency, " - ", amount)
 	recompensa_otorgada = true
 	Global.dinero = dinero_guardado
-	money_label.text = "Dinero: $%.2f" % Global.dinero
+	if money_display_instance:
+		money_display_instance.set_money(Global.dinero)
+	else:
+		printerr("⚠️ No se ha cargado money_display_instance")
+
 
 func _on_anuncio_cerrado() -> void:
 	print("🎬 Anuncio cerrado. Recompensa otorgada: ", recompensa_otorgada)

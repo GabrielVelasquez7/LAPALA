@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://curnfgf25hcu8"
+path="res://.godot/imported/Dice Multiple 1_1.wav-2b0165204b0eb873af7a851fd9b809e0.sample"
+
+[deps]
+
+source_file="res://assets/Sounds/Dice Multiple 1_1.wav"
+dest_files=["res://.godot/imported/Dice Multiple 1_1.wav-2b0165204b0eb873af7a851fd9b809e0.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://blt3w06wpnk2"]
 
-[ext_resource type="Script" uid="uid://b3nqojifkeux6" path="res://SeleccionarAnoScene.gd" id="1_t5fhb"]
+[ext_resource type="Script" path="res://SeleccionarAnoScene.gd" id="1_t5fhb"]
 
 [node name="SeleccionarAnoScene" type="Control"]
 layout_mode = 3
@@ -25,6 +25,7 @@ text = "Continuar"
 
 [node name="year_container" type="GridContainer" parent="."]
 z_index = 1
+layout_mode = 0
 offset_left = 59.0
 offset_top = 315.0
 offset_right = 663.0
@@ -49,6 +50,7 @@ custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 
 [node name="money_label" type="Label" parent="."]
+layout_mode = 0
 offset_left = 428.0
 offset_top = 35.0
 offset_right = 687.0

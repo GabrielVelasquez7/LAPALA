@@ -1,0 +1,235 @@
+[gd_scene load_steps=10 format=3 uid="uid://chfj5d4pngjq4"]
+
+[ext_resource type="Script" path="res://trivia_scene.gd" id="1_h4g4l"]
+[ext_resource type="Script" path="res://admob-lib/admob.gd" id="2_y4p03"]
+[ext_resource type="Texture2D" uid="uid://d00s5xx4crkwy" path="res://assets/background/01_1994.PNG" id="3_whao5"]
+[ext_resource type="Texture2D" uid="uid://cow36b63kdyf3" path="res://assets/MobileGameUI/Silver-Gold_Pack/LongButtons/LongButton_White.png" id="4_2bj2q"]
+[ext_resource type="Texture2D" uid="uid://dnjqgyf567cfc" path="res://assets/MobileGameUI/Silver-Gold_Pack/LongButtons/LongButton_Purple.png" id="4_wiike"]
+[ext_resource type="Texture2D" uid="uid://khtlob0f6x1v" path="res://assets/MobileGameUI/Silver-Gold_Pack/LongButtons/LongButton_Purple_Pressed.png" id="5_ol70i"]
+[ext_resource type="Texture2D" uid="uid://bdc8ijjgrwegu" path="res://assets/MobileGameUI/Silver-Gold_Pack/SquareButtons/SquareButton_Red.png" id="6_k27pt"]
+[ext_resource type="Texture2D" uid="uid://du3p0eafa5nmv" path="res://assets/MobileGameUI/Silver-Gold_Pack/Icons/Icon_WatchAd.png" id="7_l2qkh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rfuin"]
+bg_color = Color(1, 1, 1, 0.807843)
+
+[node name="trivia_scene" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_h4g4l")
+
+[node name="question_container" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 230.0
+offset_right = 739.0
+offset_bottom = 522.0
+scale = Vector2(0.904076, 1.26166)
+
+[node name="question_label" type="Label" parent="question_container"]
+z_index = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="result_label" type="Label" parent="question_container"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="secondary_questions_container" type="VBoxContainer" parent="."]
+z_index = 1
+layout_mode = 0
+offset_left = 62.0
+offset_top = 480.0
+offset_right = 462.0
+offset_bottom = 732.0
+scale = Vector2(1.48513, 0.997834)
+
+[node name="secondary_option_1" type="Button" parent="secondary_questions_container"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+
+[node name="secondary_option_2" type="Button" parent="secondary_questions_container"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+
+[node name="secondary_option_3" type="Button" parent="secondary_questions_container"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+
+[node name="secondary_option_4" type="Button" parent="secondary_questions_container"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+
+[node name="continue" type="Button" parent="."]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 0
+offset_left = 215.0
+offset_top = 971.0
+offset_right = 515.0
+offset_bottom = 1031.0
+text = "APOSTAR"
+
+[node name="final_results_container" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 51.0
+offset_top = 97.0
+offset_right = 667.0
+offset_bottom = 593.0
+
+[node name="ruleta_menu" type="Button" parent="."]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 7.0
+offset_right = 64.0
+offset_bottom = 39.0
+
+[node name="AdMob" type="Node" parent="."]
+script = ExtResource("2_y4p03")
+banner_id = "ca-app-pub-3940256099942544/9214589741"
+rewarded_id = "ca-app-pub-3940256099942544/5224354917"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -2
+follow_viewport_enabled = true
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.03692, 1.02091)
+size_flags_vertical = 3
+texture = ExtResource("3_whao5")
+expand_mode = 4
+
+[node name="options_container" type="GridContainer" parent="."]
+z_index = 1
+texture_filter = 1
+layout_mode = 2
+offset_left = 55.0
+offset_top = 280.0
+offset_right = 659.0
+offset_bottom = 404.0
+scale = Vector2(1, 1.10272)
+columns = 2
+
+[node name="option_1" type="TextureButton" parent="options_container"]
+texture_filter = 1
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+texture_normal = ExtResource("4_2bj2q")
+stretch_mode = 0
+
+[node name="optionlabel1" type="Label" parent="options_container/option_1"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="option_2" type="TextureButton" parent="options_container"]
+texture_filter = 1
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+texture_normal = ExtResource("4_2bj2q")
+stretch_mode = 0
+
+[node name="optionlabel2" type="Label" parent="options_container/option_2"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="option_3" type="TextureButton" parent="options_container"]
+texture_filter = 1
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+texture_normal = ExtResource("4_2bj2q")
+stretch_mode = 0
+
+[node name="optionlabel3" type="Label" parent="options_container/option_3"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="option_4" type="TextureButton" parent="options_container"]
+texture_filter = 1
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+texture_normal = ExtResource("4_2bj2q")
+stretch_mode = 0
+
+[node name="optionlabel4" type="Label" parent="options_container/option_4"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="trivia_panel" type="Panel" parent="."]
+visibility_layer = 8
+layout_mode = 0
+offset_left = 27.0
+offset_top = 222.0
+offset_right = 71.0
+offset_bottom = 264.0
+scale = Vector2(15.1075, 15.7598)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rfuin")
+
+[node name="retry_label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 191.0
+offset_top = 470.0
+offset_right = 521.0
+offset_bottom = 543.0
+
+[node name="rewarded" type="TextureButton" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 297.0
+offset_top = 799.0
+offset_right = 369.0
+offset_bottom = 830.0
+scale = Vector2(2.69767, 2.26045)
+texture_normal = ExtResource("4_wiike")
+texture_pressed = ExtResource("5_ol70i")
+
+[node name="ad_background" type="TextureRect" parent="rewarded"]
+layout_mode = 0
+offset_left = -12.9741
+offset_top = -4.42389
+offset_right = 27.0259
+offset_bottom = 35.5761
+scale = Vector2(0.66489, 0.719405)
+texture = ExtResource("6_k27pt")
+
+[node name="ad_icon" type="TextureRect" parent="rewarded/ad_background"]
+layout_mode = 0
+offset_left = 4.79395
+offset_top = 5.0
+offset_right = 44.7939
+offset_bottom = 45.0
+scale = Vector2(0.778895, 0.639995)
+texture = ExtResource("7_l2qkh")
+
+[node name="Label" type="Label" parent="rewarded"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 22.2414
+offset_top = 0.884796
+offset_right = 62.2414
+offset_bottom = 26.8848
+scale = Vector2(0.692758, 0.841379)
+text = "VER"
+
+[node name="CantidadLabel" type="Label" parent="."]
+offset_left = 52.0
+offset_top = 4.0
+offset_right = 199.0
+offset_bottom = 56.0
+
+[node name="money_display_container" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 501.0
+offset_top = 18.0
+offset_right = 705.0
+offset_bottom = 79.0
+
+[connection signal="pressed" from="ruleta_menu" to="." method="_on_ruleta_menu_pressed"]
+[connection signal="pressed" from="rewarded" to="." method="_on_rewarded_pressed"]

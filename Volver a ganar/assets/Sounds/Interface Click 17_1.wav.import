@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ruseqdqh3u0u"
+path="res://.godot/imported/Interface Click 17_1.wav-806ed245388e6d0c20d0c3d71989682e.sample"
+
+[deps]
+
+source_file="res://assets/Sounds/Interface Click 17_1.wav"
+dest_files=["res://.godot/imported/Interface Click 17_1.wav-806ed245388e6d0c20d0c3d71989682e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

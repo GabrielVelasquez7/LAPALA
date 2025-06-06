@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://pydr5oodobnw"
+path="res://.godot/imported/Sports Tennis Ball Kick 01.wav-338b121d9ce102d1c1e542cf8ae0ac7c.sample"
+
+[deps]
+
+source_file="res://assets/Sounds/Sports Tennis Ball Kick 01.wav"
+dest_files=["res://.godot/imported/Sports Tennis Ball Kick 01.wav-338b121d9ce102d1c1e542cf8ae0ac7c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

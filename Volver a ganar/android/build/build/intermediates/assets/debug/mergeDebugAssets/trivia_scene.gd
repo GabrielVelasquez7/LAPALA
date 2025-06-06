@@ -14,54 +14,96 @@ var selecciones_secundarias: Dictionary = {}
 var dinero_guardado: float = 0.0
 var esperando_recompensa: bool = false
 var recompensa_otorgada: bool = false
+var money_display_scene = preload("res://money_display.tscn")
+var money_display: Control
 
 
 # --- NODOS UI ---
 @onready var retry_label: Label = $retry_label
-@onready var rewarded: Button = $rewarded
-@onready var continuar_button: Button = $continue
+@onready var rewarded: TextureButton = $rewarded
+var dinero: float = 100.0  # Dinero inicial del jugador
+var opciones = ["A", "B", "C", "D"]
+var opcion_correcta = "A"
+var bonos_usados = {
+	"50_50": false,
+	"pista": false,
+	"publico": false
+}
+
+# --- NODOS UI ---
+@onready var label_style: Label = $LabelStyleTemplate
+@onready var continuar_button: TextureButton = $continue
 @onready var question_container: VBoxContainer = $question_container
 @onready var final_results_container: VBoxContainer = $final_results_container
 @onready var question_label: Label = $question_container/question_label
 @onready var options_container: GridContainer = $options_container  # GridContainer con columns = 2
 @onready var result_label: Label = $question_container/result_label
 @onready var secondary_questions_container: VBoxContainer = $secondary_questions_container
-@onready var money_label: Label = $money_label
+@onready var money_display_container: Control = $money_display_container
 @onready var admob = $AdMob
+@onready var ruleta_menu_container = $ruleta_menu
+@onready var opcion_label_1: Label = $options_container/option_1/optionlabel1
+@onready var opcion_label_2: Label = $options_container/option_2/optionlabel2
+@onready var opcion_label_3: Label = $options_container/option_3/optionlabel3
+@onready var opcion_label_4: Label = $options_container/option_4/optionlabel4
+var ruleta_menu_instance
+var money_display_instance: Control
 
-# --- FUNCIONES PRINCIPALES ---
+
+# --- FUNCIÓN PRINCIPAL ---
 func _ready() -> void:
 	_configurar_ui_inicial()
 	_cargar_datos_iniciales()
 	rewarded.hide()
+	
 	print("🔍 Iniciando verificación de plugin...")
+
 	if admob:
 		print("✅ Nodo AdMob encontrado")
-		
-		# Conectar señales directamente al nodo
 		if admob.has_signal("rewarded"):
 			admob.rewarded.connect(_on_recompensa_recibida)
 		else:
 			printerr("❌ Señal 'rewarded' no encontrada en nodo AdMob")
-			
 		if admob.has_signal("rewarded_video_closed"):
 			admob.rewarded_video_closed.connect(_on_anuncio_cerrado)
 		else:
 			printerr("❌ Señal 'rewarded_video_closed' no encontrada en nodo AdMob")
-			
 		if admob.has_signal("rewarded_video_loaded"):
 			admob.rewarded_video_loaded.connect(_on_rewarded_video_loaded)
 		else:
 			printerr("❌ Señal 'rewarded_video_loaded' no encontrada en nodo AdMob")
 	else:
 		printerr("❌ Error: Nodo AdMob no encontrado en escena")
+		
+
+	var money_scene = load("res://money_display.tscn")
+	if money_scene:
+		money_display_instance = money_scene.instantiate()
+		money_display_container.add_child(money_display_instance)
+		money_display_instance.set_money(Global.dinero)
+
+	else:
+		printerr("❌ No se pudo cargar la escena del display de dinero")
 
 
+	var menu_scene = load("res://bonos.tscn")
+	if menu_scene:
+		ruleta_menu_instance = menu_scene.instantiate()
+		ruleta_menu_container.add_child(ruleta_menu_instance)
+		ruleta_menu_instance.connect("potenciar_50_50", Callable(self, "_usar_50_50"))
+		ruleta_menu_instance.connect("potenciar_pista", Callable(self, "_usar_pista"))
+		ruleta_menu_instance.connect("potenciar_publico", Callable(self, "_usar_publico"))
+		ruleta_menu_instance.hide()
+	else:
+		printerr("❌ No se pudo cargar el menú de potenciadores")
 
+
+# --- CONFIGURACIÓN INICIAL ---
 func _configurar_ui_inicial() -> void:
 	continuar_button.hide()
 	continuar_button.pressed.connect(_on_continuar_pressed)
-	money_label.text = "Dinero: $%.2f" % Global.dinero
+
+
 
 func _cargar_datos_iniciales() -> void:
 	anio_seleccionado = Global.ano_seleccionado
@@ -70,7 +112,7 @@ func _cargar_datos_iniciales() -> void:
 		return
 	_filtrar_y_cargar_preguntas(anio_seleccionado)
 
-# --- CARGAR Y FILTRAR PREGUNTAS ---
+# --- CARGA Y FILTRADO DE PREGUNTAS ---
 func _cargar_preguntas_desde_json() -> bool:
 	var file = FileAccess.open("res://data/preguntas.json", FileAccess.READ)
 	if not file:
@@ -105,20 +147,81 @@ func _mostrar_pregunta_principal() -> void:
 	question_label.text = "{0} (Cuota: x{1})".format([
 		pregunta_actual["pregunta"], pregunta_actual["cuota"]
 	])
-
+	
+	# Limpiar solo los botones anteriores
+	for child in options_container.get_children():
+		if child is TextureButton:
+			child.queue_free()
+	
 	for i in pregunta_actual["opciones"].size():
-		var btn = Button.new()
-		btn.text = pregunta_actual["opciones"][i]
+		var btn = TextureButton.new()
+		
+		# Configuración del botón (igual que antes)
+		btn.name = "Opcion_%d" % i
 		btn.set_meta("option_index", i)
 		btn.pressed.connect(_on_option_pressed.bind(btn))
+		btn.custom_minimum_size = Vector2(150, 80)
+		btn.texture_normal = load("res://assets/MobileGameUI/Silver-Gold_Pack/LongButtons/LongButton_White.png")
+		btn.texture_pressed = load("res://assets/MobileGameUI/Silver-Gold_Pack/LongButtons/LongButton_White_Pressed.png")
+		btn.stretch_mode = TextureButton.STRETCH_SCALE
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		btn.size_flags_vertical = Control.SIZE_EXPAND_FILL
-		btn.custom_minimum_size = Vector2(150, 80)
+		
+		# Crear NUEVO Label pero copiando el estilo de la plantilla
+		var new_label = Label.new()
+		
+		# 1. CONFIGURACIÓN MANUAL OBLIGATORIA
+		new_label.position.y += 25
+		new_label.name = "OptionLabel_%d" % i
+		new_label.text = pregunta_actual["opciones"][i]
+		new_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER  # Valor 1 para centro
+		new_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER      # Valor 1 para centro
+		
+		# 2. PROPIEDADES DE TAMAÑO (CRÍTICAS)
+		new_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		new_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		new_label.anchor_right = 2.0
+		new_label.anchor_bottom = 1.0
+
+		new_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		
+		# 3. ESTILO VISUAL FORZADO (eliminar después de debug)
+		var debug_style = StyleBoxFlat.new()
+		debug_style.bg_color = Color(0.8, 0.8, 0.8, 0.5)  # Fondo gris semitransparente
+		new_label.add_theme_stylebox_override("normal", debug_style)
+		
+		# 4. FUENTE Y TEXTO (configuración manual)
+		var font = FontFile.new()
+		font.font_data = load("res://Fonts/Pixellari.ttf")  # Cambia por tu fuente
+
+		
+		new_label.add_theme_font_override("font", font)
+		new_label.add_theme_font_size_override("font_size", 24)
+		new_label.add_theme_color_override("font_color", Color.BLACK)
+		
+		# 5. AÑADIR AL BOTÓN
+		btn.add_child(new_label)
+		
+		# Debug adicional
+		print("✅ Label creado - Texto: ", new_label.text)
+		print("   - Tamaño: ", new_label.size)
+		print("   - Posición: ", new_label.position)
+		print("   - Alineación: ", new_label.horizontal_alignment, ", ", new_label.vertical_alignment)
+		
 		options_container.add_child(btn)
+		
+		# Forzar actualización
+		new_label.reset_size()
 
 func _mostrar_preguntas_secundarias() -> void:
 	secondary_questions_container.show()
 	selecciones_secundarias.clear()
+	
+	# Cargar estilos base (asegúrate de tener estas variables @onready)
+	var button_style = preload("res://assets/MobileGameUI/Silver-Gold_Pack/LongButtons/LongButton_White.png")
+	var button_pressed_style = preload("res://assets/MobileGameUI/Silver-Gold_Pack/LongButtons/LongButton_White_Pressed.png")
+	var label_font = load("res://Fonts/Pixellari.ttf")  # Cambia por tu fuente
+
 
 	for i in pregunta_actual["secundarias"].size():
 		var secundaria = pregunta_actual["secundarias"][i]
@@ -126,44 +229,81 @@ func _mostrar_preguntas_secundarias() -> void:
 		box.set_meta("secundaria_index", i)
 		box.size_flags_horizontal = Control.SIZE_FILL
 		box.custom_minimum_size = Vector2(320, 0)
+		box.add_theme_constant_override("separation", 10)  # Espacio entre elementos
 
+		# Label de la pregunta
 		var label = Label.new()
 		label.text = "{0} (Cuota: x{1})".format([secundaria["pregunta"], secundaria["cuota"]])
 		label.custom_minimum_size = Vector2(300, 40)
 		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		label.modulate = Color(0, 0, 0)
 		label.z_index = 1
-
-
+		
+		# Configuración de fuente para el Label
+		label.add_theme_font_override("font", label_font)
+		label.add_theme_font_size_override("font_size", 18)
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			
 		box.add_child(label)
 
 		for j in secundaria["opciones"].size():
-			var btn = Button.new()
-			btn.text = secundaria["opciones"][j]
+			var btn = TextureButton.new()  # Cambiamos Button por TextureButton
+			
+			# Configuración del botón
+			btn.name = "Secundaria_%d_Opcion_%d" % [i, j]
 			btn.set_meta("option_index", j)
 			btn.custom_minimum_size = Vector2(200, 60)
 			btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			btn.size_flags_vertical = Control.SIZE_FILL
+			
+					
+					# Texturas y estilo
+			btn.texture_normal = button_style
+			btn.texture_pressed = button_pressed_style
+			btn.stretch_mode = TextureButton.STRETCH_SCALE
+		
+			
+			# Label interno para el texto
+			var btn_label = Label.new()
+			btn_label.text = secundaria["opciones"][j]
+			btn_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			btn_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+			btn_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL          
+			btn_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
+			btn_label.anchor_right = 1.0
+			btn_label.anchor_bottom = 1.0
+			
+			# Ajuste de posición vertical (bajar un poco el texto)
+			btn_label.position.y += 1  # Ajusta este valor según necesites
+					
+					# Configuración de fuente
+			btn_label.add_theme_font_override("font", label_font)
+			btn_label.add_theme_font_size_override("font_size", 24)
+			btn_label.add_theme_color_override("font_color", Color(0, 0, 0))
+					
+			btn.add_child(btn_label)
 			btn.pressed.connect(_on_secundaria_option_pressed.bind(btn, i))
 			box.add_child(btn)
-
-		secondary_questions_container.add_child(box)
+				
+			secondary_questions_container.add_child(box)
 
 
 # --- MANEJO DE SELECCIONES ---
-func _on_option_pressed(button: Button) -> void:
+func _on_option_pressed(button: TextureButton) -> void:  # ¡Cambiado a TextureButton!
 	seleccion_temporal = button.get_meta("option_index")
 	for btn in options_container.get_children():
-		btn.modulate = Color.WHITE if btn != button else Color.GREEN
-	_verificar_selecciones()
+		if btn is TextureButton:
+			btn.modulate = Color.WHITE if btn != button else Color.GREEN
+			_verificar_selecciones()
 
-func _on_secundaria_option_pressed(button: Button, secundaria_index: int) -> void:
+func _on_secundaria_option_pressed(button: TextureButton, secundaria_index: int) -> void:
 	selecciones_secundarias[str(secundaria_index)] = button.get_meta("option_index")
 	for sibling in button.get_parent().get_children():
-		if sibling is Button:
+		if sibling is TextureButton:
 			sibling.modulate = Color.WHITE if sibling != button else Color.GREEN
 	_verificar_selecciones()
 
+# --- VERIFICACIÓN DE COMPLECIÓN ---
 func _verificar_selecciones() -> void:
 	var secundarias_completas = true
 	if pregunta_actual.has("secundarias"):
@@ -194,7 +334,6 @@ func _on_continuar_pressed() -> void:
 	if seleccion_temporal == -1:
 		print("¡Selecciona una opción primero!")
 		return
-
 	var acierto_principal = (seleccion_temporal == pregunta_actual["respuesta_correcta"])
 	Global.dinero *= pregunta_actual["cuota"] if acierto_principal else 0.0
 	respuestas_seleccionadas.append({
@@ -202,7 +341,6 @@ func _on_continuar_pressed() -> void:
 		"correcta": acierto_principal,
 		"cuota": pregunta_actual["cuota"]
 	})
-
 	if pregunta_actual.has("secundarias"):
 		for i in pregunta_actual["secundarias"].size():
 			var idx_str = str(i)
@@ -216,7 +354,11 @@ func _on_continuar_pressed() -> void:
 					"cuota": secundaria["cuota"]
 				})
 
-	money_label.text = "Dinero: $%.2f" % Global.dinero
+	if money_display_instance:
+		money_display_instance.set_money(Global.dinero)
+	else:
+		printerr("⚠️ No se ha cargado money_display_instance")
+
 
 	if Global.dinero <= 0.0:
 		dinero_guardado = 500.0  # Puedes ajustar el valor que se recupera
@@ -255,7 +397,11 @@ func _on_recompensa_recibida(currency: String, amount: int) -> void:
 	print("💰 Recompensa recibida: ", currency, " - ", amount)
 	recompensa_otorgada = true
 	Global.dinero = dinero_guardado
-	money_label.text = "Dinero: $%.2f" % Global.dinero
+	if money_display_instance:
+		money_display_instance.set_money(Global.dinero)
+	else:
+		printerr("⚠️ No se ha cargado money_display_instance")
+
 
 func _on_anuncio_cerrado() -> void:
 	print("🎬 Anuncio cerrado. Recompensa otorgada: ", recompensa_otorgada)
@@ -277,7 +423,59 @@ func _on_anuncio_cerrado() -> void:
 func _on_rewarded_video_loaded() -> void:
 	print("📦 Anuncio rewarded cargado y listo")
 
-# --- FLUJO DE REINTENTO MEJORADO ---
+
+# --- FUNCIONES DE POTENCIADORES ---
+func _usar_50_50() -> void:
+	if bonos_usados["50_50"]:
+		return
+	bonos_usados["50_50"] = true
+	var correct_index = pregunta_actual["respuesta_correcta"]
+	var indices_incorrectos = []
+	for i in range(pregunta_actual["opciones"].size()):
+		if i != correct_index:
+			indices_incorrectos.append(i)
+	indices_incorrectos.shuffle()
+	var eliminados = indices_incorrectos.slice(0, 2)
+	for btn in options_container.get_children():
+		var index = btn.get_meta("option_index")
+		if eliminados.has(index):
+			btn.hide()
+	print("✅ Bono 50/50 activado")
+
+func _usar_pista() -> void:
+	if bonos_usados["pista"]:
+		return
+	bonos_usados["pista"] = true
+	var correcta = pregunta_actual["opciones"][pregunta_actual["respuesta_correcta"]]
+	var pista = "💡 Pista: la respuesta está relacionada con: %s" % correcta
+	result_label.text = pista
+	result_label.show()
+	print("✅ Bono pista activado")
+
+func _usar_publico() -> void:
+	if bonos_usados["publico"]:
+		return
+	bonos_usados["publico"] = true
+	var cantidad_opciones = pregunta_actual["opciones"].size()
+	var correct_index = pregunta_actual["respuesta_correcta"]
+	var porcentaje_correcta = randi_range(50, 70)
+	var restante = 100 - porcentaje_correcta
+	var incorrectos = []
+	var porcentajes = []
+	for i in range(cantidad_opciones):
+		if i != correct_index:
+			incorrectos.append(i)
+	var suma = 0
+	for i in range(incorrectos.size()):
+		var valor = (restante - suma) if i == incorrectos.size() - 1 else randi_range(0, restante - suma)
+		suma += valor
+		porcentajes.append("Opción %s: %d%%" % [opciones[incorrectos[i]], valor])
+	porcentajes.append("Opción %s: %d%% ✅" % [opciones[correct_index], porcentaje_correcta])
+	result_label.text = "📊 Resultado del público:\n" + "\n".join(porcentajes)
+	result_label.show()
+	print("✅ Bono público activado")
+
+# --- FUNCIONES DE ANUNCIOS ---
 func _on_rewarded_pressed():
 	if esperando_recompensa:
 		print("⏳ Ya se está esperando una recompensa...")
@@ -311,3 +509,7 @@ func _on_banner_pressed():
 	admob.load_banner()
 	await admob.banner_loaded
 	admob.show_banner()
+
+# --- ABRIR MENÚ DE BONOS ---
+func _on_ruleta_menu_pressed() -> void:
+	ruleta_menu_instance.visible = not ruleta_menu_instance.visible

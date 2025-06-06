@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bm8lqjhqv2btf"
+path="res://.godot/imported/Tile Plastic 03.wav-450e01f81a3cc0275d4dcabbdd7f50a0.sample"
+
+[deps]
+
+source_file="res://assets/Sounds/Tile Plastic 03.wav"
+dest_files=["res://.godot/imported/Tile Plastic 03.wav-450e01f81a3cc0275d4dcabbdd7f50a0.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

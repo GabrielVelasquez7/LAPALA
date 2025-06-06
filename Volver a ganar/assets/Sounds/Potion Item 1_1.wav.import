@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://5u1xq5sqh7wl"
+path="res://.godot/imported/Potion Item 1_1.wav-f7fc12a2ba0ab15223629ac61edd6b1e.sample"
+
+[deps]
+
+source_file="res://assets/Sounds/Potion Item 1_1.wav"
+dest_files=["res://.godot/imported/Potion Item 1_1.wav-f7fc12a2ba0ab15223629ac61edd6b1e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
