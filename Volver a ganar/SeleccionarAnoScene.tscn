@@ -49,10 +49,10 @@ layout_mode = 2
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 
-[node name="money_label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 428.0
-offset_top = 35.0
-offset_right = 687.0
-offset_bottom = 70.0
-text = "DINERO :"
+[node name="money_display_container" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 501.0
+offset_top = 18.0
+offset_right = 705.0
+offset_bottom = 79.0

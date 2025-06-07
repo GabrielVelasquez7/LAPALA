@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://chfj5d4pngjq4"]
+[gd_scene load_steps=18 format=3 uid="uid://chfj5d4pngjq4"]
 
 [ext_resource type="Script" path="res://trivia_scene.gd" id="1_h4g4l"]
 [ext_resource type="FontFile" uid="uid://b1efm8pbkjfue" path="res://Fonts/Pixellari.ttf" id="2_dbjih"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bdc8ijjgrwegu" path="res://assets/MobileGameUI/Silver-Gold_Pack/SquareButtons/SquareButton_Red.png" id="6_k27pt"]
 [ext_resource type="Texture2D" uid="uid://nqdribtn61eu" path="res://assets/MobileGameUI/Silver-Gold_Pack/Others/Gold_Handle.png" id="7_0cnyb"]
 [ext_resource type="Texture2D" uid="uid://du3p0eafa5nmv" path="res://assets/MobileGameUI/Silver-Gold_Pack/Icons/Icon_WatchAd.png" id="7_l2qkh"]
+[ext_resource type="Script" path="res://background.gd" id="9_bbnjq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_jsena"]
 font_color = Color(0, 0, 0, 1)
@@ -30,32 +31,14 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_h4g4l")
 
-[node name="question_container" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 68.0
-offset_top = 230.0
-offset_right = 739.0
-offset_bottom = 522.0
-scale = Vector2(0.904076, 1.26166)
-
-[node name="question_label" type="Label" parent="question_container"]
-z_index = 1
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_dbjih")
-theme_override_font_sizes/font_size = 16
-
-[node name="result_label" type="Label" parent="question_container"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-
 [node name="secondary_questions_container" type="VBoxContainer" parent="."]
 z_index = 1
+texture_filter = 1
 layout_mode = 0
-offset_left = 179.0
-offset_top = 487.0
-offset_right = 530.0
-offset_bottom = 790.0
+offset_left = 182.0
+offset_top = 533.0
+offset_right = 533.0
+offset_bottom = 836.0
 scale = Vector2(1.00513, 0.997834)
 
 [node name="secondary_option_1" type="TextureButton" parent="secondary_questions_container"]
@@ -67,6 +50,7 @@ stretch_mode = 0
 
 [node name="secondarylabel1" type="Label" parent="secondary_questions_container/secondary_option_1"]
 z_index = 5
+layout_mode = 0
 offset_left = 80.0
 offset_top = 10.8822
 offset_right = 171.0
@@ -83,6 +67,7 @@ stretch_mode = 0
 
 [node name="secondarylabel2" type="Label" parent="secondary_questions_container/secondary_option_2"]
 z_index = 5
+layout_mode = 0
 offset_left = 80.0
 offset_top = 10.8822
 offset_right = 171.0
@@ -99,6 +84,7 @@ stretch_mode = 0
 
 [node name="secondarylabel3" type="Label" parent="secondary_questions_container/secondary_option_3"]
 z_index = 5
+layout_mode = 0
 offset_left = 80.0
 offset_top = 10.8822
 offset_right = 171.0
@@ -115,6 +101,7 @@ stretch_mode = 0
 
 [node name="secondarylabel4" type="Label" parent="secondary_questions_container/secondary_option_4"]
 z_index = 5
+layout_mode = 0
 offset_left = 80.0
 offset_top = 10.8822
 offset_right = 171.0
@@ -186,6 +173,7 @@ rewarded_id = "ca-app-pub-3940256099942544/5224354917"
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -2
 follow_viewport_enabled = true
+script = ExtResource("9_bbnjq")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = 15
@@ -202,11 +190,11 @@ expand_mode = 4
 z_index = 1
 texture_filter = 1
 layout_mode = 2
-offset_left = 55.0
-offset_top = 280.0
-offset_right = 659.0
-offset_bottom = 404.0
-scale = Vector2(1, 1.10272)
+offset_left = 76.0
+offset_top = 313.0
+offset_right = 680.0
+offset_bottom = 437.0
+scale = Vector2(0.959998, 1.18272)
 columns = 2
 
 [node name="option_1" type="TextureButton" parent="options_container"]
@@ -234,6 +222,7 @@ texture_normal = ExtResource("4_2bj2q")
 stretch_mode = 0
 
 [node name="optionlabel2" type="Label" parent="options_container/option_2"]
+layout_mode = 0
 offset_left = 69.0
 offset_top = 9.06845
 offset_right = 109.0
@@ -269,6 +258,7 @@ texture_normal = ExtResource("4_2bj2q")
 stretch_mode = 0
 
 [node name="optionlabel4" type="Label" parent="options_container/option_4"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 scale = Vector2(7.46858, 2.52808)
@@ -328,9 +318,11 @@ offset_top = 0.884796
 offset_right = 62.2414
 offset_bottom = 26.8848
 scale = Vector2(0.692758, 0.841379)
+theme_override_fonts/font = ExtResource("2_dbjih")
 text = "VER"
 
 [node name="CantidadLabel" type="Label" parent="."]
+layout_mode = 0
 offset_left = 52.0
 offset_top = 4.0
 offset_right = 199.0
@@ -357,7 +349,32 @@ offset_bottom = 1121.0
 scale = Vector2(50.1871, 0.831674)
 theme = SubResource("Theme_unl7m")
 theme_override_colors/font_color = Color(0, 0.996078, 0, 1)
-theme_override_font_sizes/font_size = 600
+theme_override_font_sizes/font_size = 500
+
+[node name="question_label" type="Label" parent="."]
+z_index = 1
+texture_filter = 1
+layout_mode = 2
+offset_left = 66.0
+offset_top = 232.0
+offset_right = 615.0
+offset_bottom = 325.0
+scale = Vector2(0.993445, 0.972774)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbjih")
+theme_override_font_sizes/font_size = 36
+
+[node name="secondary_question_label" type="Label" parent="."]
+z_index = 1
+texture_filter = 1
+offset_left = 112.0
+offset_top = 464.0
+offset_right = 661.0
+offset_bottom = 557.0
+scale = Vector2(0.993445, 0.972774)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbjih")
+theme_override_font_sizes/font_size = 36
 
 [connection signal="pressed" from="ruleta_menu" to="." method="_on_ruleta_menu_pressed"]
 [connection signal="pressed" from="rewarded" to="." method="_on_rewarded_pressed"]

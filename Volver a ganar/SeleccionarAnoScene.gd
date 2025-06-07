@@ -2,6 +2,11 @@ extends Control
 
 var todas_las_preguntas = []
 var botones_anios: Array
+var money_display_scene = preload("res://money_display.tscn")
+var money_display: Control
+var money_display_instance: Control
+
+@onready var money_display_container: Control = $money_display_container
 
 func _ready():
 	botones_anios = [
@@ -10,7 +15,14 @@ func _ready():
 		$year_container/year_3,
 		$year_container/year_4
 	]
-	
+	var money_scene = load("res://money_display.tscn")
+	if money_scene:
+		money_display_instance = money_scene.instantiate()
+		money_display_container.add_child(money_display_instance)
+		money_display_instance.set_money(Global.dinero)
+
+	else:
+		printerr("❌ No se pudo cargar la escena del display de dinero")
 	# Verificación de años ganados y dinero
 	print("Años ganados (al cargar Selección): ", Global.anios_ganados)
 	print("Dinero actual: $", Global.dinero)
@@ -21,7 +33,7 @@ func _ready():
 		print("¡Dinero reseteado a $100!")
 	
 	# Actualizar el label de dinero (asegúrate de tener un Label llamado LabelDinero en tu escena)
-	$money_label.text = "Dinero: $%.2f" % Global.dinero
+
 	
 	cargar_preguntas()
 	seleccionar_anios_aleatorios()
