@@ -35,7 +35,7 @@ var bonos_usados = {
 @onready var continuar_button: TextureButton = $continue
 @onready var question_container: VBoxContainer = $question_container
 @onready var final_results_container: VBoxContainer = $final_results_container
-@onready var question_label: Label = $question_label
+@onready var question_label: Label = $question_container/question_label
 @onready var options_container: GridContainer = $options_container  # GridContainer con columns = 2
 @onready var result_label: Label = $question_container/result_label
 @onready var secondary_questions_container: VBoxContainer = $secondary_questions_container
@@ -143,8 +143,8 @@ func _cargar_pregunta() -> void:
 		_mostrar_preguntas_secundarias()
 
 func _mostrar_pregunta_principal() -> void:
-
-	question_label.text = "{0} \n (Cuota: x{1})".format([
+	question_container.show()
+	question_label.text = "{0} (Cuota: x{1})".format([
 		pregunta_actual["pregunta"], pregunta_actual["cuota"]
 	])
 	
@@ -234,8 +234,7 @@ func _mostrar_preguntas_secundarias() -> void:
 		# Label de la pregunta
 		var label = Label.new()
 		label.text = "{0} (Cuota: x{1})".format([secundaria["pregunta"], secundaria["cuota"]])
-		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL  # Se expandirá horizontalmente
-		label.size_flags_vertical = Control.SIZE_EXPAND_FILL    # Se expandirá verticalmente
+		label.custom_minimum_size = Vector2(300, 40)
 		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		label.modulate = Color(0, 0, 0)
 		label.z_index = 1
@@ -245,8 +244,7 @@ func _mostrar_preguntas_secundarias() -> void:
 		label.add_theme_font_size_override("font_size", 18)
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			
-		secondary_questions_container.add_child(label)
-
+		box.add_child(label)
 
 		for j in secundaria["opciones"].size():
 			var btn = TextureButton.new()  # Cambiamos Button por TextureButton
@@ -326,7 +324,7 @@ func _limpiar_contenedores() -> void:
 		child.queue_free()
 	seleccion_temporal = -1
 	selecciones_secundarias.clear()
-
+	question_container.hide()
 	secondary_questions_container.hide()
 	continuar_button.hide()
 	final_results_container.hide()
