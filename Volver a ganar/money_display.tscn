@@ -32,6 +32,7 @@ texture = ExtResource("3_k5gid")
 
 [node name="Icon2" type="TextureRect" parent="."]
 texture_filter = 1
+layout_mode = 0
 offset_left = 5.0
 offset_top = 1.0
 offset_right = 42.0

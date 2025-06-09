@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://chfj5d4pngjq4"]
+[gd_scene load_steps=20 format=3 uid="uid://chfj5d4pngjq4"]
 
 [ext_resource type="Script" path="res://trivia_scene.gd" id="1_h4g4l"]
 [ext_resource type="FontFile" uid="uid://b1efm8pbkjfue" path="res://Fonts/Pixellari.ttf" id="2_dbjih"]
@@ -13,17 +13,24 @@
 [ext_resource type="Texture2D" uid="uid://bdc8ijjgrwegu" path="res://assets/MobileGameUI/Silver-Gold_Pack/SquareButtons/SquareButton_Red.png" id="6_k27pt"]
 [ext_resource type="Texture2D" uid="uid://nqdribtn61eu" path="res://assets/MobileGameUI/Silver-Gold_Pack/Others/Gold_Handle.png" id="7_0cnyb"]
 [ext_resource type="Texture2D" uid="uid://du3p0eafa5nmv" path="res://assets/MobileGameUI/Silver-Gold_Pack/Icons/Icon_WatchAd.png" id="7_l2qkh"]
+[ext_resource type="Script" path="res://CanvasLayer.gd" id="9_4uk0u"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_jsena"]
 font_color = Color(0, 0, 0, 1)
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="ImageTexture" id="ImageTexture_s8vd3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uehec"]
+bg_color = Color(1, 0.988235, 0.694118, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rfuin"]
-bg_color = Color(1, 1, 1, 0.807843)
+bg_color = Color(1, 1, 1, 0.639216)
 
 [sub_resource type="Theme" id="Theme_unl7m"]
 
 [node name="trivia_scene" type="Control"]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -51,11 +58,12 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 
 [node name="secondary_questions_container" type="VBoxContainer" parent="."]
 z_index = 1
+texture_filter = 1
 layout_mode = 0
-offset_left = 179.0
-offset_top = 487.0
-offset_right = 530.0
-offset_bottom = 790.0
+offset_left = 55.0
+offset_top = 550.0
+offset_right = 659.0
+offset_bottom = 853.0
 scale = Vector2(1.00513, 0.997834)
 
 [node name="secondary_option_1" type="TextureButton" parent="secondary_questions_container"]
@@ -67,10 +75,11 @@ stretch_mode = 0
 
 [node name="secondarylabel1" type="Label" parent="secondary_questions_container/secondary_option_1"]
 z_index = 5
-offset_left = 80.0
-offset_top = 10.8822
-offset_right = 171.0
-offset_bottom = 36.8822
+layout_mode = 0
+offset_left = 226.836
+offset_top = 9.01953
+offset_right = 317.836
+offset_bottom = 35.0195
 scale = Vector2(1.58022, 1.25127)
 label_settings = SubResource("LabelSettings_jsena")
 
@@ -83,6 +92,7 @@ stretch_mode = 0
 
 [node name="secondarylabel2" type="Label" parent="secondary_questions_container/secondary_option_2"]
 z_index = 5
+layout_mode = 0
 offset_left = 80.0
 offset_top = 10.8822
 offset_right = 171.0
@@ -99,6 +109,7 @@ stretch_mode = 0
 
 [node name="secondarylabel3" type="Label" parent="secondary_questions_container/secondary_option_3"]
 z_index = 5
+layout_mode = 0
 offset_left = 80.0
 offset_top = 10.8822
 offset_right = 171.0
@@ -115,6 +126,7 @@ stretch_mode = 0
 
 [node name="secondarylabel4" type="Label" parent="secondary_questions_container/secondary_option_4"]
 z_index = 5
+layout_mode = 0
 offset_left = 80.0
 offset_top = 10.8822
 offset_right = 171.0
@@ -186,6 +198,7 @@ rewarded_id = "ca-app-pub-3940256099942544/5224354917"
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -2
 follow_viewport_enabled = true
+script = ExtResource("9_4uk0u")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = 15
@@ -193,10 +206,24 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.03692, 1.02091)
-size_flags_vertical = 3
+scale = Vector2(0.997974, 0.81356)
 texture = ExtResource("3_whao5")
 expand_mode = 4
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ImageTexture_s8vd3")
+
+[node name="panel" type="Panel" parent="CanvasLayer"]
+visibility_layer = 8
+offset_left = -48.0
+offset_top = 1042.0
+offset_right = 10.0
+offset_bottom = 1120.0
+scale = Vector2(13.5108, 2.92667)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uehec")
 
 [node name="options_container" type="GridContainer" parent="."]
 z_index = 1
@@ -234,6 +261,7 @@ texture_normal = ExtResource("4_2bj2q")
 stretch_mode = 0
 
 [node name="optionlabel2" type="Label" parent="options_container/option_2"]
+layout_mode = 0
 offset_left = 69.0
 offset_top = 9.06845
 offset_right = 109.0
@@ -269,16 +297,16 @@ texture_normal = ExtResource("4_2bj2q")
 stretch_mode = 0
 
 [node name="optionlabel4" type="Label" parent="options_container/option_4"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 scale = Vector2(7.46858, 2.52808)
 
 [node name="trivia_panel" type="Panel" parent="."]
 visibility_layer = 8
-layout_mode = 0
-offset_left = 27.0
+offset_left = 21.0
 offset_top = 222.0
-offset_right = 72.0
+offset_right = 66.0
 offset_bottom = 267.0
 scale = Vector2(15.1075, 15.7598)
 mouse_filter = 2
@@ -323,14 +351,16 @@ texture = ExtResource("7_l2qkh")
 [node name="Label" type="Label" parent="rewarded"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 22.2414
-offset_top = 0.884796
-offset_right = 62.2414
-offset_bottom = 26.8848
+offset_left = 22.6121
+offset_top = 4.42389
+offset_right = 62.6121
+offset_bottom = 30.4239
 scale = Vector2(0.692758, 0.841379)
+theme_override_fonts/font = ExtResource("2_dbjih")
 text = "VER"
 
 [node name="CantidadLabel" type="Label" parent="."]
+layout_mode = 0
 offset_left = 52.0
 offset_top = 4.0
 offset_right = 199.0

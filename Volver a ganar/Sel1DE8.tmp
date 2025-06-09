@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://blt3w06wpnk2"]
+[gd_scene load_steps=11 format=3 uid="uid://blt3w06wpnk2"]
 
 [ext_resource type="Script" path="res://SeleccionarAnoScene.gd" id="1_t5fhb"]
 [ext_resource type="Texture2D" uid="uid://ppgfa4m4lskb" path="res://assets/MobileGameUI/Silver-Gold_Pack/LongButtons/LongButton_Green.png" id="2_3wc8t"]
@@ -7,6 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://cms01qcbxxq1l" path="res://assets/MobileGameUI/Silver-Gold_Pack/SquareButtons/SquareButton_White.png" id="5_041wy"]
 [ext_resource type="Texture2D" uid="uid://nqdribtn61eu" path="res://assets/MobileGameUI/Silver-Gold_Pack/Others/Gold_Handle.png" id="6_hpsnc"]
 [ext_resource type="Texture2D" uid="uid://cow36b63kdyf3" path="res://assets/MobileGameUI/Silver-Gold_Pack/LongButtons/LongButton_White.png" id="7_5glhy"]
+
+[sub_resource type="Theme" id="Theme_8w53a"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cx03o"]
+font_color = Color(0, 0, 0, 1)
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_hupkt"]
 
 [node name="SeleccionarAnoScene" type="Control"]
 texture_filter = 1
@@ -82,12 +90,33 @@ layout_mode = 2
 texture_normal = ExtResource("7_5glhy")
 stretch_mode = 0
 
+[node name="Label" type="Label" parent="year_container/year_1"]
+z_index = 5
+texture_filter = 1
+layout_mode = 0
+offset_left = 11.0
+offset_top = 10.8822
+offset_right = 102.0
+offset_bottom = 36.8822
+scale = Vector2(3.14022, 1.57774)
+theme = SubResource("Theme_8w53a")
+label_settings = SubResource("LabelSettings_cx03o")
+
 [node name="year_2" type="TextureButton" parent="year_container"]
 texture_filter = 1
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 texture_normal = ExtResource("7_5glhy")
 stretch_mode = 0
+
+[node name="Label" type="Label" parent="year_container/year_2"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 6.0
+offset_top = 3.62741
+offset_right = 46.0
+offset_bottom = 26.6275
+scale = Vector2(7.44339, 2.43701)
 
 [node name="year_3" type="TextureButton" parent="year_container"]
 texture_filter = 1
@@ -96,9 +125,32 @@ layout_mode = 2
 texture_normal = ExtResource("7_5glhy")
 stretch_mode = 0
 
+[node name="Label" type="Label" parent="year_container/year_3"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = 0.386017
+offset_right = 14.0
+offset_bottom = 0.386017
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.909653, 0.771295)
+theme = SubResource("Theme_hupkt")
+horizontal_alignment = 1
+
 [node name="year_4" type="TextureButton" parent="year_container"]
 texture_filter = 1
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 texture_normal = ExtResource("7_5glhy")
 stretch_mode = 0
+
+[node name="Label" type="Label" parent="year_container/year_4"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(5.70858, 1.91142)
