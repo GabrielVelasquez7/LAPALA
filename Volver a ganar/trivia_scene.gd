@@ -16,6 +16,13 @@ var esperando_recompensa: bool = false
 var recompensa_otorgada: bool = false
 var money_display_scene = preload("res://money_display.tscn")
 var money_display: Control
+var timer_pregunta: Timer
+var tiempo_limite: float = 20.0  # 30 segundos por defecto, ajústalo según necesites
+var tiempo_restante: float = 0.0
+var min_time_for_sound := 15.0
+var tiempo_total_inicial: float = 30.0  # Ajusta según tu timer
+var pitch_inicial: float = 0.03  # Velocidad más lenta al inicio
+var pitch_final: float = 1.1   # Velocidad máxima al final
 
 
 # --- NODOS UI ---
@@ -46,16 +53,26 @@ var bonos_usados = {
 @onready var opcion_label_2: Label = $options_container/option_2/optionlabel2
 @onready var opcion_label_3: Label = $options_container/option_3/optionlabel3
 @onready var opcion_label_4: Label = $options_container/option_4/optionlabel4
+@onready var timer_sound: AudioStreamPlayer = $TimerSound
+@onready var timer_label: Label = $TimerContainer/TimerLabel
 var ruleta_menu_instance
 var money_display_instance: Control
 
 
+
 # --- FUNCIÓN PRINCIPAL ---
 func _ready() -> void:
+	timer_pregunta = Timer.new()
+	add_child(timer_pregunta)
+	timer_pregunta.timeout.connect(_on_tiempo_agotado)
+	timer_pregunta.one_shot = true
+	
 	_configurar_ui_inicial()
 	_cargar_datos_iniciales()
 	rewarded.hide()
 	$CanvasLayer.cambiar_fondo_por_ano(anio_seleccionado)
+
+	
 	
 	print("🔍 Iniciando verificación de plugin...")
 
@@ -138,10 +155,36 @@ func _cargar_pregunta() -> void:
 	if indice_pregunta >= preguntas.size():
 		_mostrar_resultados_finales()
 		return
+	tiempo_restante = tiempo_limite
+	timer_pregunta.start(tiempo_limite)
+	_actualizar_ui_timer()  # Actualiza la UI del time
 	pregunta_actual = preguntas[indice_pregunta]
 	_mostrar_pregunta_principal()
 	if pregunta_actual.has("secundarias"):
 		_mostrar_preguntas_secundarias()
+		
+func _actualizar_ui_timer():
+	# Mostrar número entero
+	timer_label.text = str(int(tiempo_restante))
+	
+	# 1. Sonido continuo con aceleración progresiva
+	var progreso = 1.0 - (tiempo_restante / tiempo_total_inicial)
+	timer_sound.pitch_scale = pitch_inicial + (pitch_final - pitch_inicial) * progreso
+	
+	if not timer_sound.playing:
+		timer_sound.play()
+	
+	# 2. Parpadeo rojo (últimos 3 segundos)
+	if tiempo_restante <= 3.0:
+		timer_label.modulate = Color.RED.lerp(Color.WHITE, fmod(tiempo_restante, 0.5))
+	else:
+		timer_label.modulate = Color.WHITE
+		
+func _on_tiempo_agotado():
+	Sound_master.play("lose")  # Añade este sonido a tu sistema de sonidos
+	Global.dinero = 0.0  # Pierdes todo el dinero por tiempo
+	dinero_guardado = 500.0  # Reset al valor inicial
+	_mostrar_retry_ui()
 
 func _mostrar_pregunta_principal() -> void:
 	question_container.show()
@@ -213,6 +256,12 @@ func _mostrar_pregunta_principal() -> void:
 		
 		# Forzar actualización
 		new_label.reset_size()
+		
+func _process(delta):
+	if timer_pregunta and timer_pregunta.time_left > 0:
+		tiempo_restante = timer_pregunta.time_left
+
+		_actualizar_ui_timer()
 
 func _mostrar_preguntas_secundarias() -> void:
 	secondary_questions_container.show()
@@ -254,11 +303,15 @@ func _mostrar_preguntas_secundarias() -> void:
 			var btn = TextureButton.new()
 			btn.name = "Secundaria_%d_Opcion_%d" % [i, j]
 			btn.set_meta("option_index", j)
+			btn.set_meta("secundaria_index", i)  # Añadimos el índice de la pregunta secundaria
 			btn.custom_minimum_size = Vector2(130, 60)
 			btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			btn.texture_normal = button_style
 			btn.texture_pressed = button_pressed_style
 			btn.stretch_mode = TextureButton.STRETCH_SCALE
+			
+			# Conectamos la señal pressed
+			btn.pressed.connect(_on_secundaria_option_pressed.bind(btn, i))  # Pasamos el botón y el índice
 
 			var btn_label = Label.new()
 			btn_label.text = secundaria["opciones"][j]
@@ -289,10 +342,17 @@ func _on_option_pressed(button: TextureButton) -> void:  # ¡Cambiado a TextureB
 
 func _on_secundaria_option_pressed(button: TextureButton, secundaria_index: int) -> void:
 	Sound_master.play("click")
-	selecciones_secundarias[str(secundaria_index)] = button.get_meta("option_index")
-	for sibling in button.get_parent().get_children():
-		if sibling is TextureButton:
-			sibling.modulate = Color.WHITE if sibling != button else Color.GREEN
+	
+	# Guardamos la selección
+	var option_index = button.get_meta("option_index")
+	selecciones_secundarias[str(secundaria_index)] = option_index
+	
+	# Resaltamos el botón seleccionado y desmarcamos los otros
+	var parent_container = button.get_parent()
+	for child in parent_container.get_children():
+		if child is TextureButton:
+			child.modulate = Color.WHITE if child != button else Color.GREEN
+	
 	_verificar_selecciones()
 
 # --- VERIFICACIÓN DE COMPLECIÓN ---

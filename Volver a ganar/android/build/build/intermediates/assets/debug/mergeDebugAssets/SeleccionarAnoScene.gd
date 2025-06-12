@@ -2,6 +2,11 @@ extends Control
 
 var todas_las_preguntas = []
 var botones_anios: Array
+var money_display_scene = preload("res://money_display.tscn")
+var money_display: Control
+var money_display_instance: Control
+
+@onready var money_display_container: Control = $money_display_container
 
 func _ready():
 	botones_anios = [
@@ -10,6 +15,39 @@ func _ready():
 		$year_container/year_3,
 		$year_container/year_4
 	]
+	var label_style = {
+		"font_size": 30,
+		"font_color": Color.BLACK,
+		"align": HORIZONTAL_ALIGNMENT_CENTER,
+		"valign": VERTICAL_ALIGNMENT_CENTER,
+	}
+	for boton in botones_anios:
+		var new_label = Label.new()
+		new_label.name = "Label"
+		
+		# Aplicar estilo
+		var font = load("res://Fonts/Pixellari.ttf")
+		new_label.add_theme_font_size_override("font_size", label_style.font_size)
+		new_label.add_theme_font_override("font", font)
+		new_label.add_theme_color_override("font_color", label_style.font_color)
+		new_label.horizontal_alignment = label_style.align
+		new_label.vertical_alignment = label_style.valign
+		
+		
+		# Ajustar tamaño y anclaje
+		new_label.size = boton.size
+		new_label.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		
+		boton.add_child(new_label)
+			
+	
+	var money_scene = load("res://money_display.tscn")
+	if money_scene:
+		money_display_instance = money_scene.instantiate()
+		money_display_container.add_child(money_display_instance)
+		money_display_instance.set_money(Global.dinero)
+	else:
+		printerr("❌ No se pudo cargar la escena del display de dinero")
 	
 	# Verificación de años ganados y dinero
 	print("Años ganados (al cargar Selección): ", Global.anios_ganados)
@@ -20,9 +58,6 @@ func _ready():
 		Global.dinero = 100
 		print("¡Dinero reseteado a $100!")
 	
-	# Actualizar el label de dinero (asegúrate de tener un Label llamado LabelDinero en tu escena)
-	$money_label.text = "Dinero: $%.2f" % Global.dinero
-	
 	cargar_preguntas()
 	seleccionar_anios_aleatorios()
 
@@ -30,7 +65,8 @@ func _ready():
 	$boton_continuar.pressed.connect(_on_boton_continuar_pressed)
 
 	for boton in botones_anios:
-		boton.pressed.connect(_on_boton_anio_pressed.bind(boton))
+		if boton is TextureButton:
+			boton.pressed.connect(_on_boton_anio_pressed.bind(boton))
 
 func cargar_preguntas():
 	var file = FileAccess.open("res://data/preguntas.json", FileAccess.READ)
@@ -51,16 +87,21 @@ func seleccionar_anios_aleatorios():
 
 	var seleccionados = anios_disponibles.slice(0, 4)
 	for i in range(4):
+		var boton = botones_anios[i]
 		if i < seleccionados.size():
-			botones_anios[i].text = str(seleccionados[i])
-			botones_anios[i].visible = true
-			botones_anios[i].disabled = false
-			botones_anios[i].set_meta("anio", seleccionados[i])
+			var label = boton.get_node("Label") as Label
+			label.text = str(seleccionados[i])  # Ahora todos los Labels existen y son idénticos
+			
+			boton.visible = true
+			boton.disabled = false
+			boton.set_meta("anio", seleccionados[i])
 		else:
-			botones_anios[i].visible = false
+			boton.visible = false
 
-func _on_boton_anio_pressed(boton):
+func _on_boton_anio_pressed(boton: TextureButton):
 	var anio = boton.get_meta("anio")
+	Sound_master.play("click")
+
 	Global.ano_seleccionado = anio
 	print("Año seleccionado:", anio)
 	$boton_continuar.disabled = false

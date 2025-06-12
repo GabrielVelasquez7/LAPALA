@@ -16,6 +16,9 @@ var esperando_recompensa: bool = false
 var recompensa_otorgada: bool = false
 var money_display_scene = preload("res://money_display.tscn")
 var money_display: Control
+var timer_pregunta: Timer
+var tiempo_limite: float = 30.0  # 30 segundos por defecto, ajústalo según necesites
+var tiempo_restante: float = 0.0
 
 
 # --- NODOS UI ---
@@ -50,11 +53,20 @@ var ruleta_menu_instance
 var money_display_instance: Control
 
 
+
 # --- FUNCIÓN PRINCIPAL ---
 func _ready() -> void:
+	timer_pregunta = Timer.new()
+	add_child(timer_pregunta)
+	timer_pregunta.timeout.connect(_on_tiempo_agotado)
+	timer_pregunta.one_shot = true
+	
 	_configurar_ui_inicial()
 	_cargar_datos_iniciales()
 	rewarded.hide()
+	$CanvasLayer.cambiar_fondo_por_ano(anio_seleccionado)
+
+	
 	
 	print("🔍 Iniciando verificación de plugin...")
 
@@ -137,10 +149,25 @@ func _cargar_pregunta() -> void:
 	if indice_pregunta >= preguntas.size():
 		_mostrar_resultados_finales()
 		return
+	tiempo_restante = tiempo_limite
+	timer_pregunta.start(tiempo_limite)
+	_actualizar_ui_timer()  # Actualiza la UI del time
 	pregunta_actual = preguntas[indice_pregunta]
 	_mostrar_pregunta_principal()
 	if pregunta_actual.has("secundarias"):
 		_mostrar_preguntas_secundarias()
+		
+func _actualizar_ui_timer():
+	if has_node("TimerContainer/TimerLabel"):
+		var timer_label = get_node("TimerContainer/TimerLabel")
+		# Muestra solo el número entero (sin decimales)
+		timer_label.text = str(int(tiempo_restante))  # Ejemplo: "29" en lugar de "29.0"
+		
+func _on_tiempo_agotado():
+	Sound_master.play("lose")  # Añade este sonido a tu sistema de sonidos
+	Global.dinero = 0.0  # Pierdes todo el dinero por tiempo
+	dinero_guardado = 500.0  # Reset al valor inicial
+	_mostrar_retry_ui()
 
 func _mostrar_pregunta_principal() -> void:
 	question_container.show()
@@ -212,24 +239,29 @@ func _mostrar_pregunta_principal() -> void:
 		
 		# Forzar actualización
 		new_label.reset_size()
+		
+func _process(delta):
+	if timer_pregunta and timer_pregunta.time_left > 0:
+		tiempo_restante = timer_pregunta.time_left
+
+		_actualizar_ui_timer()
 
 func _mostrar_preguntas_secundarias() -> void:
 	secondary_questions_container.show()
 	selecciones_secundarias.clear()
-	
-	# Cargar estilos base (asegúrate de tener estas variables @onready)
+
 	var button_style = preload("res://assets/MobileGameUI/Silver-Gold_Pack/LongButtons/LongButton_White.png")
 	var button_pressed_style = preload("res://assets/MobileGameUI/Silver-Gold_Pack/LongButtons/LongButton_White_Pressed.png")
-	var label_font = load("res://Fonts/Pixellari.ttf")  # Cambia por tu fuente
-
+	var label_font = load("res://Fonts/Pixellari.ttf")
 
 	for i in pregunta_actual["secundarias"].size():
 		var secundaria = pregunta_actual["secundarias"][i]
+
 		var box = VBoxContainer.new()
 		box.set_meta("secundaria_index", i)
 		box.size_flags_horizontal = Control.SIZE_FILL
 		box.custom_minimum_size = Vector2(320, 0)
-		box.add_theme_constant_override("separation", 10)  # Espacio entre elementos
+		box.add_theme_constant_override("separation", 5)
 
 		# Label de la pregunta
 		var label = Label.new()
@@ -238,58 +270,53 @@ func _mostrar_preguntas_secundarias() -> void:
 		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		label.modulate = Color(0, 0, 0)
 		label.z_index = 1
-		
-		# Configuración de fuente para el Label
 		label.add_theme_font_override("font", label_font)
 		label.add_theme_font_size_override("font_size", 18)
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-			
+
 		box.add_child(label)
 
+		# HBox para botones
+		var botones_container = HBoxContainer.new()
+		botones_container.alignment = BoxContainer.ALIGNMENT_CENTER
+		botones_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		botones_container.add_theme_constant_override("separation", 8)
+
 		for j in secundaria["opciones"].size():
-			var btn = TextureButton.new()  # Cambiamos Button por TextureButton
-			
-			# Configuración del botón
+			var btn = TextureButton.new()
 			btn.name = "Secundaria_%d_Opcion_%d" % [i, j]
 			btn.set_meta("option_index", j)
-			btn.custom_minimum_size = Vector2(200, 60)
+			btn.set_meta("secundaria_index", i)  # Añadimos el índice de la pregunta secundaria
+			btn.custom_minimum_size = Vector2(130, 60)
 			btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			btn.size_flags_vertical = Control.SIZE_FILL
-			
-					
-					# Texturas y estilo
 			btn.texture_normal = button_style
 			btn.texture_pressed = button_pressed_style
 			btn.stretch_mode = TextureButton.STRETCH_SCALE
-		
 			
-			# Label interno para el texto
+			# Conectamos la señal pressed
+			btn.pressed.connect(_on_secundaria_option_pressed.bind(btn, i))  # Pasamos el botón y el índice
+
 			var btn_label = Label.new()
 			btn_label.text = secundaria["opciones"][j]
 			btn_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			btn_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-			btn_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL          
-			btn_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
-			btn_label.anchor_right = 1.0
-			btn_label.anchor_bottom = 1.0
 			
-			# Ajuste de posición vertical (bajar un poco el texto)
-			btn_label.position.y += 1  # Ajusta este valor según necesites
-					
-					# Configuración de fuente
+			btn_label.position.y += 15
+			btn_label.position.x += 135
 			btn_label.add_theme_font_override("font", label_font)
-			btn_label.add_theme_font_size_override("font_size", 24)
+			btn_label.add_theme_font_size_override("font_size", 28)
 			btn_label.add_theme_color_override("font_color", Color(0, 0, 0))
-					
+
 			btn.add_child(btn_label)
-			btn.pressed.connect(_on_secundaria_option_pressed.bind(btn, i))
-			box.add_child(btn)
-				
-			secondary_questions_container.add_child(box)
+			botones_container.add_child(btn)
+
+		box.add_child(botones_container)
+		secondary_questions_container.add_child(box)
 
 
 # --- MANEJO DE SELECCIONES ---
 func _on_option_pressed(button: TextureButton) -> void:  # ¡Cambiado a TextureButton!
+	Sound_master.play("click")
 	seleccion_temporal = button.get_meta("option_index")
 	for btn in options_container.get_children():
 		if btn is TextureButton:
@@ -297,10 +324,18 @@ func _on_option_pressed(button: TextureButton) -> void:  # ¡Cambiado a TextureB
 			_verificar_selecciones()
 
 func _on_secundaria_option_pressed(button: TextureButton, secundaria_index: int) -> void:
-	selecciones_secundarias[str(secundaria_index)] = button.get_meta("option_index")
-	for sibling in button.get_parent().get_children():
-		if sibling is TextureButton:
-			sibling.modulate = Color.WHITE if sibling != button else Color.GREEN
+	Sound_master.play("click")
+	
+	# Guardamos la selección
+	var option_index = button.get_meta("option_index")
+	selecciones_secundarias[str(secundaria_index)] = option_index
+	
+	# Resaltamos el botón seleccionado y desmarcamos los otros
+	var parent_container = button.get_parent()
+	for child in parent_container.get_children():
+		if child is TextureButton:
+			child.modulate = Color.WHITE if child != button else Color.GREEN
+	
 	_verificar_selecciones()
 
 # --- VERIFICACIÓN DE COMPLECIÓN ---
@@ -332,41 +367,60 @@ func _limpiar_contenedores() -> void:
 # --- CONFIRMAR APUESTA ---
 func _on_continuar_pressed() -> void:
 	if seleccion_temporal == -1:
+		Sound_master.play("error")  # Sonido para selección inválida
 		print("¡Selecciona una opción primero!")
 		return
+	
+	var todas_correctas := true  # Bandera para resultado global
 	var acierto_principal = (seleccion_temporal == pregunta_actual["respuesta_correcta"])
+	todas_correctas = todas_correctas and acierto_principal  # Actualiza bandera
+	
 	Global.dinero *= pregunta_actual["cuota"] if acierto_principal else 0.0
+	
 	respuestas_seleccionadas.append({
 		"pregunta": pregunta_actual["pregunta"],
 		"correcta": acierto_principal,
 		"cuota": pregunta_actual["cuota"]
 	})
+	
+	# Verificar respuestas secundarias
 	if pregunta_actual.has("secundarias"):
 		for i in pregunta_actual["secundarias"].size():
 			var idx_str = str(i)
 			if selecciones_secundarias.has(idx_str):
 				var secundaria = pregunta_actual["secundarias"][i]
 				var acierto_sec = (selecciones_secundarias[idx_str] == secundaria["respuesta_correcta"])
+				todas_correctas = todas_correctas and acierto_sec  # Actualiza bandera
 				Global.dinero *= secundaria["cuota"] if acierto_sec else 0.0
 				respuestas_seleccionadas.append({
 					"pregunta": secundaria["pregunta"],
 					"correcta": acierto_sec,
 					"cuota": secundaria["cuota"]
 				})
-
+	
+	# Sonido único basado en el resultado global
+	if todas_correctas:
+		Sound_master.play("win")
+	else:
+		Sound_master.play("lose")
+	
+	# Actualización de UI
 	if money_display_instance:
 		money_display_instance.set_money(Global.dinero)
 	else:
 		printerr("⚠️ No se ha cargado money_display_instance")
-
-
+	
+	# Manejo de derrota total
 	if Global.dinero <= 0.0:
-		dinero_guardado = 500.0  # Puedes ajustar el valor que se recupera
+		dinero_guardado = 500.0 
+		Sound_master.play("game_over")  # Sonido especial de fin de juego
 		_mostrar_retry_ui()
 		return
-
+	
+	# Avanzar a siguiente pregunta
 	indice_pregunta += 1
 	_cargar_pregunta()
+
 
 # --- RESULTADOS FINALES ---
 func _mostrar_resultados_finales() -> void:

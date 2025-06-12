@@ -68,6 +68,7 @@ texture = ExtResource("6_hpsnc")
 [node name="year_container" type="GridContainer" parent="."]
 z_index = 1
 texture_filter = 1
+layout_mode = 0
 offset_left = 55.0
 offset_top = 280.0
 offset_right = 659.0

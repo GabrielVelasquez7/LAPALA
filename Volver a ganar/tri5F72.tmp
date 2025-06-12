@@ -1,0 +1,418 @@
+[gd_scene load_steps=20 format=3 uid="uid://chfj5d4pngjq4"]
+
+[ext_resource type="Script" path="res://trivia_scene.gd" id="1_h4g4l"]
+[ext_resource type="FontFile" uid="uid://b1efm8pbkjfue" path="res://Fonts/Pixellari.ttf" id="2_dbjih"]
+[ext_resource type="Script" path="res://admob-lib/admob.gd" id="2_y4p03"]
+[ext_resource type="Texture2D" uid="uid://d00s5xx4crkwy" path="res://assets/background/01_1994.PNG" id="3_whao5"]
+[ext_resource type="Texture2D" uid="uid://cow36b63kdyf3" path="res://assets/MobileGameUI/Silver-Gold_Pack/LongButtons/LongButton_White.png" id="4_2bj2q"]
+[ext_resource type="Texture2D" uid="uid://ppgfa4m4lskb" path="res://assets/MobileGameUI/Silver-Gold_Pack/LongButtons/LongButton_Green.png" id="4_2m0oe"]
+[ext_resource type="Texture2D" uid="uid://dnjqgyf567cfc" path="res://assets/MobileGameUI/Silver-Gold_Pack/LongButtons/LongButton_Purple.png" id="4_wiike"]
+[ext_resource type="Texture2D" uid="uid://khtlob0f6x1v" path="res://assets/MobileGameUI/Silver-Gold_Pack/LongButtons/LongButton_Purple_Pressed.png" id="5_ol70i"]
+[ext_resource type="Texture2D" uid="uid://sa7q4j00xfye" path="res://assets/MobileGameUI/Silver-Gold_Pack/LongButtons/LongButton_Green_Pressed.png" id="5_sw0sm"]
+[ext_resource type="Texture2D" uid="uid://cms01qcbxxq1l" path="res://assets/MobileGameUI/Silver-Gold_Pack/SquareButtons/SquareButton_White.png" id="6_fshd6"]
+[ext_resource type="Texture2D" uid="uid://bdc8ijjgrwegu" path="res://assets/MobileGameUI/Silver-Gold_Pack/SquareButtons/SquareButton_Red.png" id="6_k27pt"]
+[ext_resource type="Texture2D" uid="uid://nqdribtn61eu" path="res://assets/MobileGameUI/Silver-Gold_Pack/Others/Gold_Handle.png" id="7_0cnyb"]
+[ext_resource type="Texture2D" uid="uid://du3p0eafa5nmv" path="res://assets/MobileGameUI/Silver-Gold_Pack/Icons/Icon_WatchAd.png" id="7_l2qkh"]
+[ext_resource type="Script" path="res://CanvasLayer.gd" id="9_4uk0u"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jsena"]
+font_color = Color(0, 0, 0, 1)
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ImageTexture" id="ImageTexture_s8vd3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uehec"]
+bg_color = Color(1, 0.988235, 0.694118, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rfuin"]
+bg_color = Color(1, 1, 1, 0.639216)
+
+[sub_resource type="Theme" id="Theme_unl7m"]
+
+[node name="trivia_scene" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_h4g4l")
+
+[node name="question_container" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 230.0
+offset_right = 739.0
+offset_bottom = 522.0
+scale = Vector2(0.904076, 1.26166)
+
+[node name="question_label" type="Label" parent="question_container"]
+z_index = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbjih")
+theme_override_font_sizes/font_size = 16
+
+[node name="result_label" type="Label" parent="question_container"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="secondary_questions_container" type="VBoxContainer" parent="."]
+z_index = 1
+texture_filter = 1
+layout_mode = 0
+offset_left = 55.0
+offset_top = 550.0
+offset_right = 659.0
+offset_bottom = 853.0
+scale = Vector2(1.00513, 0.997834)
+
+[node name="secondary_option_1" type="TextureButton" parent="secondary_questions_container"]
+texture_filter = 1
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+texture_normal = ExtResource("4_2bj2q")
+stretch_mode = 0
+
+[node name="secondarylabel1" type="Label" parent="secondary_questions_container/secondary_option_1"]
+z_index = 5
+layout_mode = 0
+offset_left = 226.836
+offset_top = 9.01953
+offset_right = 317.836
+offset_bottom = 35.0195
+scale = Vector2(1.58022, 1.25127)
+label_settings = SubResource("LabelSettings_jsena")
+
+[node name="secondary_option_2" type="TextureButton" parent="secondary_questions_container"]
+texture_filter = 1
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+texture_normal = ExtResource("4_2bj2q")
+stretch_mode = 0
+
+[node name="secondarylabel2" type="Label" parent="secondary_questions_container/secondary_option_2"]
+z_index = 5
+layout_mode = 0
+offset_left = 80.0
+offset_top = 10.8822
+offset_right = 171.0
+offset_bottom = 36.8822
+scale = Vector2(1.58022, 1.25127)
+label_settings = SubResource("LabelSettings_jsena")
+
+[node name="secondary_option_3" type="TextureButton" parent="secondary_questions_container"]
+texture_filter = 1
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+texture_normal = ExtResource("4_2bj2q")
+stretch_mode = 0
+
+[node name="secondarylabel3" type="Label" parent="secondary_questions_container/secondary_option_3"]
+z_index = 5
+layout_mode = 0
+offset_left = 80.0
+offset_top = 10.8822
+offset_right = 171.0
+offset_bottom = 36.8822
+scale = Vector2(1.58022, 1.25127)
+label_settings = SubResource("LabelSettings_jsena")
+
+[node name="secondary_option_4" type="TextureButton" parent="secondary_questions_container"]
+texture_filter = 1
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+texture_normal = ExtResource("4_2bj2q")
+stretch_mode = 0
+
+[node name="secondarylabel4" type="Label" parent="secondary_questions_container/secondary_option_4"]
+z_index = 5
+layout_mode = 0
+offset_left = 80.0
+offset_top = 10.8822
+offset_right = 171.0
+offset_bottom = 36.8822
+scale = Vector2(1.58022, 1.25127)
+label_settings = SubResource("LabelSettings_jsena")
+
+[node name="continue" type="TextureButton" parent="."]
+texture_filter = 1
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 0
+offset_left = 215.0
+offset_top = 971.0
+offset_right = 515.0
+offset_bottom = 1031.0
+texture_normal = ExtResource("4_2m0oe")
+texture_pressed = ExtResource("5_sw0sm")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="continue"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 42.0
+offset_top = 13.0
+offset_right = 114.0
+offset_bottom = 44.0
+scale = Vector2(2.32, 1.8)
+theme_override_fonts/font = ExtResource("2_dbjih")
+text = "APOSTAR"
+
+[node name="TextureRect" type="TextureRect" parent="continue"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 227.0
+offset_top = -7.0
+offset_right = 305.0
+offset_bottom = 66.0
+texture = ExtResource("6_fshd6")
+
+[node name="TextureRect" type="TextureRect" parent="continue/TextureRect"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 13.0
+offset_top = 7.0
+offset_right = 65.0
+offset_bottom = 56.0
+texture = ExtResource("7_0cnyb")
+
+[node name="final_results_container" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 51.0
+offset_top = 97.0
+offset_right = 667.0
+offset_bottom = 593.0
+
+[node name="ruleta_menu" type="Button" parent="."]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 7.0
+offset_right = 64.0
+offset_bottom = 39.0
+
+[node name="AdMob" type="Node" parent="."]
+script = ExtResource("2_y4p03")
+banner_id = "ca-app-pub-3940256099942544/9214589741"
+rewarded_id = "ca-app-pub-3940256099942544/5224354917"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -2
+follow_viewport_enabled = true
+script = ExtResource("9_4uk0u")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.997974, 0.81356)
+texture = ExtResource("3_whao5")
+expand_mode = 4
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ImageTexture_s8vd3")
+
+[node name="panel" type="Panel" parent="CanvasLayer"]
+visibility_layer = 8
+offset_left = -48.0
+offset_top = 1042.0
+offset_right = 10.0
+offset_bottom = 1120.0
+scale = Vector2(13.5108, 2.92667)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uehec")
+
+[node name="options_container" type="GridContainer" parent="."]
+z_index = 1
+texture_filter = 1
+layout_mode = 2
+offset_left = 55.0
+offset_top = 280.0
+offset_right = 659.0
+offset_bottom = 404.0
+scale = Vector2(1, 1.10272)
+columns = 2
+
+[node name="option_1" type="TextureButton" parent="options_container"]
+texture_filter = 1
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+texture_normal = ExtResource("4_2bj2q")
+stretch_mode = 0
+
+[node name="optionlabel1" type="Label" parent="options_container/option_1"]
+z_index = 5
+layout_mode = 0
+offset_left = 80.0
+offset_top = 10.8822
+offset_right = 171.0
+offset_bottom = 36.8822
+scale = Vector2(1.58022, 1.25127)
+label_settings = SubResource("LabelSettings_jsena")
+
+[node name="option_2" type="TextureButton" parent="options_container"]
+texture_filter = 1
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+texture_normal = ExtResource("4_2bj2q")
+stretch_mode = 0
+
+[node name="optionlabel2" type="Label" parent="options_container/option_2"]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 9.06845
+offset_right = 109.0
+offset_bottom = 32.0685
+scale = Vector2(7.44339, 2.43701)
+
+[node name="option_3" type="TextureButton" parent="options_container"]
+texture_filter = 1
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+texture_normal = ExtResource("4_2bj2q")
+stretch_mode = 0
+
+[node name="optionlabel3" type="Label" parent="options_container/option_3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = 0.386017
+offset_right = 14.0
+offset_bottom = 0.386017
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.909653, 0.771295)
+horizontal_alignment = 1
+
+[node name="option_4" type="TextureButton" parent="options_container"]
+texture_filter = 1
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+texture_normal = ExtResource("4_2bj2q")
+stretch_mode = 0
+
+[node name="optionlabel4" type="Label" parent="options_container/option_4"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(7.46858, 2.52808)
+
+[node name="trivia_panel" type="Panel" parent="."]
+visibility_layer = 8
+layout_mode = 0
+offset_left = 21.0
+offset_top = 222.0
+offset_right = 66.0
+offset_bottom = 267.0
+scale = Vector2(15.1075, 15.7598)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rfuin")
+
+[node name="retry_label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 191.0
+offset_top = 470.0
+offset_right = 521.0
+offset_bottom = 543.0
+
+[node name="rewarded" type="TextureButton" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 297.0
+offset_top = 799.0
+offset_right = 369.0
+offset_bottom = 830.0
+scale = Vector2(2.69767, 2.26045)
+texture_normal = ExtResource("4_wiike")
+texture_pressed = ExtResource("5_ol70i")
+
+[node name="ad_background" type="TextureRect" parent="rewarded"]
+layout_mode = 0
+offset_left = -12.9741
+offset_top = -4.42389
+offset_right = 27.0259
+offset_bottom = 35.5761
+scale = Vector2(0.66489, 0.719405)
+texture = ExtResource("6_k27pt")
+
+[node name="ad_icon" type="TextureRect" parent="rewarded/ad_background"]
+layout_mode = 0
+offset_left = 4.79395
+offset_top = 5.0
+offset_right = 44.7939
+offset_bottom = 45.0
+scale = Vector2(0.778895, 0.639995)
+texture = ExtResource("7_l2qkh")
+
+[node name="Label" type="Label" parent="rewarded"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 22.6121
+offset_top = 4.42389
+offset_right = 62.6121
+offset_bottom = 30.4239
+scale = Vector2(0.692758, 0.841379)
+theme_override_fonts/font = ExtResource("2_dbjih")
+text = "VER"
+
+[node name="CantidadLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 4.0
+offset_right = 199.0
+offset_bottom = 56.0
+
+[node name="money_display_container" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 501.0
+offset_top = 18.0
+offset_right = 705.0
+offset_bottom = 79.0
+
+[node name="LabelStyleTemplate" type="Label" parent="."]
+light_mask = 5
+visibility_layer = 5
+z_index = 2
+texture_filter = 1
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 0
+offset_left = 162.0
+offset_top = 303.0
+offset_right = 262.0
+offset_bottom = 1121.0
+scale = Vector2(50.1871, 0.831674)
+theme = SubResource("Theme_unl7m")
+theme_override_colors/font_color = Color(0, 0.996078, 0, 1)
+theme_override_font_sizes/font_size = 600
+
+[node name="QuestionTimer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+
+[node name="TimerContainer" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TimerLabel" type="Label" parent="TimerContainer"]
+layout_mode = 0
+offset_left = 514.0
+offset_top = 128.0
+offset_right = 711.0
+offset_bottom = 224.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbjih")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimerSound" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="ruleta_menu" to="." method="_on_ruleta_menu_pressed"]
+[connection signal="pressed" from="rewarded" to="." method="_on_rewarded_pressed"]
+[connection signal="timeout" from="QuestionTimer" to="." method="_on_question_timer_timeout"]

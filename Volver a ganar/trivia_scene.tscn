@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://chfj5d4pngjq4"]
+[gd_scene load_steps=21 format=3 uid="uid://chfj5d4pngjq4"]
 
 [ext_resource type="Script" path="res://trivia_scene.gd" id="1_h4g4l"]
 [ext_resource type="FontFile" uid="uid://b1efm8pbkjfue" path="res://Fonts/Pixellari.ttf" id="2_dbjih"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://nqdribtn61eu" path="res://assets/MobileGameUI/Silver-Gold_Pack/Others/Gold_Handle.png" id="7_0cnyb"]
 [ext_resource type="Texture2D" uid="uid://du3p0eafa5nmv" path="res://assets/MobileGameUI/Silver-Gold_Pack/Icons/Icon_WatchAd.png" id="7_l2qkh"]
 [ext_resource type="Script" path="res://CanvasLayer.gd" id="9_4uk0u"]
+[ext_resource type="AudioStream" uid="uid://dt7pytuewk0uj" path="res://assets/Sounds/Countdown 1_1 Loop.wav" id="15_lbspo"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_jsena"]
 font_color = Color(0, 0, 0, 1)
@@ -304,6 +305,7 @@ scale = Vector2(7.46858, 2.52808)
 
 [node name="trivia_panel" type="Panel" parent="."]
 visibility_layer = 8
+layout_mode = 0
 offset_left = 21.0
 offset_top = 222.0
 offset_right = 66.0
@@ -389,5 +391,31 @@ theme = SubResource("Theme_unl7m")
 theme_override_colors/font_color = Color(0, 0.996078, 0, 1)
 theme_override_font_sizes/font_size = 600
 
+[node name="QuestionTimer" type="Timer" parent="."]
+wait_time = 15.0
+one_shot = true
+
+[node name="TimerContainer" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TimerLabel" type="Label" parent="TimerContainer"]
+layout_mode = 0
+offset_left = 514.0
+offset_top = 128.0
+offset_right = 711.0
+offset_bottom = 224.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_dbjih")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimerSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_lbspo")
+volume_db = -0.34
+
 [connection signal="pressed" from="ruleta_menu" to="." method="_on_ruleta_menu_pressed"]
 [connection signal="pressed" from="rewarded" to="." method="_on_rewarded_pressed"]
+[connection signal="timeout" from="QuestionTimer" to="." method="_on_question_timer_timeout"]
