@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://chfj5d4pngjq4"]
+[gd_scene load_steps=20 format=3 uid="uid://chfj5d4pngjq4"]
 
 [ext_resource type="Script" path="res://trivia_scene.gd" id="1_h4g4l"]
 [ext_resource type="FontFile" uid="uid://b1efm8pbkjfue" path="res://Fonts/Pixellari.ttf" id="2_dbjih"]
@@ -21,9 +21,6 @@ font_color = Color(0, 0, 0, 1)
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="ImageTexture" id="ImageTexture_s8vd3"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uehec"]
-bg_color = Color(1, 0.988235, 0.694118, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rfuin"]
 bg_color = Color(1, 1, 1, 0.639216)
@@ -58,6 +55,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 
 [node name="secondary_questions_container" type="VBoxContainer" parent="."]
+visible = false
 z_index = 1
 texture_filter = 1
 layout_mode = 0
@@ -193,6 +191,7 @@ offset_bottom = 39.0
 
 [node name="AdMob" type="Node" parent="."]
 script = ExtResource("2_y4p03")
+banner_on_top = false
 banner_id = "ca-app-pub-3940256099942544/9214589741"
 rewarded_id = "ca-app-pub-3940256099942544/5224354917"
 
@@ -207,7 +206,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.997974, 0.81356)
+scale = Vector2(0.997974, 1.01356)
+size_flags_vertical = 3
 texture = ExtResource("3_whao5")
 expand_mode = 4
 
@@ -216,24 +216,14 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = SubResource("ImageTexture_s8vd3")
 
-[node name="panel" type="Panel" parent="CanvasLayer"]
-visibility_layer = 8
-offset_left = -48.0
-offset_top = 1042.0
-offset_right = 10.0
-offset_bottom = 1120.0
-scale = Vector2(13.5108, 2.92667)
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_uehec")
-
 [node name="options_container" type="GridContainer" parent="."]
 z_index = 1
 texture_filter = 1
 layout_mode = 2
-offset_left = 55.0
-offset_top = 280.0
-offset_right = 659.0
-offset_bottom = 404.0
+offset_left = 51.0
+offset_top = 318.0
+offset_right = 655.0
+offset_bottom = 442.0
 scale = Vector2(1, 1.10272)
 columns = 2
 

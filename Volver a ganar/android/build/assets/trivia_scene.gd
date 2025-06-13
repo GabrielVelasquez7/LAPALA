@@ -17,8 +17,12 @@ var recompensa_otorgada: bool = false
 var money_display_scene = preload("res://money_display.tscn")
 var money_display: Control
 var timer_pregunta: Timer
-var tiempo_limite: float = 30.0  # 30 segundos por defecto, ajústalo según necesites
+var tiempo_limite: float = 20.0  # 30 segundos por defecto, ajústalo según necesites
 var tiempo_restante: float = 0.0
+var min_time_for_sound := 15.0
+var tiempo_total_inicial: float = 30.0  # Ajusta según tu timer
+var pitch_inicial: float = 0.03  # Velocidad más lenta al inicio
+var pitch_final: float = 1.1   # Velocidad máxima al final
 
 
 # --- NODOS UI ---
@@ -49,6 +53,8 @@ var bonos_usados = {
 @onready var opcion_label_2: Label = $options_container/option_2/optionlabel2
 @onready var opcion_label_3: Label = $options_container/option_3/optionlabel3
 @onready var opcion_label_4: Label = $options_container/option_4/optionlabel4
+@onready var timer_sound: AudioStreamPlayer = $TimerSound
+@onready var timer_label: Label = $TimerContainer/TimerLabel
 var ruleta_menu_instance
 var money_display_instance: Control
 
@@ -56,46 +62,68 @@ var money_display_instance: Control
 
 # --- FUNCIÓN PRINCIPAL ---
 func _ready() -> void:
+	# Configuración inicial del timer
 	timer_pregunta = Timer.new()
 	add_child(timer_pregunta)
 	timer_pregunta.timeout.connect(_on_tiempo_agotado)
 	timer_pregunta.one_shot = true
 	
+	# Configuración UI inicial
 	_configurar_ui_inicial()
 	_cargar_datos_iniciales()
 	rewarded.hide()
+	secondary_questions_container.add_theme_constant_override("separation", 50)
 	$CanvasLayer.cambiar_fondo_por_ano(anio_seleccionado)
-
 	
-	
+	# Configuración de AdMob
 	print("🔍 Iniciando verificación de plugin...")
-
 	if admob:
 		print("✅ Nodo AdMob encontrado")
-		if admob.has_signal("rewarded"):
-			admob.rewarded.connect(_on_recompensa_recibida)
-		else:
-			printerr("❌ Señal 'rewarded' no encontrada en nodo AdMob")
-		if admob.has_signal("rewarded_video_closed"):
-			admob.rewarded_video_closed.connect(_on_anuncio_cerrado)
-		else:
-			printerr("❌ Señal 'rewarded_video_closed' no encontrada en nodo AdMob")
-		if admob.has_signal("rewarded_video_loaded"):
-			admob.rewarded_video_loaded.connect(_on_rewarded_video_loaded)
-		else:
-			printerr("❌ Señal 'rewarded_video_loaded' no encontrada en nodo AdMob")
+		_configurar_admob()
 	else:
 		printerr("❌ Error: Nodo AdMob no encontrado en escena")
-		
+	
+	# Cargar y mostrar el dinero (con verificación robusta)
+	_inicializar_money_display()
 
+func _configurar_admob():
+	# Conexiones de señales
+	if admob.has_signal("rewarded"):
+		admob.rewarded.connect(_on_recompensa_recibida)
+	if admob.has_signal("rewarded_video_closed"):
+		admob.rewarded_video_closed.connect(_on_anuncio_cerrado)
+	if admob.has_signal("rewarded_video_loaded"):
+		admob.rewarded_video_loaded.connect(_on_rewarded_video_loaded)
+	
+	# Cargar y mostrar banner
+	print("📢 Intentando cargar banner...")
+	admob.load_banner()
+	await admob.banner_loaded
+	admob.show_banner()
+
+func _inicializar_money_display():
+	# Verificar si ya existe una instancia
+	if is_instance_valid(money_display_instance):
+		money_display_instance.queue_free()
+	
+	# Cargar nueva instancia
 	var money_scene = load("res://money_display.tscn")
 	if money_scene:
 		money_display_instance = money_scene.instantiate()
+		
+		# Asegurar que el contenedor existe
+		if not is_instance_valid(money_display_container):
+			printerr("⚠️ money_display_container no es válido")
+			return
+			
 		money_display_container.add_child(money_display_instance)
+		
+		# Forzar actualización de la UI
+		await get_tree().process_frame
 		money_display_instance.set_money(Global.dinero)
-
+		print("💰 Display de dinero inicializado correctamente")
 	else:
-		printerr("❌ No se pudo cargar la escena del display de dinero")
+		printerr("❌ No se pudo cargar money_display.tscn")
 
 
 	var menu_scene = load("res://bonos.tscn")
@@ -139,6 +167,7 @@ func _filtrar_y_cargar_preguntas(anio: int) -> void:
 	if preguntas_filtradas.is_empty():
 		printerr("No hay preguntas para el año: ", anio)
 		return
+	preguntas_filtradas.shuffle()
 	preguntas = preguntas_filtradas
 	indice_pregunta = 0
 	_cargar_pregunta()
@@ -158,10 +187,29 @@ func _cargar_pregunta() -> void:
 		_mostrar_preguntas_secundarias()
 		
 func _actualizar_ui_timer():
-	if has_node("TimerContainer/TimerLabel"):
-		var timer_label = get_node("TimerContainer/TimerLabel")
-		# Muestra solo el número entero (sin decimales)
-		timer_label.text = str(int(tiempo_restante))  # Ejemplo: "29" en lugar de "29.0"
+	# Configuración de tiempos (ajústalos según necesites)
+	var tiempo_parpadeo := 3.0  # Tiempo para activar parpadeo (3 segundos)
+	var tiempo_sonido := 5.0    # Tiempo para activar sonido (5 segundos)
+	
+	# Mostrar número entero
+	timer_label.text = str(int(tiempo_restante))
+	
+	# Efecto de parpadeo (últimos X segundos)
+	if tiempo_restante <= tiempo_parpadeo:
+		timer_label.modulate = Color.RED.lerp(Color.WHITE, fmod(tiempo_restante, 0.5))
+	else:
+		timer_label.modulate = Color.WHITE
+	
+	# Control del sonido (se activa desde Y segundos)
+	if tiempo_restante <= tiempo_sonido:
+		# Cálculo de aceleración progresiva
+		var progreso = 1.0 - (tiempo_restante / tiempo_sonido)
+		timer_sound.pitch_scale = 1.0 + (progreso * 2.0)  # Rango: 1.0x a 3.0x
+		
+		if not timer_sound.playing:
+			timer_sound.play()
+	else:
+		timer_sound.stop()
 		
 func _on_tiempo_agotado():
 	Sound_master.play("lose")  # Añade este sonido a tu sistema de sonidos
@@ -171,9 +219,42 @@ func _on_tiempo_agotado():
 
 func _mostrar_pregunta_principal() -> void:
 	question_container.show()
+	
+	# Aplicar estilos al label existente (sin cambiar su creación)
 	question_label.text = "{0} (Cuota: x{1})".format([
 		pregunta_actual["pregunta"], pregunta_actual["cuota"]
 	])
+	
+	# Estilos idénticos a los labels secundarios
+	question_label.custom_minimum_size = Vector2(300, 40)
+	question_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	question_label.modulate = Color(0, 0, 0)  # Texto negro
+	question_label.z_index = 1
+	
+	# Configuración de fuente (asegúrate de tener la ruta correcta)
+	var label_font = load("res://Fonts/Pixellari.ttf")
+	if label_font:
+		question_label.add_theme_font_override("font", label_font)
+		question_label.add_theme_font_size_override("font_size", 24)
+	
+	# Margen y alineación (como en secundarias)
+	question_label.position.y += 10  # Margen superior
+	question_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	
+	# --- EL RESTO DE TU FUNCIÓN PERMANECE EXACTAMENTE IGUAL ---
+	# Limpiar solo los botones anteriores
+	for child in options_container.get_children():
+		if child is TextureButton:
+			child.queue_free()
+	
+	for i in pregunta_actual["opciones"].size():
+		var btn = TextureButton.new()
+		# ... (todo tu código existente de creación de botones)
+		
+		options_container.add_child(btn)
+	
+	options_container.modulate.a = 0.0
+	Animador.fade_in(options_container, 0.3)
 	
 	# Limpiar solo los botones anteriores
 	for child in options_container.get_children():
@@ -239,6 +320,9 @@ func _mostrar_pregunta_principal() -> void:
 		
 		# Forzar actualización
 		new_label.reset_size()
+	options_container.modulate.a = 0.0
+	Animador.fade_in(options_container, 0.3)
+
 		
 func _process(delta):
 	if timer_pregunta and timer_pregunta.time_left > 0:
@@ -271,7 +355,9 @@ func _mostrar_preguntas_secundarias() -> void:
 		label.modulate = Color(0, 0, 0)
 		label.z_index = 1
 		label.add_theme_font_override("font", label_font)
-		label.add_theme_font_size_override("font_size", 18)
+		label.add_theme_font_size_override("font_size", 22)
+		label.position.y += 10  # Simula un margen superior
+
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 
 		box.add_child(label)
@@ -280,7 +366,8 @@ func _mostrar_preguntas_secundarias() -> void:
 		var botones_container = HBoxContainer.new()
 		botones_container.alignment = BoxContainer.ALIGNMENT_CENTER
 		botones_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		botones_container.add_theme_constant_override("separation", 8)
+		botones_container.add_theme_constant_override("separation",30)
+
 
 		for j in secundaria["opciones"].size():
 			var btn = TextureButton.new()
@@ -292,6 +379,7 @@ func _mostrar_preguntas_secundarias() -> void:
 			btn.texture_normal = button_style
 			btn.texture_pressed = button_pressed_style
 			btn.stretch_mode = TextureButton.STRETCH_SCALE
+			
 			
 			# Conectamos la señal pressed
 			btn.pressed.connect(_on_secundaria_option_pressed.bind(btn, i))  # Pasamos el botón y el índice
@@ -312,6 +400,9 @@ func _mostrar_preguntas_secundarias() -> void:
 
 		box.add_child(botones_container)
 		secondary_questions_container.add_child(box)
+		
+	options_container.modulate.a = 0.0
+	Animador.fade_in(secondary_questions_container, 0.3)
 
 
 # --- MANEJO DE SELECCIONES ---
@@ -367,14 +458,15 @@ func _limpiar_contenedores() -> void:
 # --- CONFIRMAR APUESTA ---
 func _on_continuar_pressed() -> void:
 	if seleccion_temporal == -1:
-		Sound_master.play("error")  # Sonido para selección inválida
+		Sound_master.play("error")
 		print("¡Selecciona una opción primero!")
 		return
 	
-	var todas_correctas := true  # Bandera para resultado global
+	var todas_correctas := true
 	var acierto_principal = (seleccion_temporal == pregunta_actual["respuesta_correcta"])
-	todas_correctas = todas_correctas and acierto_principal  # Actualiza bandera
+	todas_correctas = todas_correctas and acierto_principal
 	
+	# Calcular nuevo dinero
 	Global.dinero *= pregunta_actual["cuota"] if acierto_principal else 0.0
 	
 	respuestas_seleccionadas.append({
@@ -390,7 +482,7 @@ func _on_continuar_pressed() -> void:
 			if selecciones_secundarias.has(idx_str):
 				var secundaria = pregunta_actual["secundarias"][i]
 				var acierto_sec = (selecciones_secundarias[idx_str] == secundaria["respuesta_correcta"])
-				todas_correctas = todas_correctas and acierto_sec  # Actualiza bandera
+				todas_correctas = todas_correctas and acierto_sec
 				Global.dinero *= secundaria["cuota"] if acierto_sec else 0.0
 				respuestas_seleccionadas.append({
 					"pregunta": secundaria["pregunta"],
@@ -398,17 +490,40 @@ func _on_continuar_pressed() -> void:
 					"cuota": secundaria["cuota"]
 				})
 	
-	# Sonido único basado en el resultado global
+	# Sonido basado en resultado
 	if todas_correctas:
 		Sound_master.play("win")
 	else:
 		Sound_master.play("lose")
 	
-	# Actualización de UI
-	if money_display_instance:
-		money_display_instance.set_money(Global.dinero)
-	else:
-		printerr("⚠️ No se ha cargado money_display_instance")
+	# Actualización de UI con verificación robusta
+	_actualizar_display_dinero()
+	
+	# Manejo de derrota
+	if Global.dinero <= 0.0:
+		dinero_guardado = 500.0 
+		Sound_master.play("game_over")
+		_mostrar_retry_ui()
+		return
+	
+	# Avanzar pregunta
+	indice_pregunta += 1
+	_cargar_pregunta()
+
+func _actualizar_display_dinero():
+	# Verificar si la instancia existe
+	if not is_instance_valid(money_display_instance):
+		# Intentar cargarla si no existe
+		var money_scene = load("res://money_display.tscn")
+		if money_scene:
+			money_display_instance = money_scene.instantiate()
+			money_display_container.add_child(money_display_instance)
+		else:
+			printerr("❌ No se pudo cargar money_display.tscn")
+			return
+	
+	# Actualizar el dinero
+	money_display_instance.set_money(Global.dinero)
 	
 	# Manejo de derrota total
 	if Global.dinero <= 0.0:

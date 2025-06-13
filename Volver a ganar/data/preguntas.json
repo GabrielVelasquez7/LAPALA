@@ -1,5 +1,6 @@
-[
+[ 
 	 {
+	"separador_2022": "-------------------------------------2022------------------------------",
 	"año": 2022,
 	"pregunta": "¿Quién ganará el Mundial de 2022?",
 	"opciones": ["Francia", "Argentina", "Brasil", "Alemania"],
@@ -197,452 +198,1526 @@
 	  }
 	]
   },
-  
-  {
-	"año": 2005,
-	"pregunta": "¿Quién ganará la UEFA Champions League en 2005?",
-	"opciones": ["Liverpool", "Milan", "Barcelona", "Chelsea"],
+{
+	"año": 2019,
+	"pregunta": "¿Quién ganará la Copa América 2019?",
+	"opciones": ["Brasil", "Perú", "Argentina", "Chile"],
 	"respuesta_correcta": 0,
+	"cuota": 2.5,
 	"tipo": "principal",
 	"secundarias": [
 	  {
-		"pregunta": "¿Se definirá la final por penales?",
+		"pregunta": "¿Brasil terminará invicto el torneo?",
 		"opciones": ["Sí", "No"],
-		"respuesta_correcta": 0
+		"respuesta_correcta": 0,
+		"cuota": 1.9
 	  },
 	  {
-		"pregunta": "¿Habrá al menos un gol en los primeros 10 minutos de la final?",
+		"pregunta": "¿Argentina llegará a semifinales?",
 		"opciones": ["Sí", "No"],
-		"respuesta_correcta": 0
+		"respuesta_correcta": 0,
+		"cuota": 1.6
 	  }
 	]
   },
   {
-	"año": 2005,
-	"pregunta": "¿Cuántos goles se marcarán en la final de la Champions 2005?",
-	"opciones": ["2 o menos", "3", "4", "5 o más"],
-	"respuesta_correcta": 3,
-	"tipo": "principal",
-	"secundarias": [
-	  {
-		"pregunta": "¿Algún jugador anotará doblete en la final?",
-		"opciones": ["Sí", "No"],
-		"respuesta_correcta": 1
-	  },
-	  {
-		"pregunta": "¿El marcador final será un empate antes de penales?",
-		"opciones": ["Sí", "No"],
-		"respuesta_correcta": 0
-	  }
-	]
-  },
-  {
-	"año": 2005,
-	"pregunta": "¿Cuántos goles recibirá el equipo campeón en toda la Champions 2005?",
-	"opciones": ["3 o menos", "4-6", "7-9", "10 o más"],
+	"año": 2019,
+	"pregunta": "¿Quién será el máximo goleador de la Copa América 2019?",
+	"opciones": ["Paolo Guerrero", "Everton", "Lautaro Martínez", "Eduardo Vargas"],
 	"respuesta_correcta": 0,
+	"cuota": 3.1,
 	"tipo": "principal",
 	"secundarias": [
 	  {
-		"pregunta": "¿El equipo campeón ganará todos sus partidos en casa?",
+		"pregunta": "¿Marcará en la final?",
 		"opciones": ["Sí", "No"],
-		"respuesta_correcta": 0
+		"respuesta_correcta": 1,
+		"cuota": 2.4
 	  },
 	  {
-		"pregunta": "¿Habrá al menos una remontada en fase de eliminación?",
+		"pregunta": "¿Será el único con más de 3 goles?",
 		"opciones": ["Sí", "No"],
-		"respuesta_correcta": 0
+		"respuesta_correcta": 0,
+		"cuota": 2.0
 	  }
 	]
   },
   {
-	"año": 2005,
-	"pregunta": "¿Quién será el máximo goleador de la Champions 2005?",
-	"opciones": ["Shevchenko", "Henry", "Raúl", "Otro"],
+	"año": 2019,
+	"pregunta": "¿Qué selección ocupará el tercer lugar en la Copa América 2019?",
+	"opciones": ["Argentina", "Chile", "Uruguay", "Colombia"],
 	"respuesta_correcta": 0,
+	"cuota": 2.7,
 	"tipo": "principal",
 	"secundarias": [
 	  {
-		"pregunta": "¿Anotará al menos 8 goles?",
+		"pregunta": "¿El partido por el tercer lugar se definirá por penales?",
 		"opciones": ["Sí", "No"],
-		"respuesta_correcta": 0
+		"respuesta_correcta": 1,
+		"cuota": 3.5
 	  },
 	  {
-		"pregunta": "¿Su equipo llegará a semifinales?",
+		"pregunta": "¿Ambos equipos marcarán en el partido?",
 		"opciones": ["Sí", "No"],
-		"respuesta_correcta": 0
+		"respuesta_correcta": 1,
+		"cuota": 1.8
 	  }
 	]
   },
   {
-	"año": 2005,
-	"pregunta": "¿Cuántas tarjetas rojas habrá en toda la Champions 2005?",
-	"opciones": ["3 o menos", "4-7", "8-10", "Más de 10"],
+	"año": 2019,
+	"pregunta": "¿Qué equipo ganará la UEFA Champions League 2019?",
+	"opciones": ["Liverpool", "Tottenham", "Barcelona", "Ajax"],
+	"respuesta_correcta": 0,
+	"cuota": 3.0,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Habrá gol en los primeros 15 minutos de la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.6
+	  },
+	  {
+		"pregunta": "¿Tottenham recibirá más de 2 tarjetas?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 1.9
+	  }
+	]
+  },
+  {
+	"año": 2019,
+	"pregunta": "¿Qué jugador marcará en la final de la Champions 2019?",
+	"opciones": ["Salah", "Origi", "Kane", "Ninguno"],
+	"respuesta_correcta": 0,
+	"cuota": 2.2,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Marcará en el primer tiempo?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.0
+	  },
+	  {
+		"pregunta": "¿Su gol será de penal?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 3.1
+	  }
+	]
+  },
+  {
+	"año": 2019,
+	"pregunta": "¿Qué equipo ganará la Supercopa de Europa 2019?",
+	"opciones": ["Liverpool", "Chelsea", "Empate", "Otro"],
+	"respuesta_correcta": 0,
+	"cuota": 2.4,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿El partido se definirá en penales?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 3.3
+	  },
+	  {
+		"pregunta": "¿Ambos equipos marcarán?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 1.7
+	  }
+	]
+  },
+  {
+	"año": 2019,
+	"pregunta": "¿Quién ganará el Mundial Sub-20 de la FIFA 2019?",
+	"opciones": ["Ucrania", "Corea del Sur", "Italia", "Ecuador"],
+	"respuesta_correcta": 0,
+	"cuota": 4.0,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Ucrania terminará invicta?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.8
+	  },
+	  {
+		"pregunta": "¿La final tendrá más de 2 goles?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.2
+	  }
+	]
+  },
+  {
+	"año": 2019,
+	"pregunta": "¿Quién ganará la Copa Oro 2019?",
+	"opciones": ["México", "Estados Unidos", "Jamaica", "Haití"],
+	"respuesta_correcta": 0,
+	"cuota": 2.3,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿México marcará en todos los partidos?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 1.8
+	  },
+	  {
+		"pregunta": "¿Habrá tiempo extra en la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.5
+	  }
+	]
+  },
+  {
+	"año": 2019,
+	"pregunta": "¿Quién ganará el Mundial de Clubes 2019?",
+	"opciones": ["Liverpool", "Flamengo", "Monterrey", "Al-Hilal"],
+	"respuesta_correcta": 0,
+	"cuota": 1.7,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Habrá gol en tiempo extra en la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.9
+	  },
+	  {
+		"pregunta": "¿Liverpool marcará más de 2 goles en todo el torneo?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 1.6
+	  }
+	]
+  },
+{
+	"año": 2019,
+	"pregunta": "¿Qué país será el mejor clasificado en el ranking FIFA a finales de 2019?",
+	"opciones": ["Bélgica", "Francia", "Brasil", "Inglaterra"],
+	"respuesta_correcta": 0,
+	"cuota": 2.4,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Brasil estará entre los 3 primeros?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 1.9
+	  },
+	  {
+		"pregunta": "¿Francia bajará posiciones respecto al año anterior?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.1
+	  }
+	]
+  },{
+	"año": 2016,
+	"pregunta": "¿Quién ganará la Eurocopa 2016?",
+	"opciones": ["Portugal", "Francia", "Alemania", "Italia"],
+	"respuesta_correcta": 0,
+	"cuota": 5.0,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿La final se definirá en tiempo extra?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.8
+	  },
+	  {
+		"pregunta": "¿Cristiano Ronaldo marcará en la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.4
+	  }
+	]
+  },
+  {
+	"año": 2016,
+	"pregunta": "¿Quién será el máximo goleador de la Eurocopa 2016?",
+	"opciones": ["Griezmann", "Cristiano Ronaldo", "Payet", "Gareth Bale"],
+	"respuesta_correcta": 0,
+	"cuota": 3.2,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Anotará más de 6 goles?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.1
+	  },
+	  {
+		"pregunta": "¿Será titular en todos los partidos de su selección?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 1.7
+	  }
+	]
+  },
+  {
+	"año": 2016,
+	"pregunta": "¿Quién ganará la Copa América Centenario 2016?",
+	"opciones": ["Chile", "Argentina", "Colombia", "Estados Unidos"],
+	"respuesta_correcta": 0,
+	"cuota": 4.2,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿La final se definirá por penales?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 3.0
+	  },
+	  {
+		"pregunta": "¿Lionel Messi marcará en la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.6
+	  }
+	]
+  },
+  {
+	"año": 2016,
+	"pregunta": "¿Qué selección ocupará el tercer lugar en la Copa América Centenario?",
+	"opciones": ["Colombia", "Estados Unidos", "México", "Perú"],
+	"respuesta_correcta": 0,
+	"cuota": 3.3,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿El partido por el tercer lugar se decidirá con diferencia de 1 gol?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.2
+	  },
+	  {
+		"pregunta": "¿Habrá más de 3 goles en ese partido?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.0
+	  }
+	]
+  },
+  {
+	"año": 2016,
+	"pregunta": "¿Quién ganará la UEFA Champions League 2016?",
+	"opciones": ["Real Madrid", "Atlético de Madrid", "Bayern Múnich", "Manchester City"],
+	"respuesta_correcta": 0,
+	"cuota": 2.8,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿La final se definirá por penales?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 3.4
+	  },
+	  {
+		"pregunta": "¿Cristiano Ronaldo marcará en la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.5
+	  }
+	]
+  },
+  {
+	"año": 2016,
+	"pregunta": "¿Quién será el mejor jugador de la Champions 2015-16?",
+	"opciones": ["Cristiano Ronaldo", "Griezmann", "Bale", "Lewandowski"],
+	"respuesta_correcta": 0,
+	"cuota": 2.9,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Marcará más de 15 goles en la edición?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.2
+	  },
+	  {
+		"pregunta": "¿Terminará como líder en asistencias también?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.7
+	  }
+	]
+  },
+  {
+	"año": 2016,
+	"pregunta": "¿Quién ganará el torneo masculino de fútbol en los Juegos Olímpicos de Río 2016?",
+	"opciones": ["Brasil", "Alemania", "Honduras", "Nigeria"],
+	"respuesta_correcta": 0,
+	"cuota": 2.4,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿La final se decidirá en penales?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 3.1
+	  },
+	  {
+		"pregunta": "¿Neymar marcará en la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.0
+	  }
+	]
+  },
+  {
+	"año": 2016,
+	"pregunta": "¿Quién ganará el Mundial de Clubes 2016?",
+	"opciones": ["Real Madrid", "Kashima Antlers", "Atlético Nacional", "América (MEX)"],
+	"respuesta_correcta": 0,
+	"cuota": 1.6,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Cristiano Ronaldo marcará hat-trick en la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 3.7
+	  },
+	  {
+		"pregunta": "¿Habrá más de 4 goles en la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.1
+	  }
+	]
+  },
+  {
+	"año": 2016,
+	"pregunta": "¿Qué equipo ganará la Premier League 2015-16?",
+	"opciones": ["Leicester City", "Arsenal", "Tottenham", "Manchester City"],
+	"respuesta_correcta": 0,
+	"cuota": 5.5,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Jamie Vardy marcará más de 20 goles?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.3
+	  },
+	  {
+		"pregunta": "¿Leicester perderá menos de 4 partidos?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 1.9
+	  }
+	]
+  },
+  {
+	"año": 2016,
+	"pregunta": "¿Qué equipo ganará la Copa Libertadores 2016?",
+	"opciones": ["Atlético Nacional", "Independiente del Valle", "Boca Juniors", "São Paulo"],
+	"respuesta_correcta": 0,
+	"cuota": 3.4,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Atlético Nacional terminará invicto?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.0
+	  },
+	  {
+		"pregunta": "¿Habrá gol en la final de vuelta?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 1.8
+		}
+		]
+		},
+		 {
+	"año": 2014,
+	"pregunta": "¿Quién ganará el Mundial 2014?",
+	"opciones": ["Alemania", "Argentina", "Brasil", "Países Bajos"],
+	"respuesta_correcta": 0,
+	"cuota": 3.8,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿La final se definirá en tiempo extra?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.6
+	  },
+	  {
+		"pregunta": "¿Mesut Özil marcará en la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 3.1
+	  }
+	]
+  },
+  {
+	"año": 2014,
+	"pregunta": "¿Quién será el máximo goleador del Mundial 2014?",
+	"opciones": ["James Rodríguez", "Miroslav Klose", "Lionel Messi", "Neymar"],
+	"respuesta_correcta": 0,
+	"cuota": 4.5,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Marcará más de 6 goles?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 3.2
+	  },
+	  {
+		"pregunta": "¿Será James Rodríguez el único goleador de su equipo?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.8
+	  }
+	]
+  },
+  {
+	"año": 2014,
+	"pregunta": "¿Quién ganará la UEFA Champions League 2013-14?",
+	"opciones": ["Real Madrid", "Atlético de Madrid", "Bayern Múnich", "Chelsea"],
+	"respuesta_correcta": 0,
+	"cuota": 2.3,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Cristiano Ronaldo marcará en la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.1
+	  },
+	  {
+		"pregunta": "¿La final se decidirá por penales?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.6
+	  }
+	]
+  },
+  {
+	"año": 2014,
+	"pregunta": "¿Qué selección quedará en tercer lugar en el Mundial 2014?",
+	"opciones": ["Brasil", "Países Bajos", "Colombia", "Francia"],
 	"respuesta_correcta": 1,
+	"cuota": 3.0,
 	"tipo": "principal",
 	"secundarias": [
 	  {
-		"pregunta": "¿Habrá alguna expulsión en la final?",
+		"pregunta": "¿La selección ganadora de la medalla de bronce marcará más de 2 goles?",
 		"opciones": ["Sí", "No"],
-		"respuesta_correcta": 1
+		"respuesta_correcta": 0,
+		"cuota": 2.5
 	  },
 	  {
-		"pregunta": "¿Algún equipo tendrá más de una expulsión?",
+		"pregunta": "¿El partido por el tercer lugar terminará empatado?",
 		"opciones": ["Sí", "No"],
-		"respuesta_correcta": 0
+		"respuesta_correcta": 1,
+		"cuota": 2.3
 	  }
 	]
   },
   {
-	"año": 2005,
-	"pregunta": "¿Habrá partido con 4 o más goles en semifinales?",
-	"opciones": ["Sí", "No"],
+	"año": 2014,
+	"pregunta": "¿Quién ganará la Copa Libertadores 2014?",
+	"opciones": ["San Lorenzo", "Nacional (PAR)", "Atlético Nacional", "Boca Juniors"],
 	"respuesta_correcta": 0,
+	"cuota": 3.2,
 	"tipo": "principal",
 	"secundarias": [
 	  {
-		"pregunta": "¿Ese partido terminará con empate?",
+		"pregunta": "¿San Lorenzo ganará la final por más de 2 goles de diferencia?",
 		"opciones": ["Sí", "No"],
-		"respuesta_correcta": 1
+		"respuesta_correcta": 1,
+		"cuota": 3.5
 	  },
 	  {
-		"pregunta": "¿Se definirá por penales?",
+		"pregunta": "¿Habrá más de 3 goles en la final?",
 		"opciones": ["Sí", "No"],
-		"respuesta_correcta": 1
+		"respuesta_correcta": 0,
+		"cuota": 2.8
 	  }
 	]
   },
   {
-	"año": 2005,
-	"pregunta": "¿Cuál será el equipo sorpresa que llegue más lejos en la Champions 2005?",
-	"opciones": ["CSKA Moscú", "Bayer Leverkusen", "Ajax", "Lyon"],
+	"año": 2014,
+	"pregunta": "¿Qué equipo ganará la Premier League 2013-14?",
+	"opciones": ["Manchester City", "Liverpool", "Chelsea", "Arsenal"],
 	"respuesta_correcta": 0,
+	"cuota": 2.5,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Manchester City marcará más de 80 goles en la liga?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 3.1
+	  },
+	  {
+		"pregunta": "¿Yaya Touré será el máximo goleador del Manchester City?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.9
+	  }
+	]
+  },
+  {
+	"año": 2014,
+	"pregunta": "¿Quién será el mejor jugador de la Copa del Mundo 2014?",
+	"opciones": ["Lionel Messi", "James Rodríguez", "Neymar", "Thomas Müller"],
+	"respuesta_correcta": 0,
+	"cuota": 4.0,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Messi marcará más de 5 goles durante el torneo?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.7
+	  },
+	  {
+		"pregunta": "¿Messi será el único jugador de Argentina en estar entre los 5 mejores goleadores?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 3.3
+	  }
+	]
+  },
+  {
+	"año": 2014,
+	"pregunta": "¿Quién ganará la Copa del Rey 2014?",
+	"opciones": ["Real Madrid", "Barcelona", "Atlético de Madrid", "Real Sociedad"],
+	"respuesta_correcta": 0,
+	"cuota": 2.7,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Cristiano Ronaldo marcará en la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.4
+	  },
+	  {
+		"pregunta": "¿La final se decidirá por un gol de diferencia?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.2
+	  }
+	]
+  },
+  {
+	"año": 2014,
+	"pregunta": "¿Qué equipo ganará la Serie A 2013-14?",
+	"opciones": ["Juventus", "Roma", "Napoli", "Inter de Milán"],
+	"respuesta_correcta": 0,
+	"cuota": 1.6,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Juventus terminará la temporada invicta?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 3.0
+},
+	  {
+		"pregunta": "¿El máximo goleador de Juventus será Carlos Tévez?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.9
+		}
+		
+	]
+},
+  {
+	"año": 2012,
+	"pregunta": "¿Qué selección ganará la Eurocopa 2012?",
+	"opciones": ["España", "Italia", "Alemania", "Portugal"],
+	"respuesta_correcta": 0,
+	"cuota": 2.5,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Ganará la final por 3 o más goles?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 3.2
+	  },
+	  {
+		"pregunta": "¿Será campeona invicta?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.0
+	  }
+	]
+  },
+  {
+	"año": 2012,
+	"pregunta": "¿Quién será el máximo goleador de la Eurocopa 2012?",
+	"opciones": ["Mario Gómez", "Cristiano Ronaldo", "Fernando Torres", "Mario Balotelli"],
+	"respuesta_correcta": 2,
+	"cuota": 3.8,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Anotará en la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.4
+	  },
+	  {
+		"pregunta": "¿Marcará más de 3 goles en total?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.1
+	  }
+	]
+  },
+  {
+	"año": 2012,
+	"pregunta": "¿Quién ganará el oro en fútbol masculino en los Juegos Olímpicos de Londres 2012?",
+	"opciones": ["Brasil", "México", "Reino Unido", "Corea del Sur"],
+	"respuesta_correcta": 1,
+	"cuota": 4.5,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Ganará la final en tiempo reglamentario?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.8
+	  },
+	  {
+		"pregunta": "¿Marcará en los primeros 5 minutos de la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 3.9
+	  }
+	]
+  },
+  {
+	"año": 2012,
+	"pregunta": "¿Quién ganará la UEFA Champions League 2011-2012?",
+	"opciones": ["Chelsea", "Bayern Múnich", "Barcelona", "Real Madrid"],
+	"respuesta_correcta": 0,
+	"cuota": 4.2,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Ganará la final en penales?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 3.5
+	  },
+	  {
+		"pregunta": "¿Recibirá menos de 3 goles en toda la fase de eliminación?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.3
+	  }
+	]
+  },
+  {
+	"año": 2012,
+	"pregunta": "¿Qué jugador ganará el Balón de Oro 2012?",
+	"opciones": ["Cristiano Ronaldo", "Lionel Messi", "Andrés Iniesta", "Iker Casillas"],
+	"respuesta_correcta": 1,
+	"cuota": 2.1,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Será su cuarto Balón de Oro consecutivo?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 1.9
+	  },
+	  {
+		"pregunta": "¿Superará los 90 goles en el año natural?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 3.2
+	  }
+	]
+  },
+  {
+	"año": 2012,
+	"pregunta": "¿Qué selección sudamericana liderará las eliminatorias rumbo al Mundial 2014 al finalizar el 2012?",
+	"opciones": ["Argentina", "Uruguay", "Colombia", "Ecuador"],
+	"respuesta_correcta": 0,
+	"cuota": 2.6,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Tendrá la mejor diferencia de goles?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.1
+	  },
+	  {
+		"pregunta": "¿Ganará todos sus partidos como local ese año?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.5
+	  }
+	]
+  },
+  {
+	"año": 2012,
+	"pregunta": "¿Quién ganará la Copa Libertadores 2012?",
+	"opciones": ["Corinthians", "Boca Juniors", "Santos", "Universidad de Chile"],
+	"respuesta_correcta": 0,
+	"cuota": 3.0,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Terminará invicto el torneo?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.9
+	  },
+	  {
+		"pregunta": "¿Ganará la final sin recibir goles?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.7
+	  }
+	]
+  },
+  {
+	"año": 2012,
+	"pregunta": "¿Quién ganará el Mundial de Clubes 2012?",
+	"opciones": ["Chelsea", "Corinthians", "Monterrey", "Ulsan Hyundai"],
+	"respuesta_correcta": 1,
+	"cuota": 3.3,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Goleará en la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.5
+	  },
+	  {
+		"pregunta": "¿Será el primer título mundial de su historia?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.0
+	  }
+	]
+  },
+  {
+	"año": 2012,
+	"pregunta": "¿Quién ganará la Supercopa de España 2012?",
+	"opciones": ["Real Madrid", "Barcelona"],
+	"respuesta_correcta": 0,
+	"cuota": 2.4,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Ganará por diferencia de goles tras empate en puntos?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.8
+	  },
+	  {
+		"pregunta": "¿Cristiano Ronaldo marcará en ambos partidos?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.6
+	  }
+	]
+  },
+  {
+	"año": 2012,
+	"pregunta": "¿Cuántos goles marcará Lionel Messi en el año calendario 2012?",
+	"opciones": ["Menos de 60", "60-70", "71-85", "86 o más"],
+	"respuesta_correcta": 3,
+	"cuota": 4.5,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Batirá el récord histórico de Gerd Müller?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 3.0
+	  },
+	  {
+		"pregunta": "¿Será goleador tanto en Liga como Champions en 2012?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.4
+		}
+	]
+},
+
+{
+	"año": 2002,
+	"pregunta": "¿Qué selección ganará el Mundial de 2002?",
+	"opciones": ["Alemania", "Brasil", "Corea del Sur", "Turquía"],
+	"respuesta_correcta": 1,
+	"cuota": 3.0,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Ganará todos sus partidos?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.5
+	  },
+	  {
+		"pregunta": "¿Será campeona sin ir a penales?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.1
+	  }
+	]
+  },
+  {
+	"año": 2002,
+	"pregunta": "¿Quién será el máximo goleador del Mundial 2002?",
+	"opciones": ["Ronaldo", "Klose", "Rivaldo", "Raúl"],
+	"respuesta_correcta": 0,
+	"cuota": 4.2,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Marcará más de 6 goles?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.7
+	  },
+	  {
+		"pregunta": "¿Anotará en la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.3
+	  }
+	]
+  },
+  {
+	"año": 2002,
+	"pregunta": "¿Qué selección será la revelación del Mundial 2002?",
+	"opciones": ["Corea del Sur", "Senegal", "Turquía", "Estados Unidos"],
+	"respuesta_correcta": 0,
+	"cuota": 5.0,
 	"tipo": "principal",
 	"secundarias": [
 	  {
 		"pregunta": "¿Llegará a semifinales?",
 		"opciones": ["Sí", "No"],
-		"respuesta_correcta": 0
+		"respuesta_correcta": 0,
+		"cuota": 3.2
 	  },
 	  {
-		"pregunta": "¿Eliminó a algún campeón defensor?",
+		"pregunta": "¿Eliminará a una campeona del mundo?",
 		"opciones": ["Sí", "No"],
-		"respuesta_correcta": 1
+		"respuesta_correcta": 0,
+		"cuota": 2.9
 	  }
 	]
   },
   {
-	"año": 2005,
-	"pregunta": "¿Habrá algún jugador que anote en 5 partidos consecutivos?",
-	"opciones": ["Sí", "No"],
-	"respuesta_correcta": 1,
+	"año": 2002,
+	"pregunta": "¿Qué equipo quedará subcampeón en el Mundial 2002?",
+	"opciones": ["Alemania", "Brasil", "España", "Corea del Sur"],
+	"respuesta_correcta": 0,
+	"cuota": 3.4,
 	"tipo": "principal",
 	"secundarias": [
 	  {
-		"pregunta": "¿Será jugador del equipo campeón?",
+		"pregunta": "¿Perderá la final sin marcar goles?",
 		"opciones": ["Sí", "No"],
-		"respuesta_correcta": 1
+		"respuesta_correcta": 0,
+		"cuota": 2.8
 	  },
 	  {
-		"pregunta": "¿Anotará en final?",
+		"pregunta": "¿Recibirá más de 1 gol en la final?",
 		"opciones": ["Sí", "No"],
-		"respuesta_correcta": 1
+		"respuesta_correcta": 0,
+		"cuota": 2.6
 	  }
 	]
   },
   {
-	"año": 2005,
-	"pregunta": "¿Cuántos goles habrá en la final de la Champions 2005 en tiempo reglamentario?",
-	"opciones": ["0-1", "2-3", "4 o más"],
+	"año": 2002,
+	"pregunta": "¿Cuántos goles marcará Alemania en el Mundial 2002?",
+	"opciones": ["10", "12", "14", "Más de 14"],
+	"respuesta_correcta": 3,
+	"cuota": 3.3,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Marcará 8 goles en un solo partido?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 3.1
+	  },
+	  {
+		"pregunta": "¿Terminará como la selección más goleadora?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.4
+	  }
+	]
+  },
+  {
+	"año": 2002,
+	"pregunta": "¿Quién ganará la Champions League 2001-02?",
+	"opciones": ["Real Madrid", "Bayer Leverkusen", "Barcelona", "Manchester United"],
+	"respuesta_correcta": 0,
+	"cuota": 3.6,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Ganará con un gol desde fuera del área?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.8
+	  },
+	  {
+		"pregunta": "¿Será su noveno título europeo?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.2
+	  }
+	]
+  },
+  {
+	"año": 2002,
+	"pregunta": "¿Qué selección eliminará a Italia en el Mundial 2002?",
+	"opciones": ["Croacia", "Corea del Sur", "España", "Alemania"],
+	"respuesta_correcta": 1,
+	"cuota": 4.5,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Será en tiempo extra?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 3.0
+	  },
+	  {
+		"pregunta": "¿Italia se quedará con 10 jugadores?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.6
+	  }
+	]
+  },
+  {
+	"año": 2002,
+	"pregunta": "¿Cuál será el país con más tarjetas rojas en el Mundial?",
+	"opciones": ["Argentina", "Uruguay", "Camerún", "Portugal"],
+	"respuesta_correcta": 3,
+	"cuota": 3.9,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Tendrá más de 2 expulsados?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.5
+	  },
+	  {
+		"pregunta": "¿Será eliminado en fase de grupos?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.7
+	  }
+	]
+  },
+  {
+	"año": 2002,
+	"pregunta": "¿Quién ganará la Copa Libertadores 2002?",
+	"opciones": ["Olimpia", "Sao Caetano", "River Plate", "Nacional"],
+	"respuesta_correcta": 0,
+	"cuota": 4.1,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Ganará la final por penales?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 3.3
+	  },
+	  {
+		"pregunta": "¿Será su tercer título en la historia?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.2
+	  }
+	]
+  },
+  {
+	"año": 2002,
+	"pregunta": "¿Cuántos goles marcará Miroslav Klose en el Mundial 2002?",
+	"opciones": ["2", "4", "5", "Más de 5"],
 	"respuesta_correcta": 2,
+	"cuota": 3.0,
 	"tipo": "principal",
 	"secundarias": [
 	  {
-		"pregunta": "¿Se definirá la final en tiempo extra?",
+		"pregunta": "¿Marcará todos sus goles de cabeza?",
 		"opciones": ["Sí", "No"],
-		"respuesta_correcta": 1
+		"respuesta_correcta": 0,
+		"cuota": 3.5
 	  },
 	  {
-		"pregunta": "¿Habrá gol en los primeros 30 minutos?",
+		"pregunta": "¿Será su debut en Mundiales?",
 		"opciones": ["Sí", "No"],
-		"respuesta_correcta": 0
-	  }
+		"respuesta_correcta": 0,
+		"cuota": 2.1
+		}
 	]
-  },
+},
 
-  {
+{
 	"año": 1998,
-	"pregunta": "¿Quién ganó el Mundial de 1998?",
-	"opciones": ["Brasil", "Francia", "Alemania", "Argentina"],
+	"pregunta": "¿Quién ganará el Mundial de Fútbol 1998?",
+	"opciones": ["Brasil", "Francia", "Países Bajos", "Argentina"],
 	"respuesta_correcta": 1,
+	"cuota": 3.2,
 	"tipo": "principal",
 	"secundarias": [
 	  {
-		"pregunta": "¿Zidane anotó más de un gol en la final?",
+		"pregunta": "¿El campeón será anfitrión?",
 		"opciones": ["Sí", "No"],
-		"respuesta_correcta": 0
+		"respuesta_correcta": 0,
+		"cuota": 2.4
 	  },
 	  {
-		"pregunta": "¿Hubo goles en el primer tiempo?",
+		"pregunta": "¿Ganará la final en el tiempo reglamentario?",
 		"opciones": ["Sí", "No"],
-		"respuesta_correcta": 0
+		"respuesta_correcta": 0,
+		"cuota": 2.0
 	  }
 	]
   },
   {
 	"año": 1998,
-	"pregunta": "¿Dónde se jugó la final del Mundial de 1998?",
-	"opciones": ["París", "Marsella", "Lyon", "Burdeos"],
+	"pregunta": "¿Quién será el máximo goleador del Mundial 1998?",
+	"opciones": ["Davor Šuker", "Ronaldo", "Batistuta", "Zidane"],
 	"respuesta_correcta": 0,
-	"tipo": "principal",
-	"secundarias": []
-  },
-  {
-	"año": 1998,
-	"pregunta": "¿Quién fue el máximo goleador del Mundial de 1998?",
-	"opciones": ["Davor Šuker", "Ronaldo", "Thierry Henry", "Gabriel Batistuta"],
-	"respuesta_correcta": 0,
-	"tipo": "principal",
-	"secundarias": []
-  },
-  {
-	"año": 1998,
-	"pregunta": "¿Cuál fue el marcador final de la semifinal entre Brasil y Holanda en 1998?",
-	"opciones": ["1-1 (Brasil ganó en penales)", "2-1", "3-2", "1-0"],
-	"respuesta_correcta": 0,
-	"tipo": "principal",
-	"secundarias": []
-  },
-  {
-	"año": 1998,
-	"pregunta": "¿Qué país fue el anfitrión del Mundial 1998?",
-	"opciones": ["Francia", "Brasil", "Alemania", "Italia"],
-	"respuesta_correcta": 0,
-	"tipo": "principal",
-	"secundarias": []
-  },
-  {
-	"año": 1998,
-	"pregunta": "¿Quién fue el entrenador campeón del Mundial 1998?",
-	"opciones": ["Aimé Jacquet", "Carlos Alberto Parreira", "Jürgen Klinsmann", "Marcello Lippi"],
-	"respuesta_correcta": 0,
-	"tipo": "principal",
-	"secundarias": []
-  },
-  {
-	"año": 1998,
-	"pregunta": "¿Qué número de camiseta usó Ronaldo en la final de 1998?",
-	"opciones": ["9", "10", "11", "7"],
-	"respuesta_correcta": 0,
-	"tipo": "principal",
-	"secundarias": []
-  },
-  {
-	"año": 1998,
-	"pregunta": "¿Cuántos goles anotó Davor Šuker en el Mundial 1998?",
-	"opciones": ["6", "5", "4", "3"],
-	"respuesta_correcta": 0,
-	"tipo": "principal",
-	"secundarias": []
-  },
-  {
-	"año": 1998,
-	"pregunta": "¿Qué jugador francés anotó dos goles en la final de 1998?",
-	"opciones": ["Zinedine Zidane", "Thierry Henry", "David Trezeguet", "Emmanuel Petit"],
-	"respuesta_correcta": 0,
-	"tipo": "principal",
-	"secundarias": []
-  },
-  {
-	"año": 1998,
-	"pregunta": "¿Qué país perdió la final del Mundial 1998?",
-	"opciones": ["Brasil", "Francia", "Alemania", "Argentina"],
-	"respuesta_correcta": 0,
-	"tipo": "principal",
-	"secundarias": []
-  },
-  
-  {
-	"año": 2019,
-	"pregunta": "¿Quién ganó la Copa América 2019?",
-	"opciones": ["Brasil", "Argentina", "Chile", "Uruguay"],
-	"respuesta_correcta": 0,
+	"cuota": 4.4,
 	"tipo": "principal",
 	"secundarias": [
 	  {
-		"pregunta": "¿Brasil anotó más de 2 goles en la final?",
+		"pregunta": "¿Marcará más de 5 goles?",
 		"opciones": ["Sí", "No"],
-		"respuesta_correcta": 0
+		"respuesta_correcta": 0,
+		"cuota": 2.8
 	  },
 	  {
-		"pregunta": "¿El partido se jugó en Maracaná?",
+		"pregunta": "¿Su selección llegará al podio?",
 		"opciones": ["Sí", "No"],
-		"respuesta_correcta": 0
+		"respuesta_correcta": 0,
+		"cuota": 2.5
 	  }
 	]
   },
   {
-	"año": 2019,
-	"pregunta": "¿Quién fue el máximo goleador de la Copa América 2019?",
-	"opciones": ["Lionel Messi", "Gabriel Jesus", "Eduardo Vargas", "Paolo Guerrero"],
-	"respuesta_correcta": 0,
-	"tipo": "principal",
-	"secundarias": []
-  },
-  {
-	"año": 2019,
-	"pregunta": "¿Qué selección fue eliminada en semifinales por Brasil en la Copa América 2019?",
-	"opciones": ["Argentina", "Chile", "Perú", "Paraguay"],
-	"respuesta_correcta": 0,
-	"tipo": "principal",
-	"secundarias": []
-  },
-  {
-	"año": 2019,
-	"pregunta": "¿Quién fue el entrenador campeón de Brasil en la Copa América 2019?",
-	"opciones": ["Tite", "Dunga", "Felipe Scolari", "Carlos Alberto Parreira"],
-	"respuesta_correcta": 0,
-	"tipo": "principal",
-	"secundarias": []
-  },
-  {
-	"año": 2019,
-	"pregunta": "¿Cuántos goles anotó Brasil en la final de la Copa América 2019?",
-	"opciones": ["3", "2", "1", "0"],
+	"año": 1998,
+	"pregunta": "¿Quién ganará el Balón de Oro del Mundial 1998?",
+	"opciones": ["Zidane", "Ronaldo", "Šuker", "Deschamps"],
 	"respuesta_correcta": 1,
-	"tipo": "principal",
-	"secundarias": []
-  },
-  {
-	"año": 2019,
-	"pregunta": "¿Qué país fue sede de la Copa América 2019?",
-	"opciones": ["Brasil", "Argentina", "Chile", "Colombia"],
-	"respuesta_correcta": 0,
-	"tipo": "principal",
-	"secundarias": []
-  },
-  {
-	"año": 2019,
-	"pregunta": "¿Qué selección ganó el premio Fair Play en la Copa América 2019?",
-	"opciones": ["Chile", "Argentina", "Brasil", "Colombia"],
-	"respuesta_correcta": 0,
-	"tipo": "principal",
-	"secundarias": []
-  },
-  {
-	"año": 2019,
-	"pregunta": "¿Cuántos partidos ganó Argentina en la Copa América 2019?",
-	"opciones": ["2", "3", "4", "1"],
-	"respuesta_correcta": 0,
-	"tipo": "principal",
-	"secundarias": []
-  },
-  {
-	"año": 2019,
-	"pregunta": "¿Quién anotó el gol del empate para Argentina en semifinales 2019?",
-	"opciones": ["Lautaro Martínez", "Lionel Messi", "Paulo Dybala", "Ángel Di María"],
-	"respuesta_correcta": 0,
-	"tipo": "principal",
-	"secundarias": []
-  },
-  {
-	"año": 2019,
-	"pregunta": "¿Qué jugador fue elegido mejor jugador del torneo en la Copa América 2019?",
-	"opciones": ["Neymar", "Lionel Messi", "Philippe Coutinho", "Ederson"],
-	"respuesta_correcta": 1,
-	"tipo": "principal",
-	"secundarias": []
-  },
-  
-  {
-	"año": 2016,
-	"pregunta": "¿Quién ganó la NBA en 2016?",
-	"opciones": ["Cavaliers", "Warriors", "Heat", "Spurs"],
-	"respuesta_correcta": 0,
+	"cuota": 3.8,
 	"tipo": "principal",
 	"secundarias": [
 	  {
-		"pregunta": "¿LeBron James fue MVP de las Finales?",
+		"pregunta": "¿Será del equipo subcampeón?",
 		"opciones": ["Sí", "No"],
-		"respuesta_correcta": 0
+		"respuesta_correcta": 0,
+		"cuota": 2.3
 	  },
 	  {
-		"pregunta": "¿La serie se definió en 7 juegos?",
+		"pregunta": "¿Tendrá más de 3 asistencias?",
 		"opciones": ["Sí", "No"],
-		"respuesta_correcta": 0
+		"respuesta_correcta": 1,
+		"cuota": 2.9
 	  }
 	]
   },
   {
-	"año": 2016,
-	"pregunta": "¿Qué equipo tuvo la mejor marca regular en la NBA 2015-2016?",
-	"opciones": ["Golden State Warriors", "Cleveland Cavaliers", "San Antonio Spurs", "Oklahoma City Thunder"],
+	"año": 1998,
+	"pregunta": "¿Qué selección será la revelación del Mundial 1998?",
+	"opciones": ["Croacia", "Japón", "Nigeria", "Chile"],
 	"respuesta_correcta": 0,
+	"cuota": 4.9,
 	"tipo": "principal",
-	"secundarias": []
+	"secundarias": [
+	  {
+		"pregunta": "¿Llegará al podio?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 3.1
+	  },
+	  {
+		"pregunta": "¿Tendrá al máximo goleador?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.7
+	  }
+	]
   },
   {
-	"año": 2016,
-	"pregunta": "¿Quién fue el entrenador de los Cleveland Cavaliers en 2016?",
-	"opciones": ["Tyronn Lue", "David Blatt", "Steve Kerr", "Mike Brown"],
-	"respuesta_correcta": 0,
-	"tipo": "principal",
-	"secundarias": []
-  },
-  {
-	"año": 2016,
-	"pregunta": "¿Qué jugador anotó el tiro ganador en el juego 7 de las Finales 2016?",
-	"opciones": ["Kyrie Irving", "LeBron James", "Kevin Love", "Stephen Curry"],
-	"respuesta_correcta": 0,
-	"tipo": "principal",
-	"secundarias": []
-  },
-  {
-	"año": 2016,
-	"pregunta": "¿Cuántos puntos promedió LeBron James en las Finales 2016?",
-	"opciones": ["29.7", "27.5", "31.4", "25.3"],
-	"respuesta_correcta": 0,
-	"tipo": "principal",
-	"secundarias": []
-  },
-  {
-	"año": 2016,
-	"pregunta": "¿Qué récord histórico rompieron los Warriors en temporada regular 2015-2016?",
-	"opciones": ["73 victorias", "72 victorias", "74 victorias", "71 victorias"],
+	"año": 1998,
+	"pregunta": "¿Qué selección anotará más goles en el Mundial 1998?",
+	"opciones": ["Francia", "Brasil", "Croacia", "Países Bajos"],
 	"respuesta_correcta": 1,
+	"cuota": 3.5,
 	"tipo": "principal",
-	"secundarias": []
+	"secundarias": [
+	  {
+		"pregunta": "¿Superará los 15 goles?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.6
+	  },
+	  {
+		"pregunta": "¿Recibirá más de 5 goles en el torneo?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.2
+	  }
+	]
   },
   {
-	"año": 2016,
-	"pregunta": "¿Cuál fue el resultado del Juego 7 de las Finales NBA 2016?",
-	"opciones": ["93-89", "95-90", "92-88", "96-91"],
-	"respuesta_correcta": 0,
+	"año": 1998,
+	"pregunta": "¿Cuántos goles marcará Ronaldo en el Mundial 1998?",
+	"opciones": ["2", "3", "4", "Más de 4"],
+	"respuesta_correcta": 2,
+	"cuota": 3.1,
 	"tipo": "principal",
-	"secundarias": []
+	"secundarias": [
+	  {
+		"pregunta": "¿Anotará en la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 3.0
+	  },
+	  {
+		"pregunta": "¿Será incluido en el equipo ideal del torneo?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 1.8
+	  }
+	]
   },
   {
-	"año": 2016,
-	"pregunta": "¿Cuántos rebotes promedió Draymond Green en las Finales 2016?",
-	"opciones": ["9.5", "8.2", "10.3", "7.7"],
+	"año": 1998,
+	"pregunta": "¿Quién ganará la Copa Libertadores 1998?",
+	"opciones": ["Vasco da Gama", "Barcelona SC", "River Plate", "América de Cali"],
 	"respuesta_correcta": 0,
+	"cuota": 3.6,
 	"tipo": "principal",
-	"secundarias": []
+	"secundarias": [
+	  {
+		"pregunta": "¿Ganará tanto en la ida como en la vuelta?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.5
+	  },
+	  {
+		"pregunta": "¿Tendrá al máximo goleador del torneo?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.9
+	  }
+	]
   },
   {
-	"año": 2016,
-	"pregunta": "¿Quién fue el máximo anotador de los Warriors en las Finales 2016?",
-	"opciones": ["Stephen Curry", "Klay Thompson", "Andre Iguodala", "Harrison Barnes"],
-	"respuesta_correcta": 0,
+	"año": 1998,
+	"pregunta": "¿Quién ganará la Champions League 1997-98?",
+	"opciones": ["Juventus", "Real Madrid", "Borussia Dortmund", "Mónaco"],
+	"respuesta_correcta": 1,
+	"cuota": 3.4,
 	"tipo": "principal",
-	"secundarias": []
+	"secundarias": [
+	  {
+		"pregunta": "¿Ganará la final por diferencia de un gol?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.6
+	  },
+	  {
+		"pregunta": "¿Será su primer título en más de 30 años?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.1
+	  }
+	]
   },
   {
-	"año": 2016,
-	"pregunta": "¿Cuál fue la diferencia en el marcador del Juego 7 en las Finales 2016?",
-	"opciones": ["4 puntos", "3 puntos", "5 puntos", "2 puntos"],
+	"año": 1998,
+	"pregunta": "¿Quién será el mejor jugador joven del Mundial 1998?",
+	"opciones": ["Michael Owen", "Thierry Henry", "David Beckham", "Kluivert"],
 	"respuesta_correcta": 0,
+	"cuota": 4.0,
 	"tipo": "principal",
-	"secundarias": []
-  }
+	"secundarias": [
+	  {
+		"pregunta": "¿Anotará al menos 2 goles?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.4
+	  },
+	  {
+		"pregunta": "¿Jugará más de 300 minutos en el torneo?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.2
+	  }
+	]
+  },
+  {
+	"año": 1998,
+	"pregunta": "¿Francia mantendrá su arco en cero en la final del Mundial?",
+	"opciones": ["Sí", "No"],
+	"respuesta_correcta": 0,
+	"cuota": 2.8,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Barthez será elegido mejor arquero del torneo?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.7
+	  },
+	  {
+		"pregunta": "¿Brasil no anotará en la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.3
+		}
+	]
+},
+{
+	"año": 1994,
+	"pregunta": "¿Quién ganará el Mundial de Fútbol 1994?",
+	"opciones": ["Brasil", "Italia", "Suecia", "Bulgaria"],
+	"respuesta_correcta": 0,
+	"cuota": 3.7,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿La final se definirá por penales?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.8
+	  },
+	  {
+		"pregunta": "¿Brasil dejará su arco en cero en la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.4
+	  }
+	]
+  },
+  {
+	"año": 1994,
+	"pregunta": "¿Quién será el máximo goleador del Mundial 1994?",
+	"opciones": ["Hristo Stoichkov", "Romário", "Roberto Baggio", "Jürgen Klinsmann"],
+	"respuesta_correcta": 0,
+	"cuota": 4.2,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Marcará más de 6 goles?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.7
+	  },
+	  {
+		"pregunta": "¿Su selección llegará a semifinales?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.6
+	  }
+	]
+  },
+  {
+	"año": 1994,
+	"pregunta": "¿Quién ganará el Balón de Oro del Mundial 1994?",
+	"opciones": ["Romário", "Baggio", "Stoichkov", "Bebeto"],
+	"respuesta_correcta": 0,
+	"cuota": 3.3,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Romário anotará más de 5 goles en el torneo?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.9
+	  },
+	  {
+		"pregunta": "¿Brasil ganará todos sus partidos sin perder en el tiempo reglamentario?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.1
+	  }
+	]
+  },
+  {
+	"año": 1994,
+	"pregunta": "¿Qué selección será la gran revelación del Mundial 1994?",
+	"opciones": ["Bulgaria", "Nigeria", "Rumania", "Arabia Saudita"],
+	"respuesta_correcta": 0,
+	"cuota": 5.0,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Llegará a semifinales?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 3.2
+	  },
+	  {
+		"pregunta": "¿El máximo goleador de esta selección será Stoichkov?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 1.9
+	  }
+	]
+  },
+  {
+	"año": 1994,
+	"pregunta": "¿Qué equipo ganará la Copa Libertadores 1994?",
+	"opciones": ["Vélez Sarsfield", "São Paulo", "River Plate", "Olimpia"],
+	"respuesta_correcta": 0,
+	"cuota": 4.1,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿La final se definirá por penales?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 3.6
+	  },
+	  {
+		"pregunta": "¿Vélez ganará como local en la ida?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.3
+	  }
+	]
+  },
+  {
+	"año": 1994,
+	"pregunta": "¿Quién ganará la Champions League 1993-94?",
+	"opciones": ["AC Milan", "Barcelona", "Manchester United", "Porto"],
+	"respuesta_correcta": 0,
+	"cuota": 3.2,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Milan ganará la final por más de 2 goles de diferencia?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 4.0
+	  },
+	  {
+		"pregunta": "¿Habrá al menos 4 goles en la final?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.7
+	  }
+	]
+  },
+  {
+	"año": 1994,
+	"pregunta": "¿Qué equipo ganará la Serie A italiana en la temporada 1993-94?",
+	"opciones": ["AC Milan", "Juventus", "Parma", "Sampdoria"],
+	"respuesta_correcta": 0,
+	"cuota": 2.6,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Milan ganará con más de 3 puntos de ventaja?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.5
+	  },
+	  {
+		"pregunta": "¿El máximo goleador del torneo será Roberto Baggio?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.9
+	  }
+	]
+  },
+  {
+	"año": 1994,
+	"pregunta": "¿Qué país anotará más goles en el Mundial 1994?",
+	"opciones": ["Brasil", "Alemania", "Suecia", "Países Bajos"],
+	"respuesta_correcta": 2,
+	"cuota": 4.3,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Marcarán más de 12 goles en total?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.8
+	  },
+	  {
+		"pregunta": "¿Llegarán al podio?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.0
+	  }
+	]
+  },
+  {
+	"año": 1994,
+	"pregunta": "¿Qué jugador fallará un penal en la final del Mundial 1994?",
+	"opciones": ["Baggio", "Massaro", "Santos", "Dunga"],
+	"respuesta_correcta": 0,
+	"cuota": 3.9,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿El penal fallado será el último de la tanda?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.6
+	  },
+	  {
+		"pregunta": "¿El jugador es delantero?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.1
+	  }
+	]
+  },
+  {
+	"año": 1994,
+	"pregunta": "¿Cuántos goles marcará Brasil durante el Mundial 1994?",
+	"opciones": ["Menos de 10", "10-12", "13-15", "Más de 15"],
+	"respuesta_correcta": 2,
+	"cuota": 3.4,
+	"tipo": "principal",
+	"secundarias": [
+	  {
+		"pregunta": "¿Brasil anotará en todos sus partidos?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 0,
+		"cuota": 2.3
+	  },
+	  {
+		"pregunta": "¿Marcarán más goles en fase de grupos que en rondas finales?",
+		"opciones": ["Sí", "No"],
+		"respuesta_correcta": 1,
+		"cuota": 2.6
+		}
+	]
+}
+
+
 ]

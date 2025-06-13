@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Global="*res://Global.gd"
 Sound_master="*res://sound_master.gd"
+Animador="*res://Animador.gd"
 
 [display]
 
