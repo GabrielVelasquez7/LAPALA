@@ -32,9 +32,9 @@ var dinero: float = 100.0  # Dinero inicial del jugador
 var opciones = ["A", "B", "C", "D"]
 var opcion_correcta = "A"
 var bonos_usados = {
-	"50_50": false,
-	"pista": false,
-	"publico": false
+	"50_50": 1,
+	"pista": 1,
+	"publico": 1
 }
 
 # --- NODOS UI ---
@@ -54,7 +54,13 @@ var bonos_usados = {
 @onready var opcion_label_3: Label = $options_container/option_3/optionlabel3
 @onready var opcion_label_4: Label = $options_container/option_4/optionlabel4
 @onready var timer_sound: AudioStreamPlayer = $TimerSound
+@onready var bono_result_label = $CanvasLayer2/BonoPanel/bono_result_label
+@onready var bono_panel = $CanvasLayer2/BonoPanel
 @onready var timer_label: Label = $TimerContainer/TimerLabel
+@onready var contador_50 = $"CanvasLayer/panel/50_50/contador_50"
+@onready var contador_pista = $"CanvasLayer/panel/publico/contador_publico"
+@onready var contador_publico = $CanvasLayer/panel/pista/contador_pista
+
 var ruleta_menu_instance
 var money_display_instance: Control
 
@@ -71,10 +77,10 @@ func _ready() -> void:
 	_cargar_datos_iniciales()
 	rewarded.hide()
 	$CanvasLayer.cambiar_fondo_por_ano(anio_seleccionado)
-
-	
 	
 	print("🔍 Iniciando verificación de plugin...")
+	
+	_actualizar_contadores_bonos()
 
 	if admob:
 		print("✅ Nodo AdMob encontrado")
@@ -108,9 +114,7 @@ func _ready() -> void:
 	if menu_scene:
 		ruleta_menu_instance = menu_scene.instantiate()
 		ruleta_menu_container.add_child(ruleta_menu_instance)
-		ruleta_menu_instance.connect("potenciar_50_50", Callable(self, "_usar_50_50"))
-		ruleta_menu_instance.connect("potenciar_pista", Callable(self, "_usar_pista"))
-		ruleta_menu_instance.connect("potenciar_publico", Callable(self, "_usar_publico"))
+		ruleta_menu_instance.connect("exit", Callable(self, "_cerrar_ruleta_menu"))
 		ruleta_menu_instance.hide()
 	else:
 		printerr("❌ No se pudo cargar el menú de potenciadores")
@@ -494,58 +498,6 @@ func _on_anuncio_cerrado() -> void:
 func _on_rewarded_video_loaded() -> void:
 	print("📦 Anuncio rewarded cargado y listo")
 
-
-# --- FUNCIONES DE POTENCIADORES ---
-func _usar_50_50() -> void:
-	if bonos_usados["50_50"]:
-		return
-	bonos_usados["50_50"] = true
-	var correct_index = pregunta_actual["respuesta_correcta"]
-	var indices_incorrectos = []
-	for i in range(pregunta_actual["opciones"].size()):
-		if i != correct_index:
-			indices_incorrectos.append(i)
-	indices_incorrectos.shuffle()
-	var eliminados = indices_incorrectos.slice(0, 2)
-	for btn in options_container.get_children():
-		var index = btn.get_meta("option_index")
-		if eliminados.has(index):
-			btn.hide()
-	print("✅ Bono 50/50 activado")
-
-func _usar_pista() -> void:
-	if bonos_usados["pista"]:
-		return
-	bonos_usados["pista"] = true
-	var correcta = pregunta_actual["opciones"][pregunta_actual["respuesta_correcta"]]
-	var pista = "💡 Pista: la respuesta está relacionada con: %s" % correcta
-	result_label.text = pista
-	result_label.show()
-	print("✅ Bono pista activado")
-
-func _usar_publico() -> void:
-	if bonos_usados["publico"]:
-		return
-	bonos_usados["publico"] = true
-	var cantidad_opciones = pregunta_actual["opciones"].size()
-	var correct_index = pregunta_actual["respuesta_correcta"]
-	var porcentaje_correcta = randi_range(50, 70)
-	var restante = 100 - porcentaje_correcta
-	var incorrectos = []
-	var porcentajes = []
-	for i in range(cantidad_opciones):
-		if i != correct_index:
-			incorrectos.append(i)
-	var suma = 0
-	for i in range(incorrectos.size()):
-		var valor = (restante - suma) if i == incorrectos.size() - 1 else randi_range(0, restante - suma)
-		suma += valor
-		porcentajes.append("Opción %s: %d%%" % [opciones[incorrectos[i]], valor])
-	porcentajes.append("Opción %s: %d%% ✅" % [opciones[correct_index], porcentaje_correcta])
-	result_label.text = "📊 Resultado del público:\n" + "\n".join(porcentajes)
-	result_label.show()
-	print("✅ Bono público activado")
-
 # --- FUNCIONES DE ANUNCIOS ---
 func _on_rewarded_pressed():
 	if esperando_recompensa:
@@ -584,3 +536,84 @@ func _on_banner_pressed():
 # --- ABRIR MENÚ DE BONOS ---
 func _on_ruleta_menu_pressed() -> void:
 	ruleta_menu_instance.visible = not ruleta_menu_instance.visible
+	
+func _cerrar_ruleta_menu():
+	ruleta_menu_instance.visible = false
+
+# --- FUNCIONES DE POTENCIADORES ---
+func _on__50_pressed():
+	if bonos_usados["50_50"] <=0:
+		return
+	bonos_usados["50_50"] -= 1
+	_actualizar_contadores_bonos()
+	var correct_index = pregunta_actual["respuesta_correcta"]
+	var indices_incorrectos = []
+	for i in range(pregunta_actual["opciones"].size()):
+		if i != correct_index:
+			indices_incorrectos.append(i)
+	indices_incorrectos.shuffle()
+	var eliminados = indices_incorrectos.slice(0, 2)
+	for btn in options_container.get_children():
+		var index = btn.get_meta("option_index")
+		if eliminados.has(index):
+			btn.hide()
+	print("✅ Bono 50/50 activado")
+
+
+func _on_pista_pressed():
+	if bonos_usados["pista"] <= 0:
+		return
+	bonos_usados["pista"] -= 1
+	_actualizar_contadores_bonos()
+	var correcta = pregunta_actual["opciones"][pregunta_actual["respuesta_correcta"]]
+	var pista = "💡 Pista: la respuesta está relacionada con: %s" % correcta
+	mostrar_mensaje_bono(pista)
+	print("✅ Bono pista activado")
+
+
+func _on_publico_pressed():
+	if bonos_usados["publico"] <=0:
+		return
+	bonos_usados["publico"] -= 1
+	_actualizar_contadores_bonos()
+	var cantidad_opciones = pregunta_actual["opciones"].size()
+	var correct_index = pregunta_actual["respuesta_correcta"]
+	var porcentaje_correcta = randi_range(50, 70)
+	var restante = 100 - porcentaje_correcta
+	var incorrectos = []
+	var porcentajes = []
+	for i in range(cantidad_opciones):
+		if i != correct_index:
+			incorrectos.append(i)
+	var suma = 0
+	for i in range(incorrectos.size()):
+		var valor = (restante - suma) if i == incorrectos.size() - 1 else randi_range(0, restante - suma)
+		suma += valor
+		porcentajes.append("Opción %s: %d%%" % [opciones[incorrectos[i]], valor])
+	porcentajes.append("Opción %s: %d%% ✅" % [opciones[correct_index], porcentaje_correcta])
+	var mensaje = "📊 Resultado del público:\n" + "\n".join(porcentajes)
+	mostrar_mensaje_bono(mensaje)
+	print("✅ Bono público activado")
+
+
+
+
+func mostrar_mensaje_bono(texto: String) -> void:
+	bono_result_label.text = texto
+	bono_panel.visible = true
+	# Cierra automáticamente después de 10 segundos
+	await get_tree().create_timer(10).timeout
+	bono_panel.visible = false
+	
+func _on_cerrar_pressed() -> void:
+	bono_panel.visible = false
+	
+func _actualizar_contadores_bonos():
+	print("🔁 Actualizando contadores de bonos...")
+	contador_50.text = str(bonos_usados["50_50"])
+	contador_pista.text = str(bonos_usados["pista"])
+	contador_publico.text = str(bonos_usados["publico"])
+
+	contador_50.visible = bonos_usados["50_50"] > 0
+	contador_pista.visible = bonos_usados["pista"] > 0
+	contador_publico.visible = bonos_usados["publico"] > 0

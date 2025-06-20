@@ -26,20 +26,10 @@ layout_mode = 0
 offset_right = 421.0
 offset_bottom = 442.0
 
-[node name="boton_publico" type="Button" parent="Panel/Label/VBoxContainer"]
+[node name="exit" type="Button" parent="Panel/Label/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
-text = "PUBLICO"
+text = "SALIDA"
 
-[node name="boton_pista" type="Button" parent="Panel/Label/VBoxContainer"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-text = "PISTA"
-
-[node name="button_50" type="Button" parent="Panel/Label/VBoxContainer"]
-layout_mode = 2
-text = "50/50"
-
-[connection signal="pressed" from="Panel/Label/VBoxContainer/boton_publico" to="." method="_on_boton_publico_pressed"]
-[connection signal="pressed" from="Panel/Label/VBoxContainer/boton_pista" to="." method="_on_boton_pista_pressed"]
-[connection signal="pressed" from="Panel/Label/VBoxContainer/button_50" to="." method="_on_button_50_pressed"]
+[connection signal="pressed" from="Panel/Label/VBoxContainer/exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Panel/Label/VBoxContainer/exit" to="." method="_on_boton_publico_pressed"]

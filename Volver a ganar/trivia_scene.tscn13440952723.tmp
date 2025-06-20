@@ -237,7 +237,6 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_uehec")
 
 [node name="50_50" type="Button" parent="CanvasLayer/panel"]
-texture_filter = 1
 layout_mode = 0
 offset_left = 38.0
 offset_top = 8.0
@@ -246,15 +245,13 @@ offset_bottom = 43.0
 icon = ExtResource("11_e6wnj")
 
 [node name="contador_50" type="Label" parent="CanvasLayer/panel/50_50"]
-texture_filter = 1
 layout_mode = 0
-offset_left = -1.28863
-offset_top = -6.63325
-offset_right = 3.71137
-offset_bottom = 16.3668
+offset_left = -21.1986
+offset_top = -8.34167
+offset_right = -16.1986
+offset_bottom = 14.6583
 
 [node name="pista" type="Button" parent="CanvasLayer/panel"]
-texture_filter = 1
 layout_mode = 0
 offset_left = 5.0
 offset_top = 4.0
@@ -263,15 +260,13 @@ offset_bottom = 39.0
 icon = ExtResource("12_k1h83")
 
 [node name="contador_pista" type="Label" parent="CanvasLayer/panel/pista"]
-texture_filter = 1
 layout_mode = 0
-offset_left = 12.4675
-offset_top = -4.34167
-offset_right = 15.4675
-offset_bottom = 18.6583
+offset_left = 48.7348
+offset_top = 1.12529
+offset_right = 51.7348
+offset_bottom = 24.1253
 
 [node name="publico" type="Button" parent="CanvasLayer/panel"]
-texture_filter = 1
 layout_mode = 0
 offset_left = 19.0218
 offset_top = 49.2027
@@ -280,7 +275,6 @@ offset_bottom = 73.2027
 icon = ExtResource("13_8to3l")
 
 [node name="contador_publico" type="Label" parent="CanvasLayer/panel/publico"]
-texture_filter = 1
 layout_mode = 0
 offset_left = 16.0
 offset_top = -4.0
